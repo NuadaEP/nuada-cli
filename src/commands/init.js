@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'init',
+  name: 'new',
   description: 'Create a complete project structure to use',
   run: async toolbox => {
     const {
@@ -85,7 +85,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'service.js.ejs',
+      template: 'services.js.ejs',
       target: parameters.first
         ? 'src/app/services/SampleService.js'
         : `${parameters.first}/src/app/services/SampleService.js`
@@ -94,8 +94,8 @@ module.exports = {
     template.generate({
       template: 'sampleValidator.js.ejs',
       target: parameters.first
-        ? 'src/app/services/SampleValidator.js'
-        : `${parameters.first}/src/app/services/SampleValidator.js`
+        ? 'src/app/validators/SampleValidator.js'
+        : `${parameters.first}/src/app/validators/SampleValidator.js`
     })
 
     template.generate({
