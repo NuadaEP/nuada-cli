@@ -1,0 +1,18 @@
+import Mongoose from 'mongoose';
+
+const SampleModel = new Mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true
+      },
+    },
+    {
+        timestamps: true
+    }
+);
+
+export default Mongoose.model('Sample', SampleModel);
