@@ -4,12 +4,9 @@ module.exports = {
   run: async toolbox => {
     const {
       parameters,
-      createScaffold,
       template,
-      print: { success, error, warning }
+      print: { success, warning }
     } = toolbox
-
-    console.log(parameters.first)
 
     if (typeof parameters.first == 'undefined')
       warning(
@@ -173,5 +170,13 @@ module.exports = {
         name: parameters.first || 'unnamedApp'
       }
     })
+
+    const message =
+      typeof parameters.first == 'undefined'
+        ? 'Run "npm install" or "yarn install"'
+        : 'Change for your project folder and run "npm install" or "yarn install"'
+
+    success('Project created successfuly!')
+    warning(message)
   }
 }
