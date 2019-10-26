@@ -1,4 +1,16 @@
 module.exports = toolbox => {
+  async function isNodeProject() {
+    const { filesystem } = toolbox
+
+    const package = await filesystem.read('package.json', 'json')
+    const haveExpress = !!package.dependencies['express']
+    const haveMongoose = !!package.dependencies['mongoose']
+
+    if (haveExpress && haveMongoose) return true
+
+    return false
+  }
+
   async function validateName(name) {
     if (!name) return false
 
@@ -31,4 +43,5 @@ module.exports = toolbox => {
 
   toolbox.validateName = validateName
   toolbox.validateExtraValues = validateExtraValues
+  toolbox.isNodeProject = isNodeProject
 }
