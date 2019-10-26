@@ -1,8 +1,8 @@
 module.exports = {
-  name: 'generate:scaffold',
-  description: 'Create a controller with a complete CRUD, model and validator',
+  name: 'generate:validator',
+  description: 'Create a simple validator inside src/app/validators',
   run: async toolbox => {
-    const { parameters, createScaffold, isNodeProject } = toolbox
+    const { parameters, createValidator, isNodeProject } = toolbox
 
     if (!(await isNodeProject())) {
       error(
@@ -16,6 +16,6 @@ module.exports = {
       return
     }
 
-    await createScaffold(parameters.first, parameters.array)
+    await createValidator(parameters.first, parameters.array)
   }
 }
