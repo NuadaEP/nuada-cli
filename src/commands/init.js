@@ -19,35 +19,35 @@ module.exports = {
     template.generate({
       template: 'app.js.ejs',
       target: parameters.first
-        ? `src/app/app.js`
+        ? 'src/app/app.js'
         : `src/${parameters.first}/src/app/app.js`
     })
 
     template.generate({
       template: 'server.js.ejs',
       target: parameters.first
-        ? `src/app/server.js`
+        ? 'src/app/server.js'
         : `src/${parameters.first}/src/app/server.js`
     })
 
     template.generate({
       template: 'routes.js.ejs',
       target: parameters.first
-        ? `src/app/routes.js`
+        ? 'src/app/routes.js'
         : `src/${parameters.first}/src/app/routes.js`
     })
 
     template.generate({
       template: 'database.js.ejs',
       target: parameters.first
-        ? `src/config/database.js`
+        ? 'src/config/database.js'
         : `src/${parameters.first}/src/config/database.js`
     })
 
     template.generate({
       template: 'config.js.ejs',
       target: parameters.first
-        ? `src/config/ConfigSample.js`
+        ? 'src/config/ConfigSample.js'
         : `src/${parameters.first}/src/config/ConfigSample.js`
     })
 
