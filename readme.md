@@ -37,6 +37,12 @@ Generates a simple controller to use in your application. Import it into your ro
 $ nuada generate:model <model-name> <field:type>
 ```
 
+Creates a validation file based on the passed parameters.
+
+```shell
+$ nuada generate:model <model-name> <field:type>
+```
+
 Create a simple model file with fields and types defined. A validation file is also created following these rules.
 
 ```shell
