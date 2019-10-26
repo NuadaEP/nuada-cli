@@ -34,7 +34,7 @@ $ nuada generate:controller <controller-name>
 Generates a simple controller to use in your application. Import it into your routes file to get started.
 
 ```shell
-$ nuada generate:model <model-name> <field:type>
+$ nuada generate:validator <validator-name> <field:type>
 ```
 
 Creates a validation file based on the passed parameters.
@@ -50,6 +50,13 @@ $ nuada generate:scaffold <scaffold-name> <field:type>
 ```
 
 It generates an entire controller structure with a complete CRUD, model and validator ready to be used.
+
+# Some Another Commands
+
+```shell
+$ nuada version (-v)
+$ nuada help (-h)
+```
 
 # License
 
