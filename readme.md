@@ -51,7 +51,7 @@ $ nuada generate:scaffold <scaffold-name> <field:type>
 
 It generates an entire controller structure with a complete CRUD, model and validator ready to be used.
 
-# Some Another Commands
+# Some Other Commands
 
 ```shell
 $ nuada version (-v)
