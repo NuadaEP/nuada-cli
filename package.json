@@ -40,5 +40,13 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  }
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "cli",
+    "mongo",
+    "mongoose",
+    "express"
+  ]
 }
