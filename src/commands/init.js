@@ -18,7 +18,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/app.js'
-          : `src/${parameters.first}/src/app/app.js`
+          : `${parameters.first}/src/app/app.js`
     })
 
     template.generate({
@@ -26,7 +26,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/server.js'
-          : `src/${parameters.first}/src/app/server.js`
+          : `${parameters.first}/src/app/server.js`
     })
 
     template.generate({
@@ -34,7 +34,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/routes.js'
-          : `src/${parameters.first}/src/app/routes.js`
+          : `${parameters.first}/src/app/routes.js`
     })
 
     template.generate({
@@ -42,7 +42,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/database.js'
-          : `src/${parameters.first}/src/config/database.js`
+          : `${parameters.first}/src/config/database.js`
     })
 
     template.generate({
@@ -50,7 +50,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/ConfigSample.js'
-          : `src/${parameters.first}/src/config/ConfigSample.js`
+          : `${parameters.first}/src/config/ConfigSample.js`
     })
 
     template.generate({
@@ -58,7 +58,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/SampleController.js'
-          : `src/${parameters.first}/src/app/controllers/SampleController.js`
+          : `${parameters.first}/src/app/controllers/SampleController.js`
     })
 
     template.generate({
@@ -66,7 +66,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/index.js'
-          : `src/${parameters.first}/src/app/controllers/index.js`
+          : `${parameters.first}/src/app/controllers/index.js`
     })
 
     template.generate({
@@ -74,7 +74,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/jobs/SampleJob.js'
-          : `src/${parameters.first}/src/app/jobs/SampleJob.js`
+          : `${parameters.first}/src/app/jobs/SampleJob.js`
     })
 
     template.generate({
@@ -82,7 +82,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/middlewares/SampleMiddleware.js'
-          : `src/${parameters.first}/src/app/middlewares/SampleMiddleware.js`
+          : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`
     })
 
     template.generate({
@@ -90,7 +90,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/models/SampleModel.js'
-          : `src/${parameters.first}/src/app/models/SampleModel.js`
+          : `${parameters.first}/src/app/models/SampleModel.js`
     })
 
     template.generate({
@@ -98,7 +98,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/services/SampleService.js'
-          : `src/${parameters.first}/src/app/services/SampleService.js`
+          : `${parameters.first}/src/app/services/SampleService.js`
     })
 
     template.generate({
@@ -106,7 +106,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/validators/SampleValidator.js'
-          : `src/${parameters.first}/src/app/validators/SampleValidator.js`
+          : `${parameters.first}/src/app/validators/SampleValidator.js`
     })
 
     template.generate({
@@ -114,7 +114,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.editorconfig'
-          : `src/${parameters.first}/.editorconfig`
+          : `${parameters.first}/.editorconfig`
     })
 
     template.generate({
@@ -122,7 +122,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.env'
-          : `src/${parameters.first}/.env`,
+          : `${parameters.first}/.env`,
       props: {
         name: parameters.first || 'unnamedApp'
       }
@@ -133,7 +133,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.eslintrc'
-          : `src/${parameters.first}/.eslintrc`
+          : `${parameters.first}/.eslintrc`
     })
 
     template.generate({
@@ -141,7 +141,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.gitignore'
-          : `src/${parameters.first}/.gitignore`
+          : `${parameters.first}/.gitignore`
     })
 
     template.generate({
@@ -149,7 +149,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.prettierrc'
-          : `src/${parameters.first}/.prettierrc`
+          : `${parameters.first}/.prettierrc`
     })
 
     template.generate({
@@ -157,7 +157,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'nodemon.json'
-          : `src/${parameters.first}/nodemon.json`
+          : `${parameters.first}/nodemon.json`
     })
 
     template.generate({
@@ -165,7 +165,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'package.json'
-          : `src/${parameters.first}/package.json`,
+          : `${parameters.first}/package.json`,
       props: {
         name: parameters.first || 'unnamedApp'
       }
