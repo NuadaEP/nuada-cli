@@ -50,8 +50,10 @@ module.exports = toolbox => {
     return schemas
   }
 
-  toolbox.validateName = validateName
-  toolbox.validateExtraValues = validateExtraValues
-  toolbox.isNodeProject = isNodeProject
-  toolbox.isSucraseProject = isSucraseProject
+  toolbox.methods = {}
+
+  toolbox.methods.validateName = validateName
+  toolbox.methods.validateExtraValues = validateExtraValues
+  toolbox.methods.isNodeProject = isNodeProject
+  toolbox.methods.isSucraseProject = isSucraseProject
 }
