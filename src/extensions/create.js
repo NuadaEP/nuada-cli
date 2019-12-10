@@ -4,8 +4,11 @@ module.exports = toolbox => {
     print: { success, error, warning },
     template,
     validateName,
-    validateExtraValues
+    validateExtraValues,
+    isSucraseProject
   } = toolbox
+
+  const templatePath = isSucraseProject() ? 'sucrase/' : 'vanilla/'
 
   async function createModel(name, params) {
     const nameCapitalized = await toolbox.validateName(name)
@@ -25,7 +28,7 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: 'model.js.ejs',
+      template: `${templatePath}model.js.ejs`,
       target: `src/app/models/${nameCapitalized}Model.js`,
       props: {
         name: `${nameCapitalized}`,
@@ -56,7 +59,7 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: 'validator.js.ejs',
+      template: `${templatePath}validator.js.ejs`,
       target: `src/app/validators/${nameCapitalized}Validator.js`,
       props: {
         name: `${nameCapitalized}`,
@@ -76,7 +79,9 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: full ? 'scaffoldController.js.ejs' : 'controller.js.ejs',
+      template: full
+        ? `${templatePath}scaffoldController.js.ejs`
+        : `${templatePath}controller.js.ejs`,
       target: `src/app/controllers/${nameCapitalized}Controller.js`,
       props: { name: `${nameCapitalized}` }
     })

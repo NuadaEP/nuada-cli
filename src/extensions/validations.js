@@ -11,6 +11,15 @@ module.exports = toolbox => {
     return false
   }
 
+  async function isSucraseProject() {
+    const { filesystem } = toolbox
+
+    const package = await filesystem.read('package.json', 'json')
+    const sucrase = !!package.devDependencies['sucrase']
+
+    return sucrase
+  }
+
   async function validateName(name) {
     if (!name) return false
 
@@ -44,4 +53,5 @@ module.exports = toolbox => {
   toolbox.validateName = validateName
   toolbox.validateExtraValues = validateExtraValues
   toolbox.isNodeProject = isNodeProject
+  toolbox.isSucraseProject = isSucraseProject
 }
