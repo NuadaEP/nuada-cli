@@ -5,7 +5,8 @@ module.exports = {
     const {
       parameters,
       template,
-      print: { success, warning }
+      print: { success, warning },
+      isSucraseProject
     } = toolbox
 
     if (typeof parameters.first == 'undefined')
@@ -13,8 +14,25 @@ module.exports = {
         'You give no name for your application, so it will be created in current folder'
       )
 
+    const packageJson = parameters.options.sucrase ? 'sucrase/' : 'vanilla/'
+
     template.generate({
-      template: 'app.js.ejs',
+      template: `${packageJson}package.js.ejs`,
+      target:
+        typeof parameters.first == 'undefined'
+          ? 'package.json'
+          : `${parameters.first}/package.json`,
+      props: {
+        name: parameters.first || 'unnamedApp'
+      }
+    })
+
+    const templatePath = (await isSucraseProject()) ? 'sucrase/' : 'vanilla/'
+
+    console.log(await isSucraseProject())
+
+    template.generate({
+      template: `${templatePath}app.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/app.js'
@@ -22,7 +40,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'server.js.ejs',
+      template: `${templatePath}server.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/server.js'
@@ -30,7 +48,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'routes.js.ejs',
+      template: `${templatePath}routes.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/routes.js'
@@ -38,7 +56,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'database.js.ejs',
+      template: `${templatePath}database.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/database.js'
@@ -46,7 +64,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'config.js.ejs',
+      template: `${templatePath}config.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/ConfigSample.js'
@@ -54,7 +72,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'sampleController.js.ejs',
+      template: `${templatePath}sampleController.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/SampleController.js'
@@ -62,7 +80,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'indexController.js.ejs',
+      template: `${templatePath}indexController.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/index.js'
@@ -70,7 +88,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'job.js.ejs',
+      template: `${templatePath}job.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/jobs/SampleJob.js'
@@ -78,7 +96,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'middleware.js.ejs',
+      template: `${templatePath}middleware.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/middlewares/SampleMiddleware.js'
@@ -86,7 +104,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'sampleModel.js.ejs',
+      template: `${templatePath}sampleModel.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/models/SampleModel.js'
@@ -94,7 +112,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'services.js.ejs',
+      template: `${templatePath}services.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/services/SampleService.js'
@@ -102,7 +120,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'sampleValidator.js.ejs',
+      template: `${templatePath}sampleValidator.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/validators/SampleValidator.js'
@@ -110,7 +128,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'editorConfig.js.ejs',
+      template: `${templatePath}editorConfig.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.editorconfig'
@@ -118,7 +136,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'env.js.ejs',
+      template: `${templatePath}env.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.env'
@@ -129,7 +147,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'eslintrc.js.ejs',
+      template: `${templatePath}eslintrc.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.eslintrc'
@@ -137,7 +155,7 @@ module.exports = {
     })
 
     template.generate({
-      template: 'gitignore.js.ejs',
+      template: `${templatePath}gitignore.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.gitignore'
@@ -145,31 +163,22 @@ module.exports = {
     })
 
     template.generate({
-      template: 'prettierrc.js.ejs',
+      template: `${templatePath}prettierrc.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.prettierrc'
           : `${parameters.first}/.prettierrc`
     })
 
-    template.generate({
-      template: 'nodemon.js.ejs',
-      target:
-        typeof parameters.first == 'undefined'
-          ? 'nodemon.json'
-          : `${parameters.first}/nodemon.json`
-    })
-
-    template.generate({
-      template: 'package.js.ejs',
-      target:
-        typeof parameters.first == 'undefined'
-          ? 'package.json'
-          : `${parameters.first}/package.json`,
-      props: {
-        name: parameters.first || 'unnamedApp'
-      }
-    })
+    if (await isSucraseProject()) {
+      template.generate({
+        template: `${templatePath}nodemon.js.ejs`,
+        target:
+          typeof parameters.first == 'undefined'
+            ? 'nodemon.json'
+            : `${parameters.first}/nodemon.json`
+      })
+    }
 
     const message =
       typeof parameters.first == 'undefined'

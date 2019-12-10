@@ -6,7 +6,7 @@ module.exports = {
       parameters,
       print: { warning, error },
       createController,
-      methods: { isNodeProject }
+      isNodeProject
     } = toolbox
 
     if (!(await isNodeProject())) {

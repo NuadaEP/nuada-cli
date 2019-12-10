@@ -1,18 +1,17 @@
 module.exports = toolbox => {
   const {
     print: { success, error, warning },
-    template
-    // methods.validateName,
-    // methods.validateExtraValues
+    template,
+    isSucraseProject,
+    validateName,
+    validateExtraValues
   } = toolbox
 
-  console.log(toolbox)
-
-  const templatePath = true
-
   async function createModel(name, params) {
-    const nameCapitalized = await toolbox.methods.validateName(name)
-    const schemas = await toolbox.methods.validateExtraValues(params)
+    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+
+    const nameCapitalized = await validateName(name)
+    const schemas = await validateExtraValues(params)
 
     if (!nameCapitalized) {
       error('Model name must be specified')
@@ -42,8 +41,10 @@ module.exports = toolbox => {
   }
 
   async function createValidator(name, params) {
-    const nameCapitalized = await toolbox.methods.validateName(name)
-    const schemas = await toolbox.methods.validateExtraValues(params)
+    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+
+    const nameCapitalized = await validateName(name)
+    const schemas = await validateExtraValues(params)
 
     if (!nameCapitalized) {
       error('Model name must be specified')
@@ -71,7 +72,9 @@ module.exports = toolbox => {
   }
 
   async function createController(name, full = false) {
-    const nameCapitalized = await toolbox.methods.validateName(name)
+    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+
+    const nameCapitalized = await validateName(name)
 
     if (!nameCapitalized) {
       error('Controller name must be specified')
