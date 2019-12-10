@@ -1,4 +1,4 @@
-import Mongoose from 'mongoose';
+const Mongoose = require('mongoose')
 
 const <%= props.name %>Model = new Mongoose.Schema({
     <% props.fields.forEach(field => { -%>
@@ -11,6 +11,6 @@ const <%= props.name %>Model = new Mongoose.Schema({
     {
         timestamps: true
     }
-);
+)
 
-export default Mongoose.model('<%= props.name %>Model', <%= props.name %>Model);
+module.exports = Mongoose.model('<%= props.name %>Model', <%= props.name %>Model)

@@ -1,4 +1,4 @@
-import * as Yup from 'yup'
+const Yup = require('yup')
 
 const store = Yup.object().shape({
     <% props.fields.forEach(field => { -%>
@@ -10,11 +10,11 @@ const update = Yup.object().shape({
     <% props.fields.forEach(field => { -%>
 <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(), 
     <% }) %>
-});
+})
 
 const <%= props.name %>Validator = {
     store,
     update,
-};
+}
 
-export default <%= props.name %>Validator;
+module.exports = <%= props.name %>Validator

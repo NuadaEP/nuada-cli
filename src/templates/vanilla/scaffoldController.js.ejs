@@ -1,0 +1,40 @@
+const <%= props.name %>Model = require('../models/<%= props.name %>Model')
+const <%= props.name %>Validator = require('../validators/<%= props.name %>Validator')
+
+class <%= props.name %>Controller {
+    async index(req, res) {
+        const response = await <%= props.name %>Model.find()
+
+        return res.json(response)
+    }
+
+    async show(req, res) {
+        const response = await <%= props.name %>Model.findById(req.params.id)
+
+        return res.json(response)
+    }
+
+    async store(req, res) {
+        if(!(await <%= props.name %>Validator.store.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
+
+        const response = await <%= props.name %>Model.create(req.body)
+
+        return res.json(response)
+    }
+
+    async update(req, res) {
+        if(!(await <%= props.name %>Validator.update.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
+
+        const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body)
+
+        return res.json(response)
+    }
+
+    async delete(req, res) {
+        await <%= props.name %>Model.findByIdAndDelete(req.params.id)
+
+        return res.send(true)
+    }
+}
+
+module.exports = new <%= props.name %>Controller()
