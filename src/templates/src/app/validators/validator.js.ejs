@@ -1,4 +1,8 @@
+<% if (props.sucrase) { -%>
 import * as Yup from 'yup'
+<% } else { -%>
+const Yup = require('yup')
+<% } -%>
 
 const store = Yup.object().shape({
     <% props.fields.forEach(field => { -%>
@@ -17,4 +21,8 @@ const <%= props.name %>Validator = {
     update,
 };
 
+<% if (props.sucrase) { -%>
 export default <%= props.name %>Validator;
+<% } else { -%>
+module.exports = <%= props.name %>Validator;
+<% } -%>

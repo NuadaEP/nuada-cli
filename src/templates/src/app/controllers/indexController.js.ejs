@@ -1,7 +1,15 @@
+<% if (props.sucrase) { -%>
 import SampleController from './SampleController';
+<% } else { -%>
+const SampleController = require('./SampleController');
+<% } -%>
 
 const controllers = {
     SampleController
 };
 
+<% if (props.sucrase) { -%>
 export default controllers;
+<% } else { -%>
+module.exports = controllers;
+<% } -%>

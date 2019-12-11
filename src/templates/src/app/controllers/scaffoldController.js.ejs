@@ -1,5 +1,10 @@
+<% if (props.sucrase) { -%>
 import <%= props.name %>Model from '../models/<%= props.name %>Model';
 import <%= props.name %>Validator from '../validators/<%= props.name %>Validator';
+<% } else { -%>
+const <%= props.name %>Model = require('../models/<%= props.name %>Model');
+const <%= props.name %>Validator = require('../validators/<%= props.name %>Validator');
+<% } -%>
 
 class <%= props.name %>Controller {
     async index(req, res) {
@@ -37,4 +42,8 @@ class <%= props.name %>Controller {
     }
 }
 
+<% if (props.sucrase) { -%>
 export default new <%= props.name %>Controller();
+<% } else { -%>
+module.exports = new <%= props.name %>Controller();
+<% } -%>

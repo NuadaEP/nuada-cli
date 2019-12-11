@@ -1,46 +1,44 @@
-const Dotenv = require('dotenv')
-const Express = require('express')
-const Mongoose = require('mongoose')
+const Dotenv = require('dotenv');
+const Express = require('express');
+const Mongoose = require('mongoose');
 
-Dotenv.config()
+Dotenv.config();
 
-const databaseConfig = require('./config/database')
-const routes = require('./routes')
+const databaseConfig = require('./config/database');
+const routes = require('./routes');
 
 class App {
-  constructor() {
-    this.server = Express()
-    this.isDev = process.env.NODE_ENV !== 'production'
+  constructor () {
+    this.server = Express();
+    this.isDev = process.env.NODE_ENV !== 'production';
 
-    this.database()
-    this.middwares()
-    this._routes()
-    this.exception()
+    this.database();
+    this.middwares();
+    this._routes();
+    this.exception();
   }
 
-  database() {
+  database () {
     Mongoose.connect(databaseConfig.uri, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true
-    })
+    });
   }
 
-  middwares() {
-    this.server.use(Express.json())
-    this.server.use(Express.urlencoded({ extended: true }))
+  middwares () {
+    this.server.use(Express.json());
+    this.server.use(Express.urlencoded({ extended: true }));
   }
 
-  _routes() {
-    this.server.use(routes)
+  _routes () {
+    this.server.use(routes);
   }
 
-  exception() {
-    this.server.use(async (err, req, res, next) =>
-      res.status(err.status || 500).json({ error: 'Internal Server Error' })
-    )
+  exception () {
+    this.server.use(async (err, req, res, next) => res.status(err.status || 500).json({ error: 'Internal Server Error' }));
   }
 }
 
-module.exports = new App().server
+module.exports = new App().server;

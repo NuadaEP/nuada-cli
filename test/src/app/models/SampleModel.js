@@ -1,19 +1,18 @@
-const Mongoose = require('mongoose')
+const Mongoose = require('mongoose');
 
-const SampleModel = new Mongoose.Schema(
-  {
+const SampleModel = new Mongoose.Schema({
     title: {
-      type: String,
-      required: true
+        type: String,
+        required: true,
     },
     description: {
-      type: String,
-      required: true
+        type: String,
+        required: true
+      },
+    },
+    {
+        timestamps: true
     }
-  },
-  {
-    timestamps: true
-  }
-)
+);
 
-module.exports = Mongoose.model('Sample', SampleModel)
+module.exports = Mongoose.model('Sample', SampleModel);

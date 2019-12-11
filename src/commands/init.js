@@ -5,8 +5,7 @@ module.exports = {
     const {
       parameters,
       template,
-      print: { success, warning },
-      isSucraseProject
+      print: { success, warning }
     } = toolbox
 
     if (typeof parameters.first == 'undefined')
@@ -17,152 +16,151 @@ module.exports = {
     const packageJson = !!parameters.options.sucrase
 
     template.generate({
-      template: `${packageJson}package.js.ejs`,
+      template: `src/package.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'package.json'
           : `${parameters.first}/package.json`,
       props: {
-        name: parameters.first || 'unnamedApp'
+        name: parameters.first || 'unnamedApp',
+        sucrase: packageJson
       }
     })
 
-    const templatePath = () ? 'sucrase/' : 'vanilla/'
-
     template.generate({
-      template: `app.js.ejs`,
+      template: `src/app/app.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/app.js'
           : `${parameters.first}/src/app/app.js`,
       props: {
-        sucrase: await isSucraseProject()
+        sucrase: packageJson
       }
     })
 
     template.generate({
-      template: `server.js.ejs`,
+      template: `src/app/server.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/server.js'
           : `${parameters.first}/src/app/server.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `routes.js.ejs`,
+      template: `src/app/routes.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/routes.js'
           : `${parameters.first}/src/app/routes.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `database.js.ejs`,
+      template: `src/config/database.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/database.js'
           : `${parameters.first}/src/config/database.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `config.js.ejs`,
+      template: `src/config/config.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/ConfigSample.js'
           : `${parameters.first}/src/config/ConfigSample.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `sampleController.js.ejs`,
+      template: `src/app/controllers/sampleController.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/SampleController.js'
           : `${parameters.first}/src/app/controllers/SampleController.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `indexController.js.ejs`,
+      template: `src/app/controllers/indexController.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/index.js'
           : `${parameters.first}/src/app/controllers/index.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `job.js.ejs`,
+      template: `src/app/jobs/job.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/jobs/SampleJob.js'
           : `${parameters.first}/src/app/jobs/SampleJob.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `middleware.js.ejs`,
+      template: `src/app/middlewares/middleware.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/middlewares/SampleMiddleware.js'
           : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `sampleModel.js.ejs`,
+      template: `src/app/models/sampleModel.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/models/SampleModel.js'
           : `${parameters.first}/src/app/models/SampleModel.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `services.js.ejs`,
+      template: `src/app/services/services.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/services/SampleService.js'
           : `${parameters.first}/src/app/services/SampleService.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `sampleValidator.js.ejs`,
+      template: `src/app/validators/sampleValidator.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/validators/SampleValidator.js'
           : `${parameters.first}/src/app/validators/SampleValidator.js`,
-          props: {
-            sucrase: await isSucraseProject()
-          }
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
-      template: `editorConfig.js.ejs`,
+      template: `src/editorConfig.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.editorconfig'
@@ -170,7 +168,7 @@ module.exports = {
     })
 
     template.generate({
-      template: `env.js.ejs`,
+      template: `src/env.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.env'
@@ -181,7 +179,7 @@ module.exports = {
     })
 
     template.generate({
-      template: `eslintrc.js.ejs`,
+      template: `src/eslintrc.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.eslintrc'
@@ -189,7 +187,7 @@ module.exports = {
     })
 
     template.generate({
-      template: `gitignore.js.ejs`,
+      template: `src/gitignore.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.gitignore'
@@ -197,16 +195,16 @@ module.exports = {
     })
 
     template.generate({
-      template: `prettierrc.js.ejs`,
+      template: `src/prettierrc.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
           ? '.prettierrc'
           : `${parameters.first}/.prettierrc`
     })
 
-    if (await isSucraseProject()) {
+    if (packageJson) {
       template.generate({
-        template: `nodemon.js.ejs`,
+        template: `src/nodemon.js.ejs`,
         target:
           typeof parameters.first == 'undefined'
             ? 'nodemon.json'

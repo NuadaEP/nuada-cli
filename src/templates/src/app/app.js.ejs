@@ -1,11 +1,22 @@
+<% if (props.sucrase) { -%>
 import Dotenv from 'dotenv';
 import Express from 'express';
 import Mongoose from 'mongoose';
+<% } else { -%>
+const Dotenv = require('dotenv');
+const Express = require('express');
+const Mongoose = require('mongoose');
+<% } -%>
 
 Dotenv.config();
 
+<% if (props.sucrase) { -%>
 import databaseConfig from './config/database';
 import routes from './routes';
+<% } else { -%>
+const databaseConfig = require('./config/database');
+const routes = require('./routes');
+<% } -%>
 
 class App {
   constructor () {
@@ -41,4 +52,8 @@ class App {
   }
 }
 
+<% if (props.sucrase) { -%>
 export default new App().server;
+<% } else { -%>
+module.exports = new App().server;
+<% } -%>

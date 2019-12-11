@@ -3,7 +3,11 @@
  * To more validation schema, take a look https://github.com/jquense/yup
  */
 
+<% if (props.sucrase) { -%>
 import * as Yup from 'yup'
+<% } else { -%>
+const Yup = require('yup')
+<% } -%>
 
 const store = Yup.object().shape({
         title: Yup.string().required(),
@@ -19,4 +23,8 @@ const SampleValidator = {
     update,
 };
 
-export default SampleValidator;
+<% if (props.sucrase) { -%>
+export default SampleValidator
+<% } else { -%>
+module.exports = SampleValidator
+<% } -%>
