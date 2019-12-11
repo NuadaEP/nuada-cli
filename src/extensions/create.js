@@ -1,13 +1,16 @@
 module.exports = toolbox => {
   const {
-    filesystem,
     print: { success, error, warning },
     template,
+    isSucraseProject,
     validateName,
     validateExtraValues
   } = toolbox
 
   async function createModel(name, params) {
+    // console.log(await toolbox.isSucraseProject())
+    const sucrase = await toolbox.isSucraseProject()
+
     const nameCapitalized = await toolbox.validateName(name)
     const schemas = await toolbox.validateExtraValues(params)
 
@@ -25,11 +28,12 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: 'model.js.ejs',
+      template: `src/app/models/model.js.ejs`,
       target: `src/app/models/${nameCapitalized}Model.js`,
       props: {
         name: `${nameCapitalized}`,
-        fields: schemas
+        fields: schemas,
+        sucrase
       }
     })
 
@@ -39,6 +43,8 @@ module.exports = toolbox => {
   }
 
   async function createValidator(name, params) {
+    const sucrase = await toolbox.isSucraseProject()
+
     const nameCapitalized = await toolbox.validateName(name)
     const schemas = await toolbox.validateExtraValues(params)
 
@@ -56,11 +62,12 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: 'validator.js.ejs',
+      template: `src/app/validators/validator.js.ejs`,
       target: `src/app/validators/${nameCapitalized}Validator.js`,
       props: {
         name: `${nameCapitalized}`,
-        fields: schemas
+        fields: schemas,
+        sucrase
       }
     })
 
@@ -68,6 +75,8 @@ module.exports = toolbox => {
   }
 
   async function createController(name, full = false) {
+    const sucrase = await toolbox.isSucraseProject()
+
     const nameCapitalized = await toolbox.validateName(name)
 
     if (!nameCapitalized) {
@@ -76,9 +85,11 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: full ? 'scaffoldController.js.ejs' : 'controller.js.ejs',
+      template: full
+        ? `src/app/controllers/scaffoldController.js.ejs`
+        : `src/app/controllers/controller.js.ejs`,
       target: `src/app/controllers/${nameCapitalized}Controller.js`,
-      props: { name: `${nameCapitalized}` }
+      props: { name: `${nameCapitalized}`, sucrase }
     })
 
     success(`Controller ${nameCapitalized}Controller generated successfuly`)
