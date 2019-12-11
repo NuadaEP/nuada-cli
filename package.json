@@ -1,6 +1,6 @@
 {
   "name": "nuada",
-  "version": "0.2.9",
+  "version": "0.3.6",
   "description": "nuada CLI",
   "bin": {
     "nuada": "bin/nuada"
