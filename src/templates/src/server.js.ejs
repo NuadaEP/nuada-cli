@@ -1,0 +1,7 @@
+<% if (props.sucrase) { -%>
+import app from './app/app'
+<% } else { -%>
+const app = require('./app/app')
+<% } -%>
+
+app.listen(process.env.PORT || 3000)

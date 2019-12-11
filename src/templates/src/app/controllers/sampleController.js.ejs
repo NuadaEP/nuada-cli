@@ -20,19 +20,27 @@ class SampleController {
     }
 
     async store(req, res) {
-        if(!(await SampleValidator.store.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
-
-        const response = await Sample.create(req.body);
-
-        return res.json(response);
+        try {
+            await SampleValidator(req.body, 'store')
+            
+            const response = await Sample.create(req.body);
+            
+            return res.json(response);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });   
+        }
     }
 
     async update(req, res) {
-        if(!(await SampleValidator.update.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
-
-        const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
-
-        return res.json(response);
+        try {
+            await SampleValidator(req.body, 'update')
+            
+            const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
+            
+            return res.json(response);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });   
+        }
     }
 
     async delete(req, res) {

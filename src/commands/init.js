@@ -39,11 +39,11 @@ module.exports = {
     })
 
     template.generate({
-      template: `src/app/server.js.ejs`,
+      template: `src/server.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
-          ? 'src/app/server.js'
-          : `${parameters.first}/src/app/server.js`,
+          ? 'src/server.js'
+          : `${parameters.first}/src/server.js`,
       props: {
         sucrase: packageJson
       }

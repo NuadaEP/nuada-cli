@@ -1,9 +1,9 @@
 <% if (props.sucrase) { -%>
 import { Router } from 'express';
-import controllers from './app/controllers';
+import controllers from './controllers';
 <% } else { -%>
 const { Router } = require('express');
-const controllers = require('./app/controllers');
+const controllers = require('./controllers');
 <% } -%>
 
 const routes = Router();

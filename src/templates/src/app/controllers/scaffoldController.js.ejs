@@ -20,19 +20,27 @@ class <%= props.name %>Controller {
     }
 
     async store(req, res) {
-        if(!(await <%= props.name %>Validator.store.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
-
-        const response = await <%= props.name %>Model.create(req.body);
-
-        return res.json(response);
+        try {
+            await <%= props.name %>Validator(req.body, 'store')
+            
+            const response = await <%= props.name %>Model.create(req.body);
+            
+            return res.json(response);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
     }
 
     async update(req, res) {
-        if(!(await <%= props.name %>Validator.update.isValid(req.body))) return res.status(400).json({ error: 'Validation fails' })
-
-        const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body);
-
-        return res.json(response);
+        try {
+            await <%= props.name %>Validator(req.body, 'update')
+            
+            const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body);
+            
+            return res.json(response);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
     }
 
     async delete(req, res) {

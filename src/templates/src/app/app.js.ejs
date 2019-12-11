@@ -11,10 +11,10 @@ const Mongoose = require('mongoose');
 Dotenv.config();
 
 <% if (props.sucrase) { -%>
-import databaseConfig from './config/database';
+import databaseConfig from '../config/database';
 import routes from './routes';
 <% } else { -%>
-const databaseConfig = require('./config/database');
+const databaseConfig = require('../config/database');
 const routes = require('./routes');
 <% } -%>
 

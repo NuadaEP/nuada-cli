@@ -9,22 +9,32 @@ import * as Yup from 'yup'
 const Yup = require('yup')
 <% } -%>
 
-const store = Yup.object().shape({
-        title: Yup.string().required(),
-        description: Yup.string().required(),
-    });
-const update = Yup.object().shape({
-    title: Yup.string(),
-    description: Yup.string(),
-});
+class SampleValidator {
+    validation(body, role) {
+        let validationConfig;
 
-const SampleValidator = {
-    store,
-    update,
-};
+        switch (role) {
+            case 'store':
+                validationConfig = Yup.object().shape({
+                    title: Yup.string().required(),
+                    description: Yup.string().required(),
+                });
+                break;
+
+            case 'update':
+                validationConfig = Yup.object().shape({
+                    title: Yup.string(),
+                    description: Yup.string(),
+                });
+                break;
+        }
+
+        return validationConfig.isValid(body);
+    }
+}
 
 <% if (props.sucrase) { -%>
-export default SampleValidator
+export default new SampleValidator().validation
 <% } else { -%>
-module.exports = SampleValidator
+module.exports = new SampleValidator().validation
 <% } -%>
