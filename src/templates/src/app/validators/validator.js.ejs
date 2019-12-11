@@ -1,0 +1,35 @@
+<% if (props.sucrase) { -%>
+import * as Yup from 'yup'
+<% } else { -%>
+const Yup = require('yup')
+<% } -%>
+
+class <%= props.name %>Validator {
+    validation(body, role) {
+        let validationConfig;
+
+        switch (role) {
+            case 'store':
+                validationConfig = Yup.object().shape({
+                    <% props.fields.forEach(field => { -%>
+<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(), 
+<% }) -%>
+                });
+            
+            case 'update':
+                validationConfig = Yup.object().shape({
+                    <% props.fields.forEach(field => { -%>
+<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(), 
+<% }) -%>
+                });
+        }
+        
+        return validationConfig.isValid(body);
+    }
+}
+
+<% if (props.sucrase) { -%>
+export default new <%= props.name %>Validator().validation
+<% } else { -%>
+module.exports = new <%= props.name %>Validator().validation
+<% } -%>

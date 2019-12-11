@@ -1,0 +1,24 @@
+<% if (props.sucrase) { -%>
+import Mongoose from 'mongoose';
+<% } else { -%>
+const Mongoose = require('mongoose');
+<% } -%>
+
+const <%= props.name %>Model = new Mongoose.Schema({
+    <% props.fields.forEach(field => { -%>
+    <%= field.fieldName %>: {
+            type: <%= field.type %>, 
+            require: true 
+        },
+    <% }) -%>
+},
+    {
+        timestamps: true
+    }
+);
+
+<% if (props.sucrase) { -%>
+export default Mongoose.model('<%= props.name %>Model', <%= props.name %>Model)
+<% } else { -%>
+module.exports = Mongoose.model('<%= props.name %>Model', <%= props.name %>Model)
+<% } -%>
