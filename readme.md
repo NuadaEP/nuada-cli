@@ -18,11 +18,19 @@ $ yarn global add nuada
 
 ## Usage
 
-You can use nuada package just like that:
+You can start a new project with nuada package just like that:
 
 ```shell
 $ nuada new <project-name>
 ```
+
+You can also create a project using [SUCRASE](https://github.com/user/repo/blob/branch/other_file.md), just doing:
+
+```shell
+$ nuada new <project-name> --sucrase
+```
+
+Then all your project structure going to follow this lib.
 
 This command creates an entire folder structure and pattern of files that will be used in the project.
 If you do not specify the project name, it will be created in the current folder. So be careful, because it can make a mess.

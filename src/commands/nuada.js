@@ -8,6 +8,7 @@ module.exports = {
 
     warning('Type some command like:')
     warning('$ nuada new <project-name>')
+    warning('$ nuada new <project-name> --sucrase')
     warning('$ nuada generate:controller <controller-name>')
     warning('$ nuada generate:validator <validator-name> <field:type>')
     warning('$ nuada generate:model <model-name> <field:type>')
