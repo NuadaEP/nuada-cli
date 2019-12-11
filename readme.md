@@ -24,7 +24,7 @@ You can start a new project with nuada package just like that:
 $ nuada new <project-name>
 ```
 
-You can also create a project using [SUCRASE](https://github.com/user/repo/blob/branch/other_file.md), just doing:
+You can also create a project using [SUCRASE](https://www.npmjs.com/package/sucrase), just doing:
 
 ```shell
 $ nuada new <project-name> --sucrase
