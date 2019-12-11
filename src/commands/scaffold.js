@@ -5,7 +5,8 @@ module.exports = {
     const {
       parameters,
       createScaffold,
-      methods: { isNodeProject }
+      isNodeProject,
+      print: { error, warning }
     } = toolbox
 
     if (!(await isNodeProject())) {

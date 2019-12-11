@@ -8,10 +8,11 @@ module.exports = toolbox => {
   } = toolbox
 
   async function createModel(name, params) {
-    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+    // console.log(await toolbox.isSucraseProject())
+    const sucrase = await toolbox.isSucraseProject()
 
-    const nameCapitalized = await validateName(name)
-    const schemas = await validateExtraValues(params)
+    const nameCapitalized = await toolbox.validateName(name)
+    const schemas = await toolbox.validateExtraValues(params)
 
     if (!nameCapitalized) {
       error('Model name must be specified')
@@ -27,11 +28,12 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: `${templatePath}model.js.ejs`,
+      template: `src/app/models/model.js.ejs`,
       target: `src/app/models/${nameCapitalized}Model.js`,
       props: {
         name: `${nameCapitalized}`,
-        fields: schemas
+        fields: schemas,
+        sucrase
       }
     })
 
@@ -41,10 +43,10 @@ module.exports = toolbox => {
   }
 
   async function createValidator(name, params) {
-    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+    const sucrase = await toolbox.isSucraseProject()
 
-    const nameCapitalized = await validateName(name)
-    const schemas = await validateExtraValues(params)
+    const nameCapitalized = await toolbox.validateName(name)
+    const schemas = await toolbox.validateExtraValues(params)
 
     if (!nameCapitalized) {
       error('Model name must be specified')
@@ -60,11 +62,12 @@ module.exports = toolbox => {
     }
 
     await template.generate({
-      template: `${templatePath}validator.js.ejs`,
+      template: `src/app/validators/validator.js.ejs`,
       target: `src/app/validators/${nameCapitalized}Validator.js`,
       props: {
         name: `${nameCapitalized}`,
-        fields: schemas
+        fields: schemas,
+        sucrase
       }
     })
 
@@ -72,9 +75,9 @@ module.exports = toolbox => {
   }
 
   async function createController(name, full = false) {
-    const templatePath = await isSucraseProject() ? 'sucrase/' : 'vanilla/'
+    const sucrase = await toolbox.isSucraseProject()
 
-    const nameCapitalized = await validateName(name)
+    const nameCapitalized = await toolbox.validateName(name)
 
     if (!nameCapitalized) {
       error('Controller name must be specified')
@@ -83,10 +86,10 @@ module.exports = toolbox => {
 
     await template.generate({
       template: full
-        ? `${templatePath}scaffoldController.js.ejs`
-        : `${templatePath}controller.js.ejs`,
+        ? `src/app/controllers/scaffoldController.js.ejs`
+        : `src/app/controllers/controller.js.ejs`,
       target: `src/app/controllers/${nameCapitalized}Controller.js`,
-      props: { name: `${nameCapitalized}` }
+      props: { name: `${nameCapitalized}`, sucrase }
     })
 
     success(`Controller ${nameCapitalized}Controller generated successfuly`)
