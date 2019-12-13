@@ -1,0 +1,63 @@
+<% if (props.sucrase) { -%>
+import Jwt from 'jsonwebtoken'
+
+import UserValidator from '../validators/UserValidator'
+import User from '../models/UserModel'
+import AuthConfig from '../../config/auth'
+<% } else { -%>
+const Jwt = require('jsonwebtoken')
+
+const UserValidator = require('../validators/UserValidator')
+const User = require('../models/UserModel')
+const AuthConfig = require('../../config/auth')
+<% } -%>
+
+class UserController {
+  async show(req, res) {
+    const { _id: user_id } = res.locals.user
+
+    return res.send({ user_id })
+  }
+
+  async store(req, res) {
+    try {
+      const { authorization } = req.headers
+
+      if (!(await UserValidator(req.body, 'create')))
+        return res
+          .status(400)
+          .json({ message: 'Validation fails' })
+
+      if (!authorization)
+        return res
+          .status(401)
+          .json({ message: 'Missing token' })
+
+      const [, token] = authorization.split(' ')
+
+      const decoded_token = await Jwt.verify(token, AuthConfig.secret)
+
+      if (decoded_token.error)
+        return res
+          .status(401)
+          .json({ message: 'Invalid Token' })
+
+      const { username } = req.body
+
+      if (await User.findOne({ username }))
+        return res
+          .status(400)
+          .json({ message: 'User is already in use' })
+
+      return res.send(await User.create(req.body))
+    } catch (error) {
+      return res.status(400).json({ error: error.message })
+    }
+  }
+}
+
+<% if (props.sucrase) { -%>
+export default new UserController()
+<% } else { -%>
+module.exports = new UserController()
+<% } -%>
