@@ -59,6 +59,12 @@ $ nuada generate:scaffold <scaffold-name> <field:type>
 
 It generates an entire controller structure with a complete CRUD, model and validator ready to be used.
 
+```shell
+$ nuada generate:auth
+```
+
+Create a simple authentication structure using [JWT](https://jwt.io/).
+
 # Some Other Commands
 
 ```shell
