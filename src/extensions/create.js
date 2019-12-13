@@ -1,7 +1,8 @@
 module.exports = toolbox => {
   const {
     print: { success, error, warning },
-    template
+    template,
+    system
   } = toolbox
 
   async function createModel(name, params) {
@@ -102,6 +103,12 @@ module.exports = toolbox => {
   async function createAuth() {
     const sucrase = await toolbox.isSucraseProject()
 
+    await system.spawn('yarn add bcryptjs jsonwebtoken', {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
+
     await template.generate({
       template: `src/app/validators/userValidator.js.ejs`,
       target: `src/app/validators/UserValidator.js`,
@@ -135,8 +142,8 @@ module.exports = toolbox => {
     })
 
     await template.generate({
-      template: `src/app/middleware/authentication.js.ejs`,
-      target: `src/app/middleware/Authentication.js`,
+      template: `src/app/middlewares/authentication.js.ejs`,
+      target: `src/app/middlewares/Authentication.js`,
       props: {
         sucrase
       }
