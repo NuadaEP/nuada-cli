@@ -13,5 +13,6 @@ module.exports = {
     warning('$ nuada generate:validator <validator-name> <field:type>')
     warning('$ nuada generate:model <model-name> <field:type>')
     warning('$ nuada generate:scaffold <scaffold-name> <field:type>')
+    warning('$ nuada generate:auth')
   }
 }
