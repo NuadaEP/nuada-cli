@@ -237,20 +237,22 @@ module.exports = {
       })
     }
 
-    await system.run('git init', { trim: true })
-
     warning('<!==================== Git was initialized ====================!>')
 
     warning(
       '<!==================== We are preparing everything for you ====================!>'
     )
 
-    await system.run('yarn install', { trim: true })
+    let cd = ''
 
     if (typeof parameters.first != 'undefined')
-      warning(
-        `<!==================== Access the folder '/${parameters.first}' to start ====================!>`
-      )
+      cd = `cd ${parameters.first} && `
+
+    await system.spawn(`${cd}yarn install && git init`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
 
     success('Project created successfuly!')
   }
