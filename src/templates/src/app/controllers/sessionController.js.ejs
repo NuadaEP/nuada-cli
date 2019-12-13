@@ -25,7 +25,7 @@ class SessionController {
 }
 
 <% if (props.sucrase) { -%>
-export default new SessionController()
+export default new SessionController().index
 <% } else { -%>
-module.exports = new SessionController()
+module.exports = new SessionController().index
 <% } -%>

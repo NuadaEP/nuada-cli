@@ -119,7 +119,7 @@ module.exports = toolbox => {
 
     await template.generate({
       template: `src/config/auth.js.ejs`,
-      target: `src/auth.js`,
+      target: `src/config/auth.js`,
       props: {
         sucrase
       }

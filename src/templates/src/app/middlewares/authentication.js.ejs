@@ -32,7 +32,7 @@ class Authentication {
 }
 
 <% if (props.sucrase) { -%>
-export default new Authentication()
+export default new Authentication().init
 <% } else { -%>
-module.exports = new Authentication()
+module.exports = new Authentication().init
 <% } -%>
