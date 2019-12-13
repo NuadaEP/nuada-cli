@@ -2,13 +2,10 @@ module.exports = toolbox => {
   const {
     print: { success, error, warning },
     template,
-    isSucraseProject,
-    validateName,
-    validateExtraValues
+    system
   } = toolbox
 
   async function createModel(name, params) {
-    // console.log(await toolbox.isSucraseProject())
     const sucrase = await toolbox.isSucraseProject()
 
     const nameCapitalized = await toolbox.validateName(name)
@@ -103,8 +100,69 @@ module.exports = toolbox => {
     await createController(name, true)
   }
 
+  async function createAuth() {
+    const sucrase = await toolbox.isSucraseProject()
+
+    await system.spawn('yarn add bcryptjs jsonwebtoken', {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
+
+    await template.generate({
+      template: `src/app/validators/userValidator.js.ejs`,
+      target: `src/app/validators/UserValidator.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/config/auth.js.ejs`,
+      target: `src/config/auth.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/app/models/userModel.js.ejs`,
+      target: `src/app/models/UserModel.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/app/controllers/userController.js.ejs`,
+      target: `src/app/controllers/UserController.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/app/middlewares/authentication.js.ejs`,
+      target: `src/app/middlewares/Authentication.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/app/controllers/sessionController.js.ejs`,
+      target: `src/app/controllers/SessionController.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    success(`Authentication module generated successfuly`)
+  }
+
   toolbox.createModel = createModel
   toolbox.createController = createController
   toolbox.createValidator = createValidator
   toolbox.createScaffold = createScaffold
+  toolbox.createAuth = createAuth
 }

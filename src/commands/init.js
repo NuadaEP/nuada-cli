@@ -5,13 +5,38 @@ module.exports = {
     const {
       parameters,
       template,
-      print: { success, warning }
+      print: { success, warning },
+      prompt,
+      system
     } = toolbox
 
-    if (typeof parameters.first == 'undefined')
-      warning(
-        'You give no name for your application, so it will be created in current folder'
-      )
+    if (typeof parameters.first == 'undefined') {
+      const confirm = {
+        type: 'select',
+        name: 'confirm',
+        message:
+          'Do you realy want to create your project in that current folder?',
+        choices: ['Yes, I do', 'No, lets create a folder']
+      }
+
+      const consoleConfirm = await prompt.ask(confirm)
+
+      if (consoleConfirm.confirm == 'No, lets create a folder') {
+        const inputName = {
+          type: 'input',
+          name: 'inputName',
+          message: "What's project name?"
+        }
+
+        const projectName = await prompt.ask(inputName)
+
+        parameters.first = projectName.inputName
+      } else {
+        warning(
+          'You give no name for your application, so it will be created in current folder'
+        )
+      }
+    }
 
     const packageJson = !!parameters.options.sucrase
 
@@ -212,12 +237,23 @@ module.exports = {
       })
     }
 
-    const message =
-      typeof parameters.first == 'undefined'
-        ? 'Run "npm install" or "yarn install"'
-        : 'Change for your project folder and run "npm install" or "yarn install"'
+    warning('<!==================== Git was initialized ====================!>')
+
+    warning(
+      '<!==================== We are preparing everything for you ====================!>'
+    )
+
+    let cd = ''
+
+    if (typeof parameters.first != 'undefined')
+      cd = `cd ${parameters.first} && `
+
+    await system.spawn(`${cd}yarn install && git init`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
 
     success('Project created successfuly!')
-    warning(message)
   }
 }

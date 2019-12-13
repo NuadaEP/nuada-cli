@@ -1,0 +1,10 @@
+const auth = {
+  secret: process.env.AUTH_SECRET,
+  ttl: process.env.AUTH_TLL
+}
+
+<% if (props.sucrase) { -%>
+export default auth
+<% } else { -%>
+module.exports = auth
+<% } -%>
