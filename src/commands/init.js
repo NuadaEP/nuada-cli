@@ -248,7 +248,7 @@ module.exports = {
     if (typeof parameters.first != 'undefined')
       cd = `cd ${parameters.first} && `
 
-    await system.spawn(`${cd}yarn install && git init`, {
+    await system.spawn(`${cd}npm install && git init`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'

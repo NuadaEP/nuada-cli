@@ -103,7 +103,7 @@ module.exports = toolbox => {
   async function createAuth() {
     const sucrase = await toolbox.isSucraseProject()
 
-    await system.spawn('yarn add bcryptjs jsonwebtoken', {
+    await system.spawn('npm add bcryptjs jsonwebtoken', {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
