@@ -100,10 +100,30 @@ module.exports = toolbox => {
     await createController(name, true)
   }
 
+  async function createAxiosService() {
+    const sucrase = await toolbox.isSucraseProject()
+
+    await system.spawn('npm install axios', {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
+
+    await template.generate({
+      template: `src/app/services/axios.js.ejs`,
+      target: `src/app/services/AxiosService.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    success(`Axios service generated successfuly`)
+  }
+
   async function createAuth() {
     const sucrase = await toolbox.isSucraseProject()
 
-    await system.spawn('npm add bcryptjs jsonwebtoken', {
+    await system.spawn('npm install bcryptjs jsonwebtoken', {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit'
@@ -119,7 +139,7 @@ module.exports = toolbox => {
 
     await template.generate({
       template: `src/config/auth.js.ejs`,
-      target: `src/config/auth.js`,
+      target: `src/config/AuthConfig.js`,
       props: {
         sucrase
       }
@@ -143,7 +163,7 @@ module.exports = toolbox => {
 
     await template.generate({
       template: `src/app/middlewares/authentication.js.ejs`,
-      target: `src/app/middlewares/Authentication.js`,
+      target: `src/app/middlewares/AuthenticationMiddleware.js`,
       props: {
         sucrase
       }
@@ -164,5 +184,6 @@ module.exports = toolbox => {
   toolbox.createController = createController
   toolbox.createValidator = createValidator
   toolbox.createScaffold = createScaffold
+  toolbox.createAxiosService = createAxiosService
   toolbox.createAuth = createAuth
 }

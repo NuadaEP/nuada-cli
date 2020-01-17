@@ -1,11 +1,11 @@
 <% if (props.sucrase) { -%>
 import Jwt from 'jsonwebtoken'
 
-import AuthConfig from '../../config/auth'
+import AuthConfig from '../../config/AuthConfig'
 <% } else { -%>
 const Jwt = require('jsonwebtoken')
 
-const AuthConfig = require('../../config/auth')
+const AuthConfig = require('../../config/AuthConfig')
 <% } -%>
 
 class Authentication {

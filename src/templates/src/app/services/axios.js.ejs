@@ -1,0 +1,61 @@
+<% if (props.sucrase) { -%>
+import Axios from 'axios';
+<% } else { -%>
+const Axios = require('axios');
+<% } -%>
+
+class AxiosService {
+
+  /**
+   *
+   * @param url | string | required
+   * @param config | object | You can pass 'params', 'headers', etc
+   */
+  async getRequest(url, verb, config = {}) {
+    try {
+      switch (verb) {
+        case 'get':
+          return Axios.get(url, config)
+
+        case 'delete':
+          return Axios.delete(url, config)
+
+        default:
+          throw {
+            error: 'Fill the parameter "verb" with "post" or "put"'
+          }
+      }
+    } catch (error) {
+      throw {
+        error
+      }
+    }
+  }
+
+  /**
+   *
+   * @param url | string | required
+   * @param data | object | required | body of the request
+   * @param config | object | You can pass 'params', 'headers', etc
+   */
+  async postPutRequest(url, data, verb, config = {}) {
+    try {
+      switch (verb) {
+        case 'post':
+          return Axios.post(url, data, config)
+
+        case 'put':
+          return Axios.put(url, data, config)
+
+        default:
+          throw {
+            error: 'Fill the parameter "verb" with "post" or "put"'
+          };
+      }
+    } catch (error) {
+      throw {
+        error
+      }
+    }
+  }
+}
