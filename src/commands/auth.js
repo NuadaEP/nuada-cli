@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'generate:auth',
+  name: 'make:auth',
   description: 'A complete authentication module using JWT',
   run: async toolbox => {
     const {

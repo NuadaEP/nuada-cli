@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'generate:validator',
+  name: 'make:validator',
   description: 'Create a simple validator inside src/app/validators',
   run: async toolbox => {
     const { parameters, createValidator, isNodeProject } = toolbox

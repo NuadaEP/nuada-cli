@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'generate:model',
+  name: 'make:model',
   description: 'Create a simple model inside src/app/models',
   run: async toolbox => {
     const { parameters, createModel, isNodeProject } = toolbox

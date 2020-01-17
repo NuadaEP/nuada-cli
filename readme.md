@@ -36,31 +36,31 @@ This command creates an entire folder structure and pattern of files that will b
 If you do not specify the project name, it will be created in the current folder. So be careful, because it can make a mess.
 
 ```shell
-$ nuada generate:controller <controller-name>
+$ nuada make:controller <controller-name>
 ```
 
 Generates a simple controller to use in your application. Import it into your routes file to get started.
 
 ```shell
-$ nuada generate:validator <validator-name> <field:type>
+$ nuada make:validator <validator-name> <field:type>
 ```
 
 Creates a validation file based on the passed parameters.
 
 ```shell
-$ nuada generate:model <model-name> <field:type>
+$ nuada make:model <model-name> <field:type>
 ```
 
 Create a simple model file with fields and types defined. A validation file is also created following these rules.
 
 ```shell
-$ nuada generate:scaffold <scaffold-name> <field:type>
+$ nuada make:scaffold <scaffold-name> <field:type>
 ```
 
 It generates an entire controller structure with a complete CRUD, model and validator ready to be used.
 
 ```shell
-$ nuada generate:auth
+$ nuada make:auth
 ```
 
 Create a simple authentication structure using [JWT](https://jwt.io/).

@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'generate:controller',
+  name: 'make:controller',
   description: 'Create a simple controller inside src/app/controllers',
   run: async toolbox => {
     const {
