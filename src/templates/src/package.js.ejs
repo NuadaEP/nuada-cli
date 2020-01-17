@@ -6,6 +6,8 @@
     "dev": "nodemon src/server.js"<% if (props.sucrase) { -%>,<% } %>
 <% if (props.sucrase) { -%>
     "build": "sucrase ./src -d ./build --transforms imports"
+<% } else { -%>
+    "build": "node src/server.js"
 <% } -%>
   },
   "license": "MIT",

@@ -20,14 +20,19 @@ class UserController {
           .status(400)
           .json({ message: 'Validation fails' })
 
-      const { username } = req.body
+      const { username, password, confirmPassword } = req.body
 
       if (await User.findOne({ username }))
         return res
           .status(400)
           .json({ message: 'User is already in use' })
 
-      return res.json(await User.create(req.body))
+      if (password === confirmPassword)
+        return res
+          .status(400)
+          .json({ message: 'The provided password is not identical' })
+
+      return res.json(await User.create({ username, password }))
     } catch (error) {
       return res.status(400).json({ error: error.message })
     }

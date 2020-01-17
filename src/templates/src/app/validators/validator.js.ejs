@@ -5,27 +5,29 @@ const Yup = require('yup')
 <% } -%>
 
 class <%= props.name %>Validator {
-    validation(body, role) {
-        let validationConfig;
+  validation(body, role) {
+    let validationConfig;
 
-        switch (role) {
-            case 'store':
-                validationConfig = Yup.object().shape({
-                    <% props.fields.forEach(field => { -%>
-<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(), 
+    switch (role) {
+      case 'store':
+          validationConfig = Yup.object().shape({
+              <% props.fields.forEach(field => { -%>
+<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(),
 <% }) -%>
-                });
-            
-            case 'update':
-                validationConfig = Yup.object().shape({
-                    <% props.fields.forEach(field => { -%>
-<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(), 
+          });
+          break;
+
+      case 'update':
+          validationConfig = Yup.object().shape({
+              <% props.fields.forEach(field => { -%>
+<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(),
 <% }) -%>
-                });
-        }
-        
-        return validationConfig.isValid(body);
+          });
+          break;
     }
+
+    return validationConfig.isValid(body);
+  }
 }
 
 <% if (props.sucrase) { -%>

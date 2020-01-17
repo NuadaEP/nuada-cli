@@ -7,47 +7,47 @@ const <%= props.name %>Validator = require('../validators/<%= props.name %>Valid
 <% } -%>
 
 class <%= props.name %>Controller {
-    async index(req, res) {
-        const response = await <%= props.name %>Model.find();
+  async index(req, res) {
+    const response = await <%= props.name %>Model.find();
 
-        return res.json(response);
+    return res.json(response);
+  }
+
+  async show(req, res) {
+    const response = await <%= props.name %>Model.findById(req.params.id);
+
+    return res.json(response);
+  }
+
+  async store(req, res) {
+    try {
+      await <%= props.name %>Validator(req.body, 'store')
+
+      const response = await <%= props.name %>Model.create(req.body);
+
+      return res.json(response);
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
     }
+  }
 
-    async show(req, res) {
-        const response = await <%= props.name %>Model.findById(req.params.id);
+  async update(req, res) {
+    try {
+      await <%= props.name %>Validator(req.body, 'update')
 
-        return res.json(response);
+      const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body);
+
+      return res.json(response);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
+  }
 
-    async store(req, res) {
-        try {
-            await <%= props.name %>Validator(req.body, 'store')
-            
-            const response = await <%= props.name %>Model.create(req.body);
-            
-            return res.json(response);
-        } catch (error) {
-            return res.status(400).json({ error: error.message });
-        }
-    }
+  async delete(req, res) {
+    await <%= props.name %>Model.findByIdAndDelete(req.params.id);
 
-    async update(req, res) {
-        try {
-            await <%= props.name %>Validator(req.body, 'update')
-            
-            const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body);
-            
-            return res.json(response);
-        } catch (error) {
-            return res.status(400).json({ error: error.message });
-        }
-    }
-
-    async delete(req, res) {
-        await <%= props.name %>Model.findByIdAndDelete(req.params.id);
-
-        return res.send(true);
-    }
+    return res.send(true);
+  }
 }
 
 <% if (props.sucrase) { -%>

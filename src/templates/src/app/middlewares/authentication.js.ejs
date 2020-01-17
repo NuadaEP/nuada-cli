@@ -13,7 +13,7 @@ class Authentication {
     try {
       const { authorization = null } = req.headers
 
-      if (!authorization) return res.status(401).json({ message: "Missing token" })
+      if (!authorization) return res.status(400).json({ message: "Missing token" })
 
       const [, token] = authorization.split(' ')
       const decoded_token = await Jwt.verify(token, AuthConfig.secret)

@@ -208,7 +208,7 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? '.eslintrc'
-          : `${parameters.first}/.eslintrc`
+          : `${parameters.first}/.eslintrc.js`
     })
 
     template.generate({

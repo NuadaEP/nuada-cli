@@ -11,26 +11,25 @@ const Mongoose = require('mongoose');
 Dotenv.config();
 
 <% if (props.sucrase) { -%>
-import databaseConfig from '../config/database';
-import routes from './routes';
+import DatabaseConfig from '../config/database';
+import Routes from './routes';
 <% } else { -%>
-const databaseConfig = require('../config/database');
-const routes = require('./routes');
+const DatabaseConfig = require('../config/database');
+const Routes = require('./routes');
 <% } -%>
 
 class App {
   constructor () {
     this.server = Express();
-    this.isDev = process.env.NODE_ENV !== 'production';
 
     this.database();
     this.middwares();
-    this._routes();
+    this.routes();
     this.exception();
   }
 
   database () {
-    Mongoose.connect(databaseConfig.uri, {
+    Mongoose.connect(DatabaseConfig.uri, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
@@ -43,7 +42,7 @@ class App {
     this.server.use(Express.urlencoded({ extended: true }));
   }
 
-  _routes () {
+  routes () {
     this.server.use(routes);
   }
 

@@ -18,7 +18,7 @@ const <%= props.name %>Model = new Mongoose.Schema({
 );
 
 <% if (props.sucrase) { -%>
-export default Mongoose.model('<%= props.name %>Model', <%= props.name %>Model)
+export default Mongoose.model('<%= props.name %>', <%= props.name %>Model)
 <% } else { -%>
-module.exports = Mongoose.model('<%= props.name %>Model', <%= props.name %>Model)
+module.exports = Mongoose.model('<%= props.name %>', <%= props.name %>Model)
 <% } -%>

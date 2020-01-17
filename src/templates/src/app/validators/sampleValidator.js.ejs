@@ -10,27 +10,27 @@ const Yup = require('yup')
 <% } -%>
 
 class SampleValidator {
-    validation(body, role) {
-        let validationConfig;
+  validation(body, role) {
+    let validationConfig;
 
-        switch (role) {
-            case 'store':
-                validationConfig = Yup.object().shape({
-                    title: Yup.string().required(),
-                    description: Yup.string().required(),
-                });
-                break;
+    switch (role) {
+      case 'store':
+        validationConfig = Yup.object().shape({
+            title: Yup.string().required(),
+            description: Yup.string().required(),
+        });
+        break;
 
-            case 'update':
-                validationConfig = Yup.object().shape({
-                    title: Yup.string(),
-                    description: Yup.string(),
-                });
-                break;
-        }
-
-        return validationConfig.isValid(body);
+      case 'update':
+        validationConfig = Yup.object().shape({
+            title: Yup.string(),
+            description: Yup.string(),
+        });
+        break;
     }
+
+    return validationConfig.isValid(body);
+  }
 }
 
 <% if (props.sucrase) { -%>
