@@ -1,6 +1,6 @@
 module.exports = {
   name: 'nuada',
-  description: 'Create a simple model inside src/app/models',
+  description: "Let's help you to create your project faster",
   run: async toolbox => {
     const {
       print: { warning }

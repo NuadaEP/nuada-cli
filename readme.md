@@ -65,6 +65,12 @@ $ nuada make:auth
 
 Create a simple authentication structure using [JWT](https://jwt.io/).
 
+```shell
+$ nuada make:axios
+```
+
+Create a simple HTTP comunication service using [Axios](https://github.com/axios/axios).
+
 # Some Other Commands
 
 ```shell

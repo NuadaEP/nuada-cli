@@ -237,6 +237,14 @@ module.exports = {
       })
     }
 
+    template.generate({
+      template: `src/readme.md.ejs`,
+      target:
+        typeof parameters.first == 'undefined'
+          ? 'readme.md'
+          : `${parameters.first}/readme.md`
+    })
+
     warning('<!==================== Git was initialized ====================!>')
 
     warning(
