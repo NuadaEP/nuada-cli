@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/server.js"<% if (props.sucrase) { -%>,<% } %>
-<% if (props.sucrase) { -%>
-    "build": "sucrase ./src -d ./build --transforms imports"
-<% } else { -%>
-    "build": "node src/server.js"
-<% } -%>
+    "dev": "nodemon src/server.js",
+    <% if (props.sucrase) { -%>
+    "build": "sucrase ./src -d ./build --transforms imports",
+    "start": "node build/server.js",
+    <% } else { -%>
+    "start": "node server.js"
+    <% } -%>
   },
   "license": "MIT",
   "dependencies": {
