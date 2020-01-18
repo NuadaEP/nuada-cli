@@ -1,10 +1,5 @@
-<% if (props.sucrase) { -%>
-import Sample from '../models/SampleModel';
-import SampleValidator from '../validators/SampleValidator';
-<% } else { -%>
 const Sample = require('../models/SampleModel');
 const SampleValidator = require('../validators/SampleValidator');
-<% } -%>
 
 class SampleController {
   async index(req, res) {
@@ -50,8 +45,4 @@ class SampleController {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new SampleController();
-<% } else { -%>
 module.exports = new SampleController();
-<% } -%>
