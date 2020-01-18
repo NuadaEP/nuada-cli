@@ -4,17 +4,18 @@ import Mongoose from 'mongoose';
 const Mongoose = require('mongoose');
 <% } -%>
 
-const <%= props.name %>Model = new Mongoose.Schema({
-    <% props.fields.forEach(field => { -%>
+const <%= props.name %>Model = new Mongoose.Schema(
+  {
+<% props.fields.forEach(field => { -%>
     <%= field.fieldName %>: {
-            type: <%= field.type %>, 
-            require: true 
-        },
-    <% }) -%>
-},
-    {
-        timestamps: true
-    }
+      type: <%= field.type %>,
+      require: true
+    },
+<% }) -%>
+  },
+  {
+    timestamps: true
+  }
 );
 
 <% if (props.sucrase) { -%>

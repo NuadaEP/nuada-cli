@@ -10,20 +10,20 @@ class <%= props.name %>Validator {
 
     switch (role) {
       case 'store':
-          validationConfig = Yup.object().shape({
-              <% props.fields.forEach(field => { -%>
-<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(),
+        validationConfig = Yup.object().shape({
+<% props.fields.forEach(field => { -%>
+          <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(),
 <% }) -%>
-          });
-          break;
+        });
+        break;
 
       case 'update':
-          validationConfig = Yup.object().shape({
-              <% props.fields.forEach(field => { -%>
-<%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(),
+        validationConfig = Yup.object().shape({
+<% props.fields.forEach(field => { -%>
+          <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(),
 <% }) -%>
-          });
-          break;
+        });
+        break;
     }
 
     return validationConfig.isValid(body);

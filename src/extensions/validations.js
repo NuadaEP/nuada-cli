@@ -37,7 +37,7 @@ module.exports = toolbox => {
         .charAt(0)
         .toUpperCase()}${fieldSplited[1].slice(1)}`
 
-      if (types.indexOf(type) != 0) return 'false'
+      if (types.indexOf(type) == -1) return 'false'
 
       const fieldName = fieldSplited[0]
 
