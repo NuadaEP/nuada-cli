@@ -1,6 +1,6 @@
 module.exports = {
   name: 'make:multer',
-  description: 'Create a multer configuration service',
+  description: 'Create a multer configuration service to upload files',
   run: async toolbox => {
     const {
       parameters,

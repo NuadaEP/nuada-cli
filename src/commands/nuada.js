@@ -14,5 +14,7 @@ module.exports = {
     warning('$ nuada make:model <model-name> <field:type>')
     warning('$ nuada make:scaffold <scaffold-name> <field:type>')
     warning('$ nuada make:auth')
+    warning('$ nuada make:axios')
+    warning('$ nuada make:multer')
   }
 }

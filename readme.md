@@ -71,6 +71,12 @@ $ nuada make:axios
 
 Create a simple HTTP comunication service using [Axios](https://github.com/axios/axios).
 
+```shell
+$ nuada make:multer
+```
+
+Create a upload config file using [Multer](https://github.com/expressjs/multer).
+
 # Some Other Commands
 
 ```shell
