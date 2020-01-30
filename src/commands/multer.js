@@ -1,11 +1,11 @@
 module.exports = {
   name: 'make:multer',
-  description: 'Create a multer configuration',
+  description: 'Create a multer configuration service',
   run: async toolbox => {
     const {
       parameters,
       print: { warning, error },
-      createAxiosService,
+      createMulterConfig,
       isNodeProject
     } = toolbox
 
@@ -21,6 +21,6 @@ module.exports = {
       return
     }
 
-    await createAxiosService(parameters.first)
+    await createMulterConfig(parameters.first)
   }
 }

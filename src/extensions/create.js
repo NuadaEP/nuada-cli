@@ -146,15 +146,24 @@ module.exports = toolbox => {
     })
 
     success(`Multer config service generated successfuly`)
-    warning(`==========Next steps==========`)
-    warning(`- Import multer lib to your route file`)
-    warning(`- Import multerConfig file to your route file`)
-    warning(
-      `- Add 'Multer(multerConfigFile).single("file")' as a middleware of a route, thats allow you to receive just one file on controller`
-    )
-    warning(`- Add this lines to your .gitignore file: `)
-    warning(`--- uploads/*`)
-    warning(`--- !uploads/.gitkeep`)
+    warning(`
+      /-------------------------------------------------------------
+      |                       Next Steps                           |
+      |                                                            |
+      |  -  Import multer lib to your route file;                  |
+      |  -  Import multerConfig file to your route file;           |
+      |  -  Add 'Multer(multerConfigFile).single("file")' as a     |
+      |     middleware of a route, thats allow you to receive just |
+      |     one file on controller;                                |
+      |  -  Add 'uploads/*' and '!uploads/.gitkeep' to .gitignore; |
+      |                                                            |
+      |                    Enjoy your uplaod                       |
+      |                                                            |
+      |                                                            |
+      |                                                            |
+      |                                                            |
+      -------------------------------------------------------------/
+    `)
   }
 
   async function createAuth() {
