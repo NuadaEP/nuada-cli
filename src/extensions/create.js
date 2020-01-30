@@ -120,6 +120,43 @@ module.exports = toolbox => {
     success(`Axios service generated successfuly`)
   }
 
+  async function createMulterConfig() {
+    const sucrase = await toolbox.isSucraseProject()
+
+    await system.spawn('npm install multer crypto', {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit'
+    })
+
+    await template.generate({
+      template: `src/config/multer.js.ejs`,
+      target: `src/config/MulterConfig.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/.gitkeep.ejs`,
+      target: `src/uploads/.gitkeep`,
+      props: {
+        sucrase
+      }
+    })
+
+    success(`Multer config service generated successfuly`)
+    warning(`==========Next steps==========`)
+    warning(`- Import multer lib to your route file`)
+    warning(`- Import multerConfig file to your route file`)
+    warning(
+      `- Add 'Multer(multerConfigFile).single("file")' as a middleware of a route, thats allow you to receive just one file on controller`
+    )
+    warning(`- Add this lines to your .gitignore file: `)
+    warning(`--- uploads/*`)
+    warning(`--- !uploads/.gitkeep`)
+  }
+
   async function createAuth() {
     const sucrase = await toolbox.isSucraseProject()
 
@@ -185,5 +222,6 @@ module.exports = toolbox => {
   toolbox.createValidator = createValidator
   toolbox.createScaffold = createScaffold
   toolbox.createAxiosService = createAxiosService
+  toolbox.createMulterConfig = createMulterConfig
   toolbox.createAuth = createAuth
 }

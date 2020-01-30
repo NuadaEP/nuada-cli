@@ -1,0 +1,31 @@
+<% if (props.sucrase) { -%>
+import Multer from "multer";
+import Crypto from "crypto";
+import Path from "path";
+<% } else { -%>
+const Multer = require("multer");
+const Path = require("path");
+const Crypto = require("crypto");
+<% } -%>
+
+const multerConfig = {
+  dest: Path.resolve(__dirname, "..", "..", "uploads"),
+  storage: Multer.diskStorage({
+    destination: (req, file, cb) => cb(null, Path.resolve(__dirname, "..", "..", "uploads")),
+    filename: (req, file, cb) => {
+      crypto.randomBytes(16, (err, hash) => {
+        if (err) cb(err);
+
+        file.key = `${hash.toString("hex")}-${file.originalname}`;
+
+        cb(null, file.key);
+      });
+    }
+  })
+};
+
+<% if (props.sucrase) { -%>
+export default multerConfig;
+<% } else { -%>
+module.exports = multerConfig;
+<% } -%>
