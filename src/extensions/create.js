@@ -46,7 +46,7 @@ module.exports = toolbox => {
     const schemas = await toolbox.validateExtraValues(params)
 
     if (!nameCapitalized) {
-      error('Model name must be specified')
+      error('Validator name must be specified')
       return
     }
 

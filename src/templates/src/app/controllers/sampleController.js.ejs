@@ -27,7 +27,7 @@ class SampleController {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({ message: error.message });
     }
   }
 
@@ -39,7 +39,7 @@ class SampleController {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({ message: error.message });
     }
   }
 

@@ -17,9 +17,9 @@ class UserController {
     try {
       await UserValidator(req.body, 'store')
 
-      const { username, password, confirmPassword } = req.body
+      const { email, password, confirmPassword } = req.body
 
-      if (await User.findOne({ username }))
+      if (await User.findOne({ email }))
         return res
           .status(400)
           .json({ message: 'User is already in use' })
@@ -29,9 +29,9 @@ class UserController {
           .status(400)
           .json({ message: 'The provided password is not identical' })
 
-      return res.json(await User.create({ username, password }))
+      return res.json(await User.create({ email, password }))
     } catch (error) {
-      return res.status(400).json({ error: error.message })
+      return res.status(400).json({ message: error.message })
     }
   }
 }

@@ -21,7 +21,9 @@ module.exports = toolbox => {
   }
 
   async function validateName(name) {
-    if (!name) return false
+    const split = name.split(':')
+
+    if (!name || split.length > 0) return false
 
     return name.charAt(0).toUpperCase() + name.slice(1)
   }

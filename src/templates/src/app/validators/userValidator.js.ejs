@@ -11,7 +11,7 @@ class UserValidator {
     switch (role) {
       case 'store':
         validationConfig = Yup.object().shape({
-          username: Yup.string().required(),
+          email: Yup.string().email().required(),
           password: Yup.string().required().min(6),
           confirmPassword: Yup.string().required().min(6)
         });
@@ -19,7 +19,7 @@ class UserValidator {
 
       case 'update':
         validationConfig = Yup.object().shape({
-          username: Yup.string(),
+          email: Yup.string().email(),
           password: Yup.string().min(6),
           confirmPassword: Yup.string().min(6),
         });
