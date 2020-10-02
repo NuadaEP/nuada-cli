@@ -47,7 +47,8 @@ module.exports = {
           ? 'package.json'
           : `${parameters.first}/package.json`,
       props: {
-        name: parameters.first || 'unnamedApp'
+        name: parameters.first || 'unnamedApp',
+        sucrase: packageJson
       }
     })
 
@@ -56,7 +57,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/app.js'
-          : `${parameters.first}/src/app/app.js`
+          : `${parameters.first}/src/app/app.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -64,7 +68,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/server.js'
-          : `${parameters.first}/src/server.js`
+          : `${parameters.first}/src/server.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -72,7 +79,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/routes.js'
-          : `${parameters.first}/src/app/routes.js`
+          : `${parameters.first}/src/app/routes.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -80,7 +90,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/database.js'
-          : `${parameters.first}/src/config/database.js`
+          : `${parameters.first}/src/config/database.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -88,7 +101,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/config/ConfigSample.js'
-          : `${parameters.first}/src/config/ConfigSample.js`
+          : `${parameters.first}/src/config/ConfigSample.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -96,7 +112,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/SampleController.js'
-          : `${parameters.first}/src/app/controllers/SampleController.js`
+          : `${parameters.first}/src/app/controllers/SampleController.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -104,7 +123,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/controllers/index.js'
-          : `${parameters.first}/src/app/controllers/index.js`
+          : `${parameters.first}/src/app/controllers/index.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -112,7 +134,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/jobs/SampleJob.js'
-          : `${parameters.first}/src/app/jobs/SampleJob.js`
+          : `${parameters.first}/src/app/jobs/SampleJob.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -120,7 +145,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/middlewares/SampleMiddleware.js'
-          : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`
+          : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -128,7 +156,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/models/SampleModel.js'
-          : `${parameters.first}/src/app/models/SampleModel.js`
+          : `${parameters.first}/src/app/models/SampleModel.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -136,7 +167,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/services/SampleService.js'
-          : `${parameters.first}/src/app/services/SampleService.js`
+          : `${parameters.first}/src/app/services/SampleService.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
@@ -144,7 +178,10 @@ module.exports = {
       target:
         typeof parameters.first == 'undefined'
           ? 'src/app/validators/SampleValidator.js'
-          : `${parameters.first}/src/app/validators/SampleValidator.js`
+          : `${parameters.first}/src/app/validators/SampleValidator.js`,
+      props: {
+        sucrase: packageJson
+      }
     })
 
     template.generate({
