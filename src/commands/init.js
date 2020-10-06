@@ -75,11 +75,22 @@ module.exports = {
     })
 
     template.generate({
-      template: `src/app/routes.js.ejs`,
+      template: `src/app/routes/index.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
-          ? 'src/app/routes.js'
-          : `${parameters.first}/src/app/routes.js`,
+          ? 'src/app/routes/index.js'
+          : `${parameters.first}/src/app/routes/index.js`,
+      props: {
+        sucrase: packageJson
+      }
+    })
+
+    template.generate({
+      template: `src/app/routes/sample.router.js.ejs`,
+      target:
+        typeof parameters.first == 'undefined'
+          ? 'src/app/routes/sample.router.js'
+          : `${parameters.first}/src/app/routes/sample.router.js`,
       props: {
         sucrase: packageJson
       }

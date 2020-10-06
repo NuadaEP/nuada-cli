@@ -92,12 +92,35 @@ module.exports = toolbox => {
     success(`Controller ${nameCapitalized}Controller generated successfuly`)
   }
 
+  async function createRouter(name, full = false) {
+    const sucrase = await toolbox.isSucraseProject()
+
+    const nameCapitalized = await toolbox.validateName(name)
+
+    if (!name) {
+      error('Route name must be specified')
+      return
+    }
+
+    await template.generate({
+      template: full
+        ? `src/app/routes/scaffold.router.js.ejs`
+        : `src/app/routes/scaffold.router.js.ejs`,
+      target: `src/app/routes/${name}.router.js`,
+      props: { name: `${name}`, sucrase, nameCapitalized }
+    })
+
+    success(`Route ${name}.router generated successfuly`)
+  }
+
   async function createScaffold(name, params) {
     await createModel(name, params)
 
     await createValidator(name, params)
 
     await createController(name, true)
+
+    await createRouter(name, true)
   }
 
   async function createAxiosService() {
@@ -185,7 +208,7 @@ module.exports = toolbox => {
 
     await template.generate({
       template: `src/config/auth.js.ejs`,
-      target: `src/config/AuthConfig.js`,
+      target: `src/config/auth.js`,
       props: {
         sucrase
       }
@@ -228,6 +251,7 @@ module.exports = toolbox => {
 
   toolbox.createModel = createModel
   toolbox.createController = createController
+  toolbox.createRouter = createRouter
   toolbox.createValidator = createValidator
   toolbox.createScaffold = createScaffold
   toolbox.createAxiosService = createAxiosService

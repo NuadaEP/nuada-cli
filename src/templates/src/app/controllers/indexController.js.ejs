@@ -1,12 +1,25 @@
 <% if (props.sucrase) { -%>
-import SampleController from './SampleController';
+import fs from 'fs';
+import path from 'path';
 <% } else { -%>
-const SampleController = require('./SampleController');
+const fs = require('fs');
+const path = require('path');
 <% } -%>
 
-const controllers = {
-  SampleController
-};
+const controllerPath = path.resolve(__dirname);
+
+const files = fs.readdirSync(controllerPath);
+
+const controllers = {};
+
+files.map(file => {
+  if (file === 'index.js') return;
+
+  const controller = file.replace('.js', '');
+  const controllerRequire = require('./' + controller);
+
+  Object.assign(controllers, { [controller]: controllerRequire.default });
+});
 
 <% if (props.sucrase) { -%>
 export default controllers;
