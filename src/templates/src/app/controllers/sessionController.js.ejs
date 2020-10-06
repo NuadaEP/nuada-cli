@@ -5,7 +5,7 @@ const User = require('../models/UserModel')
 <% } -%>
 
 class SessionController {
-  async index(req, res) {
+  async store(req, res) {
     const { email, password } = req.body
 
     const user = await User.findOne({ email })
@@ -25,7 +25,7 @@ class SessionController {
 }
 
 <% if (props.sucrase) { -%>
-export default new SessionController().index
+export default new SessionController()
 <% } else { -%>
-module.exports = new SessionController().index
+module.exports = new SessionController()
 <% } -%>

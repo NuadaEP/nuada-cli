@@ -246,6 +246,22 @@ module.exports = toolbox => {
       }
     })
 
+    await template.generate({
+      template: `src/app/routes/session.router.js.ejs`,
+      target: `src/app/routes/session.router.js`,
+      props: {
+        sucrase
+      }
+    })
+
+    await template.generate({
+      template: `src/app/routes/user.router.js.ejs`,
+      target: `src/app/routes/user.router.js`,
+      props: {
+        sucrase
+      }
+    })
+
     success(`Authentication module generated successfuly`)
   }
 
