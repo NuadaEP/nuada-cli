@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'make:scaffold',
+  name: 'make:scaffold -h',
   description: 'Create a controller with a complete CRUD, model and validator',
   run: async toolbox => {
     const {

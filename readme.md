@@ -2,6 +2,8 @@
 
 A CLI designed to facilitate API development using express and mongoose.
 
+# nuada CLI 0.9.2
+
 ## Instalation Guide
 
 To install nuada package you can use:
