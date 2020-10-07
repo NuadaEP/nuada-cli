@@ -77,6 +77,24 @@ $ nuada make:multer
 
 Create a upload config file using [Multer](https://github.com/expressjs/multer).
 
+You have to import the multer config into route file:
+
+```shell
+const Multer = require('multer');
+
+const MulterConfig = require('../config/MulterConfig');
+```
+
+and then use as a middleware:
+
+```shell
+routes.post(
+  '/user/:id',
+  Multer(MulterConfig).single('image'),
+  controllers.UserController.store
+);
+```
+
 # Some Other Commands
 
 ```shell
