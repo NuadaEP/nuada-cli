@@ -6,78 +6,86 @@ module.exports = toolbox => {
   } = toolbox
 
   async function createModel(name, params) {
-    const sucrase = await toolbox.isSucraseProject()
+    try {
+      const sucrase = await toolbox.isSucraseProject()
 
-    const nameCapitalized = await toolbox.validateName(name)
-    const schemas = await toolbox.validateExtraValues(params)
+      const nameCapitalized = await toolbox.validateName(name)
+      const schemas = await toolbox.validateExtraValues(params)
 
-    if (!nameCapitalized) {
-      error('Model name must be specified')
-      return
-    }
-
-    if (schemas.length == 0 || schemas.indexOf('false') == 0) {
-      error('Fields and types must be specified to create a model')
-      warning(
-        'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]'
-      )
-      return
-    }
-
-    await template.generate({
-      template: `src/app/models/model.js.ejs`,
-      target: `src/app/models/${nameCapitalized}Model.js`,
-      props: {
-        name: `${nameCapitalized}`,
-        fields: schemas,
-        sucrase
+      if (!nameCapitalized) {
+        error('Model name must be specified')
+        return
       }
-    })
 
-    await createValidator(name, params)
+      if (schemas.length == 0 || schemas.indexOf('false') == 0) {
+        error('Fields and types must be specified to create a model')
+        warning(
+          'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]'
+        )
+        return
+      }
 
-    success(`Model ${nameCapitalized}Model generated successfuly`)
+      await template.generate({
+        template: `src/app/models/model.js.ejs`,
+        target: `src/app/models/${nameCapitalized}Model.js`,
+        props: {
+          name: `${nameCapitalized}`,
+          fields: schemas,
+          sucrase
+        }
+      })
+
+      await createValidator(name, params, false)
+
+      success(`Model ${nameCapitalized}Model generated successfuly`)
+    } catch ({ message }) {
+      error(message)
+    }
   }
 
-  async function createValidator(name, params) {
-    const sucrase = await toolbox.isSucraseProject()
+  async function createValidator(name, params, single = true) {
+    try {
+      const sucrase = await toolbox.isSucraseProject()
 
-    const nameCapitalized = await toolbox.validateName(name)
-    const schemas = await toolbox.validateExtraValues(params)
+      const nameCapitalized = await toolbox.validateName(name)
+      const schemas = await toolbox.validateExtraValues(params)
 
-    const schemaWithoutRelational = schemas.filter(item => {
-      const relational = item.type.search('=')
+      const schemaWithoutRelational = schemas.filter(item => {
+        const relational = item.type.search('=')
 
-      return relational == -1
-    })
+        return relational == -1
+      })
 
-    if (!nameCapitalized) {
-      error('Validator name must be specified')
-      return
-    }
-
-    if (
-      schemaWithoutRelational.length == 0 ||
-      schemaWithoutRelational.indexOf('false') == 0
-    ) {
-      error('Fields and types must be specified to create a validator')
-      warning(
-        'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]'
-      )
-      return
-    }
-
-    await template.generate({
-      template: `src/app/validators/validator.js.ejs`,
-      target: `src/app/validators/${nameCapitalized}Validator.js`,
-      props: {
-        name: `${nameCapitalized}`,
-        fields: schemaWithoutRelational,
-        sucrase
+      if (!nameCapitalized) {
+        error('Validator name must be specified')
+        return
       }
-    })
 
-    success(`Validator ${nameCapitalized}Validator generated successfuly`)
+      if (
+        schemaWithoutRelational.length == 0 ||
+        schemaWithoutRelational.indexOf('false') == 0
+      ) {
+        error('Fields and types must be specified to create a validator')
+        warning(
+          'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]'
+        )
+        return
+      }
+
+      await template.generate({
+        template: `src/app/validators/validator.js.ejs`,
+        target: `src/app/validators/${nameCapitalized}Validator.js`,
+        props: {
+          name: `${nameCapitalized}`,
+          fields: schemaWithoutRelational,
+          sucrase
+        }
+      })
+
+      success(`Validator ${nameCapitalized}Validator generated successfuly`)
+    } catch ({ message }) {
+      if (single) error(message)
+    }
   }
 
   async function createController(name, full = false) {
@@ -124,8 +132,6 @@ module.exports = toolbox => {
 
   async function createScaffold(name, params) {
     await createModel(name, params)
-
-    await createValidator(name, params)
 
     await createController(name, true)
 

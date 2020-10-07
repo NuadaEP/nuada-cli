@@ -48,7 +48,15 @@ module.exports = toolbox => {
       if (types.indexOf(type) == -1) {
         const relational = type.split('=')
 
-        if (types.indexOf(relational[0]) == -1) return 'false'
+        if (types.indexOf(relational[0]) == -1) {
+          throw new Error(
+            'The field type is not one of the <' + types.join('|') + '>'
+          )
+        }
+      } else if (type === 'Relational') {
+        throw new Error(
+          'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>'
+        )
       }
 
       const fieldName = fieldSplited[0]
