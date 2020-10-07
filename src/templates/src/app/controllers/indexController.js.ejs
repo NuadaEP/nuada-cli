@@ -18,7 +18,11 @@ files.map(file => {
   const controller = file.replace('.js', '');
   const controllerRequire = require('./' + controller);
 
+  <% if (props.sucrase) { -%>
   Object.assign(controllers, { [controller]: controllerRequire.default });
+  <% } else { -%>
+  Object.assign(controllers, { [controller]: controllerRequire });
+  <% } -%>
 });
 
 <% if (props.sucrase) { -%>

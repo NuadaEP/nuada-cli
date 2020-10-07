@@ -173,11 +173,11 @@ module.exports = toolbox => {
       /-------------------------------------------------------------
       |                       Next Steps                           |
       |                                                            |
-      |  -  Import multer lib to your route file;                  |
-      |  -  Import multerConfig file to your route file;           |
-      |  -  Add 'Multer(multerConfigFile).single("file")' as a     |
-      |     middleware of a route, thats allow you to receive just |
-      |     one file on controller;                                |
+      |  -  Import multer lib inside route file;                   |
+      |  -  Import MulterConfig file inside route file;            |
+      |  -  Add 'Multer(MulterConfigFile).single("file")' as a     |
+      |     middleware before your route, thats allow you to       |
+      |     receive just one file on controller;                   |
       |  -  Add 'uploads/*' and '!uploads/.gitkeep' to .gitignore; |
       |                                                            |
       |                    Enjoy your uplaod                       |
