@@ -26,10 +26,18 @@ module.exports = toolbox => {
     return name.charAt(0).toUpperCase() + name.slice(1)
   }
 
-  async function validateExtraValues(params) {
+  function validateExtraValues(params) {
     if (params.length == 0) return false
     const fields = params.slice(1, params.length)
-    const types = ['String', 'Number', 'Date', 'Buffer', 'Boolean', 'Mixed']
+    const types = [
+      'String',
+      'Number',
+      'Date',
+      'Buffer',
+      'Boolean',
+      'Mixed',
+      'Relational'
+    ]
 
     const schemas = fields.map(field => {
       const fieldSplited = field.split(':')
@@ -37,7 +45,11 @@ module.exports = toolbox => {
         .charAt(0)
         .toUpperCase()}${fieldSplited[1].slice(1)}`
 
-      if (types.indexOf(type) == -1) return 'false'
+      if (types.indexOf(type) == -1) {
+        const relational = type.split('=')
+
+        if (types.indexOf(relational[0]) == -1) return 'false'
+      }
 
       const fieldName = fieldSplited[0]
 

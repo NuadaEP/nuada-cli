@@ -8,9 +8,14 @@ const <%= props.name %>Model = new Mongoose.Schema(
   {
 <% props.fields.forEach(field => { -%>
     <%= field.fieldName %>: {
+<% if (field.type.search('=') == -1) { -%>
       type: <%= field.type %>,
-      require: true
-    },
+      require: true,
+      <% } else { -%>
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: '<%= field.type.split('=')[1] %>',
+      <% } -%>
+},
 <% }) -%>
   },
   {

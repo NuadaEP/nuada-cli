@@ -45,12 +45,21 @@ module.exports = toolbox => {
     const nameCapitalized = await toolbox.validateName(name)
     const schemas = await toolbox.validateExtraValues(params)
 
+    const schemaWithoutRelational = schemas.filter(item => {
+      const relational = item.type.search('=')
+
+      return relational == -1
+    })
+
     if (!nameCapitalized) {
       error('Validator name must be specified')
       return
     }
 
-    if (schemas.length == 0 || schemas.indexOf('false') == 0) {
+    if (
+      schemaWithoutRelational.length == 0 ||
+      schemaWithoutRelational.indexOf('false') == 0
+    ) {
       error('Fields and types must be specified to create a validator')
       warning(
         'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]'
@@ -63,7 +72,7 @@ module.exports = toolbox => {
       target: `src/app/validators/${nameCapitalized}Validator.js`,
       props: {
         name: `${nameCapitalized}`,
-        fields: schemas,
+        fields: schemaWithoutRelational,
         sucrase
       }
     })
