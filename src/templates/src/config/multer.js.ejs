@@ -8,12 +8,14 @@ const Path = require("path");
 const Crypto = require("crypto");
 <% } -%>
 
+const path = Path.resolve(__dirname, "..", "uploads");
+
 const multerConfig = {
-  dest: Path.resolve(__dirname, "..", "..", "uploads"),
+  dest: path,
   storage: Multer.diskStorage({
-    destination: (req, file, cb) => cb(null, Path.resolve(__dirname, "..", "..", "uploads")),
+    destination: (req, file, cb) => cb(null, path),
     filename: (req, file, cb) => {
-      crypto.randomBytes(16, (err, hash) => {
+      Crypto.randomBytes(16, (err, hash) => {
         if (err) cb(err);
 
         file.key = `${hash.toString("hex")}-${file.originalname}`;

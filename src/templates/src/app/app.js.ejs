@@ -2,10 +2,12 @@
 import Dotenv from 'dotenv';
 import Express from 'express';
 import Mongoose from 'mongoose';
+import Cors from 'cors';
 <% } else { -%>
 const Dotenv = require('dotenv');
 const Express = require('express');
 const Mongoose = require('mongoose');
+const Cors = require('cors');
 <% } -%>
 
 Dotenv.config();
@@ -38,6 +40,7 @@ class App {
   }
 
   middwares() {
+    this.server.use(Cors());
     this.server.use(Express.json());
     this.server.use(Express.urlencoded({ extended: true }));
   }
