@@ -1,26 +1,28 @@
 <% if (props.sucrase) { -%>
-import User from '../models/UserModel'
+import User from '../models/UserModel';
+import AppError from '../errors/AppError';
 <% } else { -%>
-const User = require('../models/UserModel')
+const User = require('../models/UserModel');
+const AppError = require('../errors/AppError.js.ejs');
 <% } -%>
 
 class SessionController {
   async store(req, res) {
     const { email, password } = req.body
 
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
 
     if (!user)
-      return res
-        .status(400)
-        .json({ message: 'User not found' })
+      throw new AppError('User not found', 400);
 
     if (!(await user.compareHash(password)))
-      return res
-        .status(400)
-        .json({ message: 'Invalid password' })
+      throw new AppError('Invalid email password combination', 400);
 
-    return res.json({ token: User.generateToken(user) })
+    const userWithOutPassword = user.toJSON();
+
+    delete userWithOutPassword.password;
+
+    return res.json({ token: User.generateToken(userWithOutPassword) })
   }
 }
 
