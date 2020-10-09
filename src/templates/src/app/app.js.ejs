@@ -3,11 +3,15 @@ import Dotenv from 'dotenv';
 import Express from 'express';
 import Mongoose from 'mongoose';
 import Cors from 'cors';
+
+import 'express-async-errors';
 <% } else { -%>
 const Dotenv = require('dotenv');
 const Express = require('express');
 const Mongoose = require('mongoose');
 const Cors = require('cors');
+
+require('express-async-errors');
 <% } -%>
 
 Dotenv.config();
@@ -50,7 +54,16 @@ class App {
   }
 
   exception() {
-    this.server.use(async (err, req, res, next) => res.status(err.status || 500).json({ message: 'Internal Server Error' }));
+    this.server.use(async (err, req, res, next) => {
+      if (err instanceof AppError) {
+        return res.status(err.statusCode).json(err.error);
+      }
+
+      return res.status(500).json({
+        status: 'error',
+        message: 'Internal Server Error',
+      });
+    });
   }
 }
 
