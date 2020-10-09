@@ -174,6 +174,17 @@ module.exports = {
     })
 
     template.generate({
+      template: `src/app/errors/AppError.js.ejs`,
+      target:
+        typeof parameters.first == 'undefined'
+          ? 'src/app/errors/AppError.js'
+          : `${parameters.first}/src/app/errors/AppError.js`,
+      props: {
+        sucrase: packageJson
+      }
+    })
+
+    template.generate({
       template: `src/app/services/services.js.ejs`,
       target:
         typeof parameters.first == 'undefined'
