@@ -5,25 +5,26 @@ const Axios = require('axios');
 <% } -%>
 
 class AxiosService {
-  async index(method, url, headers = {}, params = {}, data = {}) {
+  async execute(method, url, headers = {}, params = {}, data = {}) {
     try {
       const request = {
         method,
         url,
-        ...headers,
-        ...params,
-        ...data
-      }
+      };
+
+      Object.assign(request, { headers, params, data });
 
       return await Axios(request);
     } catch (error) {
-      throw { error }
+      const { data, status } = error.response;
+
+      throw new AppError(data, status);
     }
   }
 }
 
 <% if (props.sucrase) { -%>
-export default new AxiosService().index
+export default new AxiosService()
 <% } else { -%>
-module.exports = new AxiosService().index
+module.exports = new AxiosService()
 <% } -%>
