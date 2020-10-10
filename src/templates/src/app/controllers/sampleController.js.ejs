@@ -1,9 +1,11 @@
 <% if (props.sucrase) { -%>
 import Sample from '../models/SampleModel';
 import SampleValidator from '../validators/SampleValidator';
+import AppError from '../errors/AppError';
 <% } else { -%>
 const Sample = require('../models/SampleModel');
 const SampleValidator = require('../validators/SampleValidator');
+const AppError = require('../errors/AppError');
 <% } -%>
 
 class SampleController {
@@ -27,7 +29,7 @@ class SampleController {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      throw new AppError(error.message, 400);
     }
   }
 
@@ -39,7 +41,7 @@ class SampleController {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      throw new AppError(error.message, 400);
     }
   }
 
