@@ -1,9 +1,11 @@
 <% if (props.sucrase) { -%>
 import <%= props.name %>Model from '../models/<%= props.name %>Model';
 import <%= props.name %>Validator from '../validators/<%= props.name %>Validator';
+import AppError from '../errors/AppError';
 <% } else { -%>
 const <%= props.name %>Model = require('../models/<%= props.name %>Model');
 const <%= props.name %>Validator = require('../validators/<%= props.name %>Validator');
+const AppError = require('../errors/AppError');
 <% } -%>
 
 class <%= props.name %>Controller {
@@ -27,7 +29,7 @@ class <%= props.name %>Controller {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      throw new AppError(error.message, 400);
     }
   }
 
@@ -39,7 +41,7 @@ class <%= props.name %>Controller {
 
       return res.json(response);
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      throw new AppError(error.message, 400);
     }
   }
 
