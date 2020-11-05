@@ -53,5 +53,6 @@
     "mongo",
     "mongoose",
     "express"
-  ]
+  ],
+  "publishConfig": { "registry": "https://www.npmjs.com/package/nuada" }
 }
