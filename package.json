@@ -25,14 +25,14 @@
     "gluegun": "latest"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.0",
-    "jest": "^24.1.0",
-    "prettier": "^1.12.1",
-    "standard": "^12.0.1"
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-config-airbnb-base": "latest",
+    "eslint-plugin-import": "latest",
+    "jest": "latest",
+    "prettier": "latest",
+    "standard": "latest"
   },
   "jest": {
     "testEnvironment": "node"
