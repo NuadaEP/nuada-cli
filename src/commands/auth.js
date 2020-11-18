@@ -1,11 +1,11 @@
 module.exports = {
   name: 'make:auth',
   description: 'A complete authentication module using JWT',
-  run: async toolbox => {
+  run: async (toolbox) => {
     const {
       print: { warning, error },
       createAuth,
-      isNodeProject
+      isNodeProject,
     } = toolbox
 
     if (!(await isNodeProject())) {
@@ -21,5 +21,5 @@ module.exports = {
     }
 
     await createAuth()
-  }
+  },
 }

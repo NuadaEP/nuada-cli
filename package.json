@@ -7,7 +7,6 @@
   },
   "scripts": {
     "format": "prettier --write **/*.{js,json} && standard --fix",
-    "lint": "standard",
     "test": "jest",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
@@ -25,11 +24,11 @@
     "gluegun": "latest"
   },
   "devDependencies": {
-    "eslint": "latest",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "latest",
-    "eslint-config-airbnb-base": "latest",
-    "eslint-plugin-import": "latest",
     "jest": "latest",
     "prettier": "latest",
     "standard": "latest"
