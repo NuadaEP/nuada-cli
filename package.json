@@ -2,6 +2,8 @@
   "name": "nuada",
   "version": "0.9.5",
   "description": "nuada CLI",
+  "private": true,
+  "types": "build/types/types.d.ts",
   "bin": {
     "nuada": "bin/nuada"
   },
@@ -19,7 +21,9 @@
     "coverage": "jest --coverage"
   },
   "files": [
-    "src",
+    "tsconfig.json",
+    ".eslint.json",
+    "build",
     "LICENSE",
     "readme.md",
     "docs",
@@ -34,9 +38,11 @@
     "@types/node": "^12.7.11",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.6.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "latest",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-airbnb-typescript-prettier": "^4.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "latest",
     "jest": "latest",
@@ -44,18 +50,7 @@
     "standard": "latest",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
-    "tslint": "^5.12.0",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-config-standard": "^8.0.1",
     "typescript": "^3.6.3"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ]
   },
   "keywords": [
     "nodejs",
