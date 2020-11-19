@@ -1,21 +1,21 @@
 module.exports = {
   name: 'make:validator',
   description: 'Create a simple validator inside src/app/validators',
-  run: async toolbox => {
-    const { parameters, createValidator, isNodeProject } = toolbox
+  run: async (toolbox) => {
+    const { parameters, createValidator, isNodeProject } = toolbox;
 
     if (!(await isNodeProject())) {
       error(
-        'This project do not have "mongoose" or "express" packages, so it can not be created'
-      )
+        'This project do not have "mongoose" or "express" packages, so it can not be created',
+      );
 
       warning(
-        'Run "npm install mongoose express" or "yarn add mongoose express"'
-      )
+        'Run "npm install mongoose express" or "yarn add mongoose express"',
+      );
 
-      return
+      return;
     }
 
-    await createValidator(parameters.first, parameters.array)
-  }
-}
+    await createValidator(parameters.first, parameters.array);
+  },
+};

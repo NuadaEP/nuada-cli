@@ -1,4 +1,4 @@
-module.exports = toolbox => {
+module.exports = (toolbox) => {
   async function isNodeProject() {
     const { filesystem } = toolbox
 
@@ -36,10 +36,10 @@ module.exports = toolbox => {
       'Buffer',
       'Boolean',
       'Mixed',
-      'Relational'
+      'Relational',
     ]
 
-    const schemas = fields.map(field => {
+    const schemas = fields.map((field) => {
       const fieldSplited = field.split(':')
       const type = `${fieldSplited[1]
         .charAt(0)
@@ -63,7 +63,7 @@ module.exports = toolbox => {
 
       return {
         fieldName,
-        type
+        type,
       }
     })
 
