@@ -1,29 +1,38 @@
-import { GluegunToolbox } from 'gluegun';
+import { INuadaToolbox } from '../@types/INuadaToolbox';
+import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages';
+import AppError from '../helpers/DispatchMessages/implementations/DispatchMessages';
 
-module.exports = (toolbox: GluegunToolbox) => {
-  async function isNodeProject() {
+interface IPackageJSON {
+  express: boolean;
+  mongoose: boolean;
+}
+
+module.exports = (toolbox: INuadaToolbox) => {
+  async function isNodeProject(): Promise<boolean> {
     const { filesystem } = toolbox;
 
-    const packageJSON = await filesystem.read('package.json', 'json');
-    const haveExpress = !!packageJSON.dependencies.express;
-    const haveMongoose = !!packageJSON.dependencies.mongoose;
+    const { express, mongoose }: IPackageJSON = await filesystem.read(
+      'package.json',
+      'json',
+    );
 
-    if (haveExpress && haveMongoose) return true;
+    if (express && mongoose) return true;
+
+    const dispatch = new DispatchMessages(toolbox);
+
+    dispatch.error(
+      'This project do not have "mongoose" or "express" packages, so it can not be created',
+    );
+
+    dispatch.warning(
+      'Run "npm install mongoose express" or "yarn add mongoose express"',
+    );
 
     return false;
   }
 
-  async function isSucraseProject() {
-    const { filesystem } = toolbox;
-
-    const packageJSON = await filesystem.read('package.json', 'json');
-    const sucrase = !!packageJSON.devDependencies.sucrase;
-
-    return sucrase;
-  }
-
-  async function validateName(name) {
-    if (!name) return false;
+  async function validateName(name: string): Promise<string> {
+    if (!name) throw new AppError('The name parameter must be passed');
 
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
@@ -51,12 +60,12 @@ module.exports = (toolbox: GluegunToolbox) => {
         const relational = type.split('=');
 
         if (types.indexOf(relational[0]) === -1) {
-          throw new Error(
+          throw new AppError(
             `The field type is not one of the <${types.join('|')}>`,
           );
         }
       } else if (type === 'Relational') {
-        throw new Error(
+        throw new AppError(
           'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>',
         );
       }
@@ -72,10 +81,9 @@ module.exports = (toolbox: GluegunToolbox) => {
     return schemas;
   }
 
-  toolbox.methods = {};
-
-  toolbox.validateName = validateName;
-  toolbox.validateExtraValues = validateExtraValues;
-  toolbox.isNodeProject = isNodeProject;
-  toolbox.isSucraseProject = isSucraseProject;
+  toolbox.validators = {
+    isNodeProject,
+    validateExtraValues,
+    validateName,
+  };
 };

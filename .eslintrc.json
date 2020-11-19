@@ -27,6 +27,7 @@
     "no-useless-constructor": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
+    "no-param-reassign": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/naming-convention": [
