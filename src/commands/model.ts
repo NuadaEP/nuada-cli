@@ -1,12 +1,14 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
-  name: 'make:axios',
-  description: 'Create a axios service configuration',
-  run: async toolbox => {
+  name: 'make:model',
+  description: 'Create a simple model inside src/app/models',
+  run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
-      print: { warning, error },
-      createAxiosService,
+      createModel,
       isNodeProject,
+      print: { error, warning },
     } = toolbox;
 
     if (!(await isNodeProject())) {
@@ -21,6 +23,6 @@ module.exports = {
       return;
     }
 
-    await createAxiosService(parameters.first);
+    await createModel(parameters.first, parameters.array);
   },
 };

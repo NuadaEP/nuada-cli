@@ -1,12 +1,14 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
-  name: 'make:controller',
-  description: 'Create a simple controller inside src/app/controllers',
-  run: async toolbox => {
+  name: 'make:scaffold',
+  description: 'Create a controller with a complete CRUD, model and validator',
+  run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
-      print: { warning, error },
-      createController,
+      createScaffold,
       isNodeProject,
+      print: { error, warning },
     } = toolbox;
 
     if (!(await isNodeProject())) {
@@ -21,6 +23,6 @@ module.exports = {
       return;
     }
 
-    await createController(parameters.first);
+    await createScaffold(parameters.first, parameters.array);
   },
 };

@@ -1,7 +1,9 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
   name: 'nuada',
   description: "Let's help you to create your project faster",
-  run: async toolbox => {
+  run: async (toolbox: GluegunToolbox) => {
     const {
       print: { warning },
     } = toolbox;

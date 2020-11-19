@@ -1,10 +1,13 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
-  name: 'make:auth',
-  description: 'A complete authentication module using JWT',
-  run: async toolbox => {
+  name: 'make:axios',
+  description: 'Create a axios service configuration',
+  run: async (toolbox: GluegunToolbox) => {
     const {
+      parameters,
       print: { warning, error },
-      createAuth,
+      createAxiosService,
       isNodeProject,
     } = toolbox;
 
@@ -20,6 +23,6 @@ module.exports = {
       return;
     }
 
-    await createAuth();
+    await createAxiosService(parameters.first);
   },
 };

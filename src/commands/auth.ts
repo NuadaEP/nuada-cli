@@ -1,12 +1,13 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
-  name: 'make:scaffold',
-  description: 'Create a controller with a complete CRUD, model and validator',
-  run: async toolbox => {
+  name: 'make:auth',
+  description: 'A complete authentication module using JWT',
+  run: async (toolbox: GluegunToolbox) => {
     const {
-      parameters,
-      createScaffold,
+      print: { warning, error },
+      createAuth,
       isNodeProject,
-      print: { error, warning },
     } = toolbox;
 
     if (!(await isNodeProject())) {
@@ -21,6 +22,6 @@ module.exports = {
       return;
     }
 
-    await createScaffold(parameters.first, parameters.array);
+    await createAuth();
   },
 };

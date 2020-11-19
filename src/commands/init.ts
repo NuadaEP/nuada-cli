@@ -1,7 +1,9 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
   name: 'new',
   description: 'Create a complete project structure to use',
-  run: async toolbox => {
+  run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
       template,

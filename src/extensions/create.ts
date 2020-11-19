@@ -1,4 +1,6 @@
-module.exports = toolbox => {
+import { GluegunToolbox } from 'gluegun';
+
+module.exports = (toolbox: GluegunToolbox) => {
   const {
     print: { success, error, warning },
     template,

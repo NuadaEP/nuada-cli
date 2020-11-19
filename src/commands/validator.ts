@@ -1,7 +1,9 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
   name: 'make:validator',
   description: 'Create a simple validator inside src/app/validators',
-  run: async toolbox => {
+  run: async (toolbox: GluegunToolbox) => {
     const { parameters, createValidator, isNodeProject } = toolbox;
     if (!(await isNodeProject())) {
       toolbox.error(

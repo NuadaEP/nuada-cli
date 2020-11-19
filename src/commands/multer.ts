@@ -1,12 +1,14 @@
+import { GluegunToolbox } from 'gluegun';
+
 module.exports = {
-  name: 'make:model',
-  description: 'Create a simple model inside src/app/models',
-  run: async toolbox => {
+  name: 'make:multer',
+  description: 'Create a multer configuration service to upload files',
+  run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
-      createModel,
+      print: { warning, error },
+      createMulterConfig,
       isNodeProject,
-      print: { error, warning },
     } = toolbox;
 
     if (!(await isNodeProject())) {
@@ -21,6 +23,6 @@ module.exports = {
       return;
     }
 
-    await createModel(parameters.first, parameters.array);
+    await createMulterConfig(parameters.first);
   },
 };
