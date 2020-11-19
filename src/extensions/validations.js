@@ -1,34 +1,34 @@
-module.exports = (toolbox) => {
+module.exports = toolbox => {
   async function isNodeProject() {
-    const { filesystem } = toolbox
+    const { filesystem } = toolbox;
 
-    const package = await filesystem.read('package.json', 'json')
-    const haveExpress = !!package.dependencies['express']
-    const haveMongoose = !!package.dependencies['mongoose']
+    const package = await filesystem.read('package.json', 'json');
+    const haveExpress = !!package.dependencies['express'];
+    const haveMongoose = !!package.dependencies['mongoose'];
 
-    if (haveExpress && haveMongoose) return true
+    if (haveExpress && haveMongoose) return true;
 
-    return false
+    return false;
   }
 
   async function isSucraseProject() {
-    const { filesystem } = toolbox
+    const { filesystem } = toolbox;
 
-    const package = await filesystem.read('package.json', 'json')
-    const sucrase = !!package.devDependencies['sucrase']
+    const package = await filesystem.read('package.json', 'json');
+    const sucrase = !!package.devDependencies['sucrase'];
 
-    return sucrase
+    return sucrase;
   }
 
   async function validateName(name) {
-    if (!name) return false
+    if (!name) return false;
 
-    return name.charAt(0).toUpperCase() + name.slice(1)
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
   function validateExtraValues(params) {
-    if (params.length == 0) return false
-    const fields = params.slice(1, params.length)
+    if (params.length == 0) return false;
+    const fields = params.slice(1, params.length);
     const types = [
       'String',
       'Number',
@@ -37,43 +37,43 @@ module.exports = (toolbox) => {
       'Boolean',
       'Mixed',
       'Relational',
-    ]
+    ];
 
-    const schemas = fields.map((field) => {
-      const fieldSplited = field.split(':')
+    const schemas = fields.map(field => {
+      const fieldSplited = field.split(':');
       const type = `${fieldSplited[1]
         .charAt(0)
-        .toUpperCase()}${fieldSplited[1].slice(1)}`
+        .toUpperCase()}${fieldSplited[1].slice(1)}`;
 
       if (types.indexOf(type) == -1) {
-        const relational = type.split('=')
+        const relational = type.split('=');
 
         if (types.indexOf(relational[0]) == -1) {
           throw new Error(
-            'The field type is not one of the <' + types.join('|') + '>'
-          )
+            'The field type is not one of the <' + types.join('|') + '>',
+          );
         }
       } else if (type === 'Relational') {
         throw new Error(
-          'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>'
-        )
+          'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>',
+        );
       }
 
-      const fieldName = fieldSplited[0]
+      const fieldName = fieldSplited[0];
 
       return {
         fieldName,
         type,
-      }
-    })
+      };
+    });
 
-    return schemas
+    return schemas;
   }
 
-  toolbox.methods = {}
+  toolbox.methods = {};
 
-  toolbox.validateName = validateName
-  toolbox.validateExtraValues = validateExtraValues
-  toolbox.isNodeProject = isNodeProject
-  toolbox.isSucraseProject = isSucraseProject
-}
+  toolbox.validateName = validateName;
+  toolbox.validateExtraValues = validateExtraValues;
+  toolbox.isNodeProject = isNodeProject;
+  toolbox.isSucraseProject = isSucraseProject;
+};
