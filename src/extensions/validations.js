@@ -2,9 +2,9 @@ module.exports = toolbox => {
   async function isNodeProject() {
     const { filesystem } = toolbox;
 
-    const package = await filesystem.read('package.json', 'json');
-    const haveExpress = !!package.dependencies['express'];
-    const haveMongoose = !!package.dependencies['mongoose'];
+    const packageJSON = await filesystem.read('package.json', 'json');
+    const haveExpress = !!packageJSON.dependencies.express;
+    const haveMongoose = !!packageJSON.dependencies.mongoose;
 
     if (haveExpress && haveMongoose) return true;
 
@@ -14,8 +14,8 @@ module.exports = toolbox => {
   async function isSucraseProject() {
     const { filesystem } = toolbox;
 
-    const package = await filesystem.read('package.json', 'json');
-    const sucrase = !!package.devDependencies['sucrase'];
+    const packageJSON = await filesystem.read('package.json', 'json');
+    const { sucrase } = !!packageJSON.devDependencies;
 
     return sucrase;
   }
@@ -27,7 +27,7 @@ module.exports = toolbox => {
   }
 
   function validateExtraValues(params) {
-    if (params.length == 0) return false;
+    if (params.length === 0) return false;
     const fields = params.slice(1, params.length);
     const types = [
       'String',
@@ -45,12 +45,12 @@ module.exports = toolbox => {
         .charAt(0)
         .toUpperCase()}${fieldSplited[1].slice(1)}`;
 
-      if (types.indexOf(type) == -1) {
+      if (types.indexOf(type) === -1) {
         const relational = type.split('=');
 
-        if (types.indexOf(relational[0]) == -1) {
+        if (types.indexOf(relational[0]) === -1) {
           throw new Error(
-            'The field type is not one of the <' + types.join('|') + '>',
+            `The field type is not one of the <${types.join('|')}>`,
           );
         }
       } else if (type === 'Relational') {

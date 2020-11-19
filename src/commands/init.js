@@ -1,7 +1,7 @@
 module.exports = {
   name: 'new',
   description: 'Create a complete project structure to use',
-  run: async (toolbox) => {
+  run: async toolbox => {
     const {
       parameters,
       template,
@@ -21,7 +21,7 @@ module.exports = {
 
       const consoleConfirm = await prompt.ask(confirm);
 
-      if (consoleConfirm.confirm == 'No, lets create a folder') {
+      if (consoleConfirm.confirm === 'No, lets create a folder') {
         const inputName = {
           type: 'input',
           name: 'inputName',
@@ -267,7 +267,9 @@ module.exports = {
           : `${parameters.first}/readme.md`,
     });
 
-    warning('<!==================== Git was initialized ====================!>');
+    warning(
+      '<!==================== Git was initialized ====================!>',
+    );
 
     warning(
       '<!==================== We are preparing everything for you ====================!>',
@@ -275,7 +277,8 @@ module.exports = {
 
     let cd = '';
 
-    if (typeof parameters.first !== 'undefined') cd = `cd ${parameters.first} && `;
+    if (typeof parameters.first !== 'undefined')
+      cd = `cd ${parameters.first} && `;
 
     await system.spawn(`${cd}npm install && git init`, {
       shell: true,

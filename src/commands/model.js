@@ -1,8 +1,13 @@
 module.exports = {
   name: 'make:model',
   description: 'Create a simple model inside src/app/models',
-  run: async (toolbox) => {
-    const { parameters, createModel, isNodeProject } = toolbox;
+  run: async toolbox => {
+    const {
+      parameters,
+      createModel,
+      isNodeProject,
+      print: { error, warning },
+    } = toolbox;
 
     if (!(await isNodeProject())) {
       error(
@@ -16,6 +21,6 @@ module.exports = {
       return;
     }
 
-    createModel(parameters.first, parameters.array);
+    await createModel(parameters.first, parameters.array);
   },
 };

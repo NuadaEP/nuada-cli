@@ -1,7 +1,7 @@
 module.exports = {
   name: 'make:axios',
   description: 'Create a axios service configuration',
-  run: async (toolbox) => {
+  run: async toolbox => {
     const {
       parameters,
       print: { warning, error },

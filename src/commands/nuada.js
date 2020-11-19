@@ -1,7 +1,7 @@
 module.exports = {
   name: 'nuada',
   description: "Let's help you to create your project faster",
-  run: async (toolbox) => {
+  run: async toolbox => {
     const {
       print: { warning },
     } = toolbox;
