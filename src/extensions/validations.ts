@@ -17,7 +17,7 @@ module.exports = (toolbox: GluegunToolbox) => {
     const { filesystem } = toolbox;
 
     const packageJSON = await filesystem.read('package.json', 'json');
-    const { sucrase } = !!packageJSON.devDependencies;
+    const sucrase = !!packageJSON.devDependencies.sucrase;
 
     return sucrase;
   }
