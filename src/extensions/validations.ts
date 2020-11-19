@@ -1,6 +1,5 @@
 import { INuadaToolbox } from '../@types/INuadaToolbox';
 import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages';
-import AppError from '../helpers/DispatchMessages/implementations/DispatchMessages';
 
 interface IPackageJSON {
   express: boolean;
