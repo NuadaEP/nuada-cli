@@ -1,4 +1,7 @@
-module.exports = toolbox => {
+import { GluegunEmptyToolbox } from "gluegun/build/types/domain/toolbox";
+import { GluegunAskResponse } from "gluegun/build/types/toolbox/prompt-types";
+
+module.exports = (toolbox: GluegunEmptyToolbox) => {
   async function isNodeProject() {
     const { filesystem } = toolbox;
 
