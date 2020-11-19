@@ -10,6 +10,8 @@ interface IPackageJSON {
 export default class HasDependenciesValidator {
   private readonly toolbox: GluegunToolbox;
 
+  protected readonly dispatch: DispatchMessages;
+
   protected readonly messages = {
     error:
       'This project do not have "mongoose" or "express" packages, so it can not be created',
@@ -19,6 +21,8 @@ export default class HasDependenciesValidator {
 
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
+
+    this.dispatch = new DispatchMessages(toolbox);
   }
 
   public async execute(): Promise<boolean> {
@@ -32,11 +36,9 @@ export default class HasDependenciesValidator {
 
     if (express && mongoose) return true;
 
-    const dispatch = new DispatchMessages(this.toolbox);
+    this.dispatch.error(this.messages.error);
 
-    dispatch.error(this.messages.error);
-
-    dispatch.warning(this.messages.warning);
+    this.dispatch.warning(this.messages.warning);
 
     return false;
   }
