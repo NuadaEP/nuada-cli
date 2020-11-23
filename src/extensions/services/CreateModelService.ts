@@ -2,7 +2,6 @@ import { GluegunToolbox } from 'gluegun';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import ExtraValuesValidator from '../validators/ExtraValuesValidator';
-import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IParamsDTO from './dtos/IParamsDTO';
 
@@ -13,14 +12,11 @@ export default class CreateModelService {
 
   protected readonly extraValuesValidator: ExtraValuesValidator;
 
-  protected readonly hasDependenciesValidator: HasDependenciesValidator;
-
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);
-    this.hasDependenciesValidator = new HasDependenciesValidator(toolbox);
   }
 
   public async execute({ name, params }: IParamsDTO): Promise<void> {
