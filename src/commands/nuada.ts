@@ -10,7 +10,6 @@ module.exports = {
 
     warning('Type some command like:');
     warning('$ nuada new <project-name>');
-    warning('$ nuada new <project-name> --sucrase');
     warning('$ nuada make:controller <controller-name>');
     warning(
       '$ nuada make:validator <validator-name> <field:type>|<field:relational=model_ref>',
