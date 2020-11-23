@@ -24,6 +24,9 @@ class UserValidator {
           confirmPassword: Yup.string().min(6),
         });
         break;
+
+        default:
+          break;
     }
 
     return validationConfig.validate(body);

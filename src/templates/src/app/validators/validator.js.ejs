@@ -24,6 +24,8 @@ class <%= props.name %>Validator {
 <% }) -%>
         });
         break;
+        default:
+          break;
     }
 
     return validationConfig.validate(body);

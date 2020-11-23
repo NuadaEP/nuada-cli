@@ -22,6 +22,7 @@ import Routes from './routes';
 <% } else { -%>
 const DatabaseConfig = require('../config/database');
 const Routes = require('./routes');
+const AppError = require('./errors/AppError');
 <% } -%>
 
 class App {

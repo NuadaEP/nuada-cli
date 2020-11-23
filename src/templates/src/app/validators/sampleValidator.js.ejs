@@ -27,6 +27,9 @@ class SampleValidator {
           description: Yup.string(),
         });
         break;
+
+      default:
+        break;
     }
 
     return validationConfig.validate(body);
