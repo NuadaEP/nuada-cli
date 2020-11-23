@@ -2,9 +2,12 @@ import { GluegunToolbox } from 'gluegun';
 
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
-export default class ExtraValuesValidator {
-  private readonly toolbox: GluegunToolbox;
+interface ISchemas {
+  fieldName: string;
+  type: string;
+}
 
+export default class ExtraValuesValidator {
   protected readonly dispatch: DispatchMessages;
 
   protected readonly messages = {
@@ -24,16 +27,15 @@ export default class ExtraValuesValidator {
   ];
 
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
-
     this.dispatch = new DispatchMessages(toolbox);
   }
 
-  public validateExtraValues(params: string[]): string[] {
+  public validateExtraValues(params: string[]): Array<ISchemas | void> {
     const parameters = params.slice(1, params.length);
 
     const schemas = parameters.map(parameter => {
-      let [fieldName, type] = parameter.split(':');
+      let [, type] = parameter.split(':');
+      const [fieldName] = parameter.split(':');
 
       type = `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
 
