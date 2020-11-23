@@ -10,12 +10,6 @@ interface ISchemas {
 export default class ExtraValuesValidator {
   protected readonly dispatch: DispatchMessages;
 
-  protected readonly messages = {
-    error: 'Fields and types must be specified to create a model',
-    warning:
-      'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]',
-  };
-
   public readonly types = [
     'String',
     'Number',
@@ -25,6 +19,13 @@ export default class ExtraValuesValidator {
     'Mixed',
     'Relational',
   ];
+
+  protected readonly messages = {
+    error: 'Fields and types must be specified to create a model',
+    warning: `Try something like this: fieldName:type [${this.types.join(
+      ', ',
+    )}]`,
+  };
 
   constructor(toolbox: GluegunToolbox) {
     this.dispatch = new DispatchMessages(toolbox);

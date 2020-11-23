@@ -24,44 +24,42 @@ export default class CreateValidatorService {
   }
 
   async execute({ name, params, single = true }: IValidatorDTO): Promise<void> {
-    try {
-      const nameCapitalized = await this.hasNameValidator.execute(name);
-      const schemas = this.extraValuesValidator.execute(params);
+    const nameCapitalized = await this.hasNameValidator.execute(name);
+    const schemas = this.extraValuesValidator.execute(params);
 
-      const schemaWithoutRelational = schemas.filter(item => {
-        if (!item) return false;
+    const schemaWithoutRelational = schemas.filter(item => {
+      if (!item) return false;
 
-        const relational = item.type.search('=');
+      const relational = item.type.search('=');
 
-        return relational === -1;
-      });
+      return relational === -1;
+    });
 
-      if (schemaWithoutRelational.length === 0) {
-        this.toolbox.error(
-          'Fields and types must be specified to create a validator',
-        );
-        this.toolbox.warning(
-          `Try something like this: fieldName:type [${this.extraValuesValidator.types.join(
-            ' | ',
-          )}]`,
-        );
-        return;
-      }
+    console.log('schemaWithoutRelational =>', schemaWithoutRelational);
 
-      await this.toolbox.template.generate({
-        template: 'src/app/validators/validator.js.ejs',
-        target: `src/app/validators/${nameCapitalized}Validator.js`,
-        props: {
-          name: `${nameCapitalized}`,
-          fields: schemaWithoutRelational,
-        },
-      });
-
-      this.toolbox.success(
-        `Validator ${nameCapitalized}Validator generated successfuly`,
+    if (schemaWithoutRelational.length === 0) {
+      this.toolbox.error(
+        'Fields and types must be specified to create a validator',
       );
-    } catch ({ message }) {
-      if (single) this.toolbox.error(message);
+      this.toolbox.warning(
+        `Try something like this: fieldName:type [${this.extraValuesValidator.types.join(
+          ' | ',
+        )}]`,
+      );
+      return;
     }
+
+    await this.toolbox.template.generate({
+      template: 'src/app/validators/validator.js.ejs',
+      target: `src/app/validators/${nameCapitalized}Validator.js`,
+      props: {
+        name: `${nameCapitalized}`,
+        fields: schemaWithoutRelational,
+      },
+    });
+
+    this.toolbox.success(
+      `Validator ${nameCapitalized}Validator generated successfuly`,
+    );
   }
 }

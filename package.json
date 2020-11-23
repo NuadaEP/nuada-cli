@@ -18,7 +18,8 @@
     "test": "jest",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "nuada": "nuada new demo && nuada make:scaffold demo name:string users:relational=user"
   },
   "files": [
     "tsconfig.json",

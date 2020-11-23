@@ -4,6 +4,7 @@ import HasNameValidator from '../validators/HasNameValidator';
 import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 
 import IParamsDTO from './dtos/IParamsDTO';
+import CreateValidatorService from './CreateValidatorService';
 
 export default class CreateModelService {
   private readonly toolbox: GluegunToolbox;
@@ -12,11 +13,15 @@ export default class CreateModelService {
 
   protected readonly extraValuesValidator: ExtraValuesValidator;
 
+  protected readonly createValidatadorService: CreateValidatorService;
+
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);
+
+    this.createValidatadorService = new CreateValidatorService(toolbox);
   }
 
   public async execute({ name, params }: IParamsDTO): Promise<void> {
@@ -50,7 +55,11 @@ export default class CreateModelService {
         },
       });
 
-      await this.toolbox.createValidator(name, params, false);
+      await this.createValidatadorService.execute({
+        name,
+        params,
+        single: false,
+      });
 
       this.toolbox.success(
         `Model ${nameCapitalized}Model generated successfuly`,
