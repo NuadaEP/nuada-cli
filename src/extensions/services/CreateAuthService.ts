@@ -1,7 +1,10 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateAuthService {
   protected readonly toolbox: GluegunToolbox;
+
+  protected readonly dispatchMessage: DispatchMessages;
 
   protected readonly actions = [
     {
@@ -40,6 +43,8 @@ export default class CreateAuthService {
 
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
+
+    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute(): Promise<void> {
@@ -55,6 +60,6 @@ export default class CreateAuthService {
 
     Promise.all(promises);
 
-    this.toolbox.success('Authentication module generated successfuly');
+    this.dispatchMessage.success('Authentication module generated successfuly');
   }
 }

@@ -1,4 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import HasNameValidator from '../validators/HasNameValidator';
 
@@ -9,10 +10,14 @@ export default class CreateControllerService {
 
   protected readonly hasNameValidator: HasNameValidator;
 
+  protected readonly dispatchMessage: DispatchMessages;
+
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
 
     this.hasNameValidator = new HasNameValidator(toolbox);
+
+    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute({ name, full = false }: IFullDTO): Promise<void> {
@@ -28,7 +33,7 @@ export default class CreateControllerService {
       props: { name: `${nameCapitalized}` },
     });
 
-    this.toolbox.success(
+    this.dispatchMessage.success(
       `Controller ${nameCapitalized}Controller generated successfuly`,
     );
   }

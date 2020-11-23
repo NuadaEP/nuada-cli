@@ -1,10 +1,15 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateMulterService {
   protected readonly toolbox: GluegunToolbox;
 
+  protected readonly dispatchMessage: DispatchMessages;
+
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
+
+    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute(): Promise<void> {
@@ -24,8 +29,8 @@ export default class CreateMulterService {
       target: 'src/uploads/.gitkeep',
     });
 
-    this.toolbox.success('Multer config service generated successfuly');
-    this.toolbox.warning(`
+    this.dispatchMessage.success('Multer config service generated successfuly');
+    this.dispatchMessage.warning(`
       /-------------------------------------------------------------
       |                       Next Steps                           |
       |                                                            |

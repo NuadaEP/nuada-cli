@@ -5,6 +5,7 @@ import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateValidatorService {
   private readonly toolbox: GluegunToolbox;
@@ -15,12 +16,16 @@ export default class CreateValidatorService {
 
   protected readonly hasDependenciesValidator: HasDependenciesValidator;
 
+  protected readonly dispatchMessage: DispatchMessages;
+
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);
     this.hasDependenciesValidator = new HasDependenciesValidator(toolbox);
+
+    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   async execute({ name, params, single = true }: IValidatorDTO): Promise<void> {
@@ -35,13 +40,11 @@ export default class CreateValidatorService {
       return relational === -1;
     });
 
-    console.log('schemaWithoutRelational =>', schemaWithoutRelational);
-
     if (schemaWithoutRelational.length === 0) {
-      this.toolbox.error(
+      this.dispatchMessage.error(
         'Fields and types must be specified to create a validator',
       );
-      this.toolbox.warning(
+      this.dispatchMessage.warning(
         `Try something like this: fieldName:type [${this.extraValuesValidator.types.join(
           ' | ',
         )}]`,
@@ -58,7 +61,7 @@ export default class CreateValidatorService {
       },
     });
 
-    this.toolbox.success(
+    this.dispatchMessage.success(
       `Validator ${nameCapitalized}Validator generated successfuly`,
     );
   }

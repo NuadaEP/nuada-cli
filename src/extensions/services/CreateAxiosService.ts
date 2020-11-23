@@ -1,10 +1,15 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateAxiosService {
   protected readonly toolbox: GluegunToolbox;
 
+  protected readonly dispatchMessage: DispatchMessages;
+
   constructor(toolbox: GluegunToolbox) {
     this.toolbox = toolbox;
+
+    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute(): Promise<void> {
@@ -19,6 +24,6 @@ export default class CreateAxiosService {
       target: 'src/app/services/AxiosService.js',
     });
 
-    this.toolbox.success('Axios service generated successfuly');
+    this.dispatchMessage.success('Axios service generated successfuly');
   }
 }
