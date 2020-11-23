@@ -16,7 +16,7 @@ export default class ExtraValuesValidator {
       'Try something like this: fieldName:type [String, Number, Date, Buffer, Boolean, Mixed]',
   };
 
-  protected readonly types = [
+  public readonly types = [
     'String',
     'Number',
     'Date',
@@ -30,7 +30,7 @@ export default class ExtraValuesValidator {
     this.dispatch = new DispatchMessages(toolbox);
   }
 
-  public validateExtraValues(params: string[]): Array<ISchemas | void> {
+  public execute(params: string[]): Array<ISchemas | void> {
     const parameters = params.slice(1, params.length);
 
     const schemas = parameters.map(parameter => {
