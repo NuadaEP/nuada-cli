@@ -1,7 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
 
-import IParamsDTO from './dtos/IParamsDTO';
-
 export default class CreateAxiosService {
   protected readonly toolbox: GluegunToolbox;
 
@@ -9,7 +7,7 @@ export default class CreateAxiosService {
     this.toolbox = toolbox;
   }
 
-  public async execute({ name, params }: IParamsDTO): Promise<void> {
+  public async execute(): Promise<void> {
     await this.toolbox.system.spawn('npm install axios', {
       shell: true,
       stdio: 'inherit',
