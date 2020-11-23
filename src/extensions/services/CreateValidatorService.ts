@@ -1,12 +1,12 @@
 import { GluegunToolbox } from 'gluegun';
 
-import HasNameValidator from '../Validators/HasNameValidator';
-import ExtraValuesValidator from '../Validators/ExtraValuesValidator';
-import HasDependenciesValidator from '../Validators/HasDependenciesValodator';
+import HasNameValidator from '../validators/HasNameValidator';
+import ExtraValuesValidator from '../validators/ExtraValuesValidator';
+import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
 
-export default class Validator {
+export default class CreateValidatorService {
   private readonly toolbox: GluegunToolbox;
 
   protected readonly hasNameValidator: HasNameValidator;
