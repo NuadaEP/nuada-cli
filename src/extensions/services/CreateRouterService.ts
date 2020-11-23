@@ -4,7 +4,7 @@ import HasNameValidator from '../validators/HasNameValidator';
 
 import IFullDTO from './dtos/IFullDTO';
 
-export default class CreateControllerService {
+export default class CreateRouterService {
   private readonly toolbox: GluegunToolbox;
 
   protected readonly hasNameValidator: HasNameValidator;
@@ -22,14 +22,12 @@ export default class CreateControllerService {
 
     await this.toolbox.template.generate({
       template: full
-        ? 'src/app/controllers/scaffoldController.js.ejs'
-        : 'src/app/controllers/controller.js.ejs',
-      target: `src/app/controllers/${nameCapitalized}Controller.js`,
-      props: { name: `${nameCapitalized}` },
+        ? 'src/app/routes/scaffold.router.js.ejs'
+        : 'src/app/routes/scaffold.router.js.ejs',
+      target: `src/app/routes/${name}.router.js`,
+      props: { name: `${name}`, nameCapitalized },
     });
 
-    this.toolbox.success(
-      `Controller ${nameCapitalized}Controller generated successfuly`,
-    );
+    this.toolbox.success(`Route ${name}.router generated successfuly`);
   }
 }
