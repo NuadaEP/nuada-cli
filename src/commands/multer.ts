@@ -1,28 +1,15 @@
 import { GluegunToolbox } from 'gluegun';
+import CreateModelService from '../extensions/services/CreateModelService';
 
 module.exports = {
   name: 'make:multer',
   description: 'Create a multer configuration service to upload files',
   run: async (toolbox: GluegunToolbox) => {
-    const {
-      parameters,
-      print: { warning, error },
-      createMulterConfig,
-      isNodeProject,
-    } = toolbox;
+    const createMulter = new CreateModelService(toolbox);
 
-    if (!(await isNodeProject())) {
-      error(
-        'This project do not have "mongoose" or "express" packages, so it can not be created',
-      );
-
-      warning(
-        'Run "npm install mongoose express" or "yarn add mongoose express"',
-      );
-
-      return;
-    }
-
-    await createMulterConfig(parameters.first);
+    await createMulter.execute({
+      name: toolbox.parameters.first,
+      params: toolbox.parameters.array,
+    });
   },
 };

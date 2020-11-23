@@ -1,22 +1,15 @@
 import { GluegunToolbox } from 'gluegun';
+import CreateValidatorService from '../extensions/services/CreateValidatorService';
 
 module.exports = {
   name: 'make:validator',
   description: 'Create a simple validator inside src/app/validators',
   run: async (toolbox: GluegunToolbox) => {
-    const { parameters, createValidator, isNodeProject } = toolbox;
-    if (!(await isNodeProject())) {
-      toolbox.error(
-        'This project do not have "mongoose" or "express" packages, so it can not be created',
-      );
+    const createValidator = new CreateValidatorService(toolbox);
 
-      toolbox.warning(
-        'Run "npm install mongoose express" or "yarn add mongoose express"',
-      );
-
-      return;
-    }
-
-    await createValidator(parameters.first, parameters.array);
+    await createValidator.execute({
+      name: toolbox.parameters.first,
+      params: toolbox.parameters.array,
+    });
   },
 };
