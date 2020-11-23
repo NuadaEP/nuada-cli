@@ -12,6 +12,169 @@ module.exports = {
       system,
     } = toolbox;
 
+    const actions = [
+      {
+        template: 'src/package.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'package.json'
+            : `${parameters.first}/package.json`,
+        props: {
+          name: parameters.first || 'unnamedApp',
+        },
+      },
+      {
+        template: 'src/env.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? '.env'
+            : `${parameters.first}/.env`,
+        props: {
+          name: parameters.first || 'unnamedApp',
+        },
+      },
+      {
+        template: 'src/app/app.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/app.js'
+            : `${parameters.first}/src/app/app.js`,
+      },
+      {
+        template: 'src/server.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/server.js'
+            : `${parameters.first}/src/server.js`,
+      },
+      {
+        template: 'src/app/routes/index.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/routes/index.js'
+            : `${parameters.first}/src/app/routes/index.js`,
+      },
+      {
+        template: 'src/app/routes/sample.router.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/routes/sample.router.js'
+            : `${parameters.first}/src/app/routes/sample.router.js`,
+      },
+      {
+        template: 'src/config/database.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/config/database.js'
+            : `${parameters.first}/src/config/database.js`,
+      },
+      {
+        template: 'src/config/config.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/config/ConfigSample.js'
+            : `${parameters.first}/src/config/ConfigSample.js`,
+      },
+      {
+        template: 'src/app/controllers/sampleController.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/controllers/SampleController.js'
+            : `${parameters.first}/src/app/controllers/SampleController.js`,
+      },
+      {
+        template: 'src/app/controllers/indexController.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/controllers/index.js'
+            : `${parameters.first}/src/app/controllers/index.js`,
+      },
+      {
+        template: 'src/app/jobs/job.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/jobs/SampleJob.js'
+            : `${parameters.first}/src/app/jobs/SampleJob.js`,
+      },
+      {
+        template: 'src/app/middlewares/middleware.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/middlewares/SampleMiddleware.js'
+            : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
+      },
+      {
+        template: 'src/app/models/sampleModel.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/models/SampleModel.js'
+            : `${parameters.first}/src/app/models/SampleModel.js`,
+      },
+      {
+        template: 'src/app/errors/AppError.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/errors/AppError.js'
+            : `${parameters.first}/src/app/errors/AppError.js`,
+      },
+      {
+        template: 'src/app/services/services.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/services/SampleService.js'
+            : `${parameters.first}/src/app/services/SampleService.js`,
+      },
+      {
+        template: 'src/app/validators/sampleValidator.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'src/app/validators/SampleValidator.js'
+            : `${parameters.first}/src/app/validators/SampleValidator.js`,
+      },
+      {
+        template: 'src/editorConfig.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? '.editorconfig'
+            : `${parameters.first}/.editorconfig`,
+      },
+      {
+        template: 'src/eslintrc.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? '.eslintrc'
+            : `${parameters.first}/.eslintrc.js`,
+      },
+      {
+        template: 'src/gitignore.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? '.gitignore'
+            : `${parameters.first}/.gitignore`,
+      },
+      {
+        template: 'src/prettierrc.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? '.prettierrc'
+            : `${parameters.first}/.prettierrc`,
+      },
+      {
+        template: 'src/nodemon.js.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'nodemon.json'
+            : `${parameters.first}/nodemon.json`,
+      },
+      {
+        template: 'src/readme.md.ejs',
+        target:
+          typeof parameters.first === 'undefined'
+            ? 'readme.md'
+            : `${parameters.first}/readme.md`,
+      },
+    ];
+
     if (typeof parameters.first === 'undefined') {
       const confirm = {
         type: 'select',
@@ -40,234 +203,9 @@ module.exports = {
       }
     }
 
-    const packageJson = !!parameters.options.sucrase;
+    const pendingActions = actions.map(action => template.generate(action));
 
-    template.generate({
-      template: 'src/package.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'package.json'
-          : `${parameters.first}/package.json`,
-      props: {
-        name: parameters.first || 'unnamedApp',
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/app.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/app.js'
-          : `${parameters.first}/src/app/app.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/server.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/server.js'
-          : `${parameters.first}/src/server.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/routes/index.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/routes/index.js'
-          : `${parameters.first}/src/app/routes/index.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/routes/sample.router.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/routes/sample.router.js'
-          : `${parameters.first}/src/app/routes/sample.router.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/config/database.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/config/database.js'
-          : `${parameters.first}/src/config/database.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/config/config.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/config/ConfigSample.js'
-          : `${parameters.first}/src/config/ConfigSample.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/controllers/sampleController.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/controllers/SampleController.js'
-          : `${parameters.first}/src/app/controllers/SampleController.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/controllers/indexController.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/controllers/index.js'
-          : `${parameters.first}/src/app/controllers/index.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/jobs/job.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/jobs/SampleJob.js'
-          : `${parameters.first}/src/app/jobs/SampleJob.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/middlewares/middleware.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/middlewares/SampleMiddleware.js'
-          : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/models/sampleModel.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/models/SampleModel.js'
-          : `${parameters.first}/src/app/models/SampleModel.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/errors/AppError.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/errors/AppError.js'
-          : `${parameters.first}/src/app/errors/AppError.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/services/services.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/services/SampleService.js'
-          : `${parameters.first}/src/app/services/SampleService.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/app/validators/sampleValidator.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'src/app/validators/SampleValidator.js'
-          : `${parameters.first}/src/app/validators/SampleValidator.js`,
-      props: {
-        sucrase: packageJson,
-      },
-    });
-
-    template.generate({
-      template: 'src/editorConfig.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? '.editorconfig'
-          : `${parameters.first}/.editorconfig`,
-    });
-
-    template.generate({
-      template: 'src/env.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? '.env'
-          : `${parameters.first}/.env`,
-      props: {
-        name: parameters.first || 'unnamedApp',
-      },
-    });
-
-    template.generate({
-      template: 'src/eslintrc.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? '.eslintrc'
-          : `${parameters.first}/.eslintrc.js`,
-    });
-
-    template.generate({
-      template: 'src/gitignore.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? '.gitignore'
-          : `${parameters.first}/.gitignore`,
-    });
-
-    template.generate({
-      template: 'src/prettierrc.js.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? '.prettierrc'
-          : `${parameters.first}/.prettierrc`,
-    });
-
-    if (packageJson) {
-      template.generate({
-        template: 'src/nodemon.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'nodemon.json'
-            : `${parameters.first}/nodemon.json`,
-      });
-    }
-
-    template.generate({
-      template: 'src/readme.md.ejs',
-      target:
-        typeof parameters.first === 'undefined'
-          ? 'readme.md'
-          : `${parameters.first}/readme.md`,
-    });
+    Promise.all(pendingActions);
 
     warning(
       '<!==================== Git was initialized ====================!>',
