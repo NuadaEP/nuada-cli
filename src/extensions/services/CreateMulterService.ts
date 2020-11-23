@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun';
 
-export default class CreateAxiosService {
+export default class CreateMulterService {
   protected readonly toolbox: GluegunToolbox;
 
   constructor(toolbox: GluegunToolbox) {
