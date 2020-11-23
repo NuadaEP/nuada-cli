@@ -1,12 +1,6 @@
-<% if (props.sucrase) { -%>
-import Sample from '../models/SampleModel';
-import SampleValidator from '../validators/SampleValidator';
-import AppError from '../errors/AppError';
-<% } else { -%>
 const Sample = require('../models/SampleModel');
 const SampleValidator = require('../validators/SampleValidator');
 const AppError = require('../errors/AppError');
-<% } -%>
 
 class SampleController {
   async index(req, res) {
@@ -23,7 +17,7 @@ class SampleController {
 
   async store(req, res) {
     try {
-      await SampleValidator(req.body, 'store')
+      await SampleValidator(req.body, 'store');
 
       const response = await Sample.create(req.body);
 
@@ -35,7 +29,7 @@ class SampleController {
 
   async update(req, res) {
     try {
-      await SampleValidator(req.body, 'update')
+      await SampleValidator(req.body, 'update');
 
       const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
 
@@ -52,8 +46,4 @@ class SampleController {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new SampleController();
-<% } else { -%>
 module.exports = new SampleController();
-<% } -%>

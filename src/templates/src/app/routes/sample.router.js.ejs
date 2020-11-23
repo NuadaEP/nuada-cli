@@ -1,10 +1,5 @@
-<% if (props.sucrase) { -%>
-import { Router } from 'express';
-import controller from '../controllers';
-<% } else { -%>
 const { Router } = require('express');
 const controller = require('../controllers');
-<% } -%>
 
 const routes = Router();
 
@@ -14,8 +9,4 @@ routes.post('/sample', controller.SampleController.store);
 routes.put('/sample/:id', controller.SampleController.update);
 routes.delete('/sample/:id', controller.SampleController.delete);
 
-<% if (props.sucrase) { -%>
-export default routes;
-<% } else { -%>
 module.exports = routes;
-<% } -%>

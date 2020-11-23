@@ -160,13 +160,6 @@ module.exports = {
             : `${parameters.first}/.prettierrc`,
       },
       {
-        template: 'src/nodemon.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'nodemon.json'
-            : `${parameters.first}/nodemon.json`,
-      },
-      {
         template: 'src/readme.md.ejs',
         target:
           typeof parameters.first === 'undefined'

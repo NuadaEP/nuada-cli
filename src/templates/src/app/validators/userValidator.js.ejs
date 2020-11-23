@@ -1,8 +1,4 @@
-<% if (props.sucrase) { -%>
-import * as Yup from 'yup'
-<% } else { -%>
-const Yup = require('yup')
-<% } -%>
+const Yup = require('yup');
 
 class UserValidator {
   validation(body, role) {
@@ -13,7 +9,7 @@ class UserValidator {
         validationConfig = Yup.object().shape({
           email: Yup.string().email().required(),
           password: Yup.string().required().min(6),
-          confirmPassword: Yup.string().required().min(6)
+          confirmPassword: Yup.string().required().min(6),
         });
         break;
 
@@ -25,16 +21,12 @@ class UserValidator {
         });
         break;
 
-        default:
-          break;
+      default:
+        break;
     }
 
     return validationConfig.validate(body);
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new UserValidator().validation
-<% } else { -%>
-module.exports = new UserValidator().validation
-<% } -%>
+module.exports = new UserValidator().validation;

@@ -1,25 +1,19 @@
-<% if (props.sucrase) { -%>
-import UserValidator from '../validators/UserValidator'
-import User from '../models/UserModel'
-import AppError from '../errors/AppError';
-<% } else { -%>
-const UserValidator = require('../validators/UserValidator')
-const User = require('../models/UserModel')
+const UserValidator = require('../validators/UserValidator');
+const User = require('../models/UserModel');
 const AppError = require('../errors/AppError');
-<% } -%>
 
 class UserController {
   async show(req, res) {
-    const { _id: user_id } = res.locals.user
+    const { _id: user_id } = res.locals.user;
 
-    return res.send({ user_id })
+    return res.send({ user_id });
   }
 
   async store(req, res) {
     try {
-      await UserValidator(req.body, 'store')
+      await UserValidator(req.body, 'store');
 
-      const { email, password, confirmPassword } = req.body
+      const { email, password, confirmPassword } = req.body;
 
       if (await User.findOne({ email }))
         throw new AppError('Email is already in use', 400);
@@ -27,15 +21,11 @@ class UserController {
       if (password != confirmPassword)
         throw new AppError('The provided password is not identical', 400);
 
-      return res.json(await User.create({ email, password }))
+      return res.json(await User.create({ email, password }));
     } catch (error) {
       throw new AppError(error.message, 400);
     }
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new UserController()
-<% } else { -%>
-module.exports = new UserController()
-<% } -%>
+module.exports = new UserController();

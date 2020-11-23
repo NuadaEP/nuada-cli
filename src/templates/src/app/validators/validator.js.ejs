@@ -1,8 +1,4 @@
-<% if (props.sucrase) { -%>
-import * as Yup from 'yup'
-<% } else { -%>
 const Yup = require('yup')
-<% } -%>
 
 class <%= props.name %>Validator {
   validation(body, role) {
@@ -32,8 +28,4 @@ class <%= props.name %>Validator {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new <%= props.name %>Validator().validation
-<% } else { -%>
 module.exports = new <%= props.name %>Validator().validation
-<% } -%>

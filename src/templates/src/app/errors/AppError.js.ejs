@@ -5,8 +5,4 @@ class AppError {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new AppError();
-<% } else { -%>
 module.exports = new AppError();
-<% } -%>

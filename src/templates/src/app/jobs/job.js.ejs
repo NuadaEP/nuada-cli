@@ -2,11 +2,7 @@
  * Use one file to make a job, the config of that job, usually, come from ./services
  */
 
-// <% if (props.sucrase) { -%>
-// import Mail from '../services/Mail'
-// <% } else { -%>
 // const Mail = require('../services/Mail')
-// <% } -%>
 
 // class PurchaseMail {
 //   get key () {
@@ -31,8 +27,4 @@
 //   }
 // }
 
-// <% if (props.sucrase) { -%>
-// export default new PurchaseMail()
-// <% } else { -%>
 // module.exports = new PurchaseMail()
-// <% } -%>

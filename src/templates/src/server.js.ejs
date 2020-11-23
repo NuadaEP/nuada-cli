@@ -1,9 +1,5 @@
-<% if (props.sucrase) { -%>
-import app from './app/app'
-<% } else { -%>
-const app = require('./app/app')
-<% } -%>
+const app = require('./app/app');
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`Listening at http://[::]:${port}`))
+app.listen(port, () => console.log(`Listening at http://[::]:${port}`));

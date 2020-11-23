@@ -3,9 +3,4 @@ class <%= props.name %>Controller {
     return res.send('indexMethod');
   }
 }
-
-<% if (props.sucrase) { -%>
-export default new <%= props.name %>Controller();
-<% } else { -%>
 module.exports = new <%= props.name %>Controller();
-<% } -%>

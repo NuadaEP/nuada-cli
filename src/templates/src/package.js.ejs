@@ -4,13 +4,8 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    <% if (props.sucrase) { -%>
-    "build": "sucrase ./src -d ./build --transforms imports",
-    "start": "node build/server.js"
-    <% } else { -%>
     "start": "node src/server.js",
     "lint": "npx eslint src/ --fix"
-    <% } -%>
   },
   "license": "MIT",
   "dependencies": {
@@ -28,9 +23,6 @@
     "eslint-plugin-import": "~2.18.2",
     "eslint-plugin-prettier": "~3.1.1",
     "nodemon": "~1.19.4",
-    "prettier": "~1.18.2"<% if (props.sucrase) { -%>,<% } %>
-<% if (props.sucrase) { -%>
-    "sucrase": "~3.10.1"
-<% } -%>
+    "prettier": "~1.18.2"
   }
 }

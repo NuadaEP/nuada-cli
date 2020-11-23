@@ -1,56 +1,44 @@
-<% if (props.sucrase) { -%>
-import Mongoose from 'mongoose'
-import Bcrypt from 'bcryptjs'
-import Jwt from 'jsonwebtoken'
+const Mongoose = require('mongoose');
+const Bcrypt = require('bcryptjs');
+const Jwt = require('jsonwebtoken');
 
-import AuthConfig from '../../config/auth'
-<% } else { -%>
-const Mongoose = require('mongoose')
-const Bcrypt = require('bcryptjs')
-const Jwt = require('jsonwebtoken')
-
-const AuthConfig = require('../../config/auth')
-<% } -%>
+const AuthConfig = require('../../config/auth');
 
 const UserModel = new Mongoose.Schema(
   {
     username: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
-    timestamps: true
-  }
-)
+    timestamps: true,
+  },
+);
 
-UserModel.pre('save', async function(next) {
-  if (!this.isModified('password')) return next()
+UserModel.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
 
-  this.password = await Bcrypt.hash(this.password, 8)
-})
+  this.password = await Bcrypt.hash(this.password, 8);
+});
 
 UserModel.methods = {
   compareHash(password) {
-    return Bcrypt.compare(password, this.password)
-  }
-}
+    return Bcrypt.compare(password, this.password);
+  },
+};
 
 UserModel.statics = {
   generateToken(user) {
     return Jwt.sign({ user }, AuthConfig.secret, {
-      expiresIn: AuthConfig.ttl
-    })
-  }
-}
+      expiresIn: AuthConfig.ttl,
+    });
+  },
+};
 
-<% if (props.sucrase) { -%>
-export default Mongoose.model('User', UserModel)
-<% } else { -%>
-module.exports = Mongoose.model('User', UserModel)
-<% } -%>
+module.exports = Mongoose.model('User', UserModel);

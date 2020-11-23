@@ -1,12 +1,6 @@
-<% if (props.sucrase) { -%>
-import { Router } from 'express';
-import fs from 'fs';
-import path from 'path';
-<% } else { -%>
 const { Router } = require('express');
 const fs = require('fs');
 const path = require('path');
-<% } -%>
 
 const routes = Router();
 
@@ -26,8 +20,4 @@ files.map(file => {
   return true;
 });
 
-<% if (props.sucrase) { -%>
-export default routes;
-<% } else { -%>
 module.exports = routes;
-<% } -%>

@@ -1,43 +1,29 @@
-<% if (props.sucrase) { -%>
-import Jwt from 'jsonwebtoken'
-
-import AppError from '../errors/AppError';
-import AuthConfig from '../../config/AuthConfig'
-<% } else { -%>
-const Jwt = require('jsonwebtoken')
+const Jwt = require('jsonwebtoken');
 
 const AppError = require('../errors/AppError');
-const AuthConfig = require('../../config/AuthConfig')
-<% } -%>
+const AuthConfig = require('../../config/AuthConfig');
 
 class Authentication {
   async init(req, res, next) {
     try {
-      const { authorization = null } = req.headers
+      const { authorization = null } = req.headers;
 
-      if (!authorization)
-        throw new AppError('Missing token', 400);
+      if (!authorization) throw new AppError('Missing token', 400);
 
-      const [, token] = authorization.split(' ')
-      const decoded_token = await Jwt.verify(token, AuthConfig.secret)
+      const [, token] = authorization.split(' ');
+      const decoded_token = await Jwt.verify(token, AuthConfig.secret);
 
-      if (decoded_token.error)
-        throw new AppError('Invalid Token', 401);
+      if (decoded_token.error) throw new AppError('Invalid Token', 401);
 
-      if(!(decoded_token.user))
-        throw new AppError('Invalid User', 401);
+      if (!decoded_token.user) throw new AppError('Invalid User', 401);
 
-      req.user = decoded_token.user
+      req.user = decoded_token.user;
 
-      next()
+      next();
     } catch (e) {
       throw new AppError('Invalid Token', 401);
     }
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new Authentication().init
-<% } else { -%>
-module.exports = new Authentication().init
-<% } -%>
+module.exports = new Authentication().init;
