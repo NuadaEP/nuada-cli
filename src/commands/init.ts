@@ -226,6 +226,12 @@ module.exports = {
       stderr: 'inherit',
     });
 
+    await system.spawn(`${cd}npx eslint src/ --fix`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
+
     success('Project created successfuly!');
   },
 };

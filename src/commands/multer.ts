@@ -8,5 +8,11 @@ module.exports = {
     const createMulter = new CreateMulterService(toolbox);
 
     await createMulter.execute();
+
+    await toolbox.system.spawn(`npx eslint src/ --fix`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
   },
 };

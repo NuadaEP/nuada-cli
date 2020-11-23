@@ -11,5 +11,11 @@ module.exports = {
       name: toolbox.parameters.first,
       params: toolbox.parameters.array,
     });
+
+    await toolbox.system.spawn(`npx eslint src/ --fix`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
   },
 };

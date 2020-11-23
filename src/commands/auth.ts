@@ -9,5 +9,11 @@ module.exports = {
     const createAuth = new CreateAuthService(toolbox);
 
     await createAuth.execute();
+
+    await toolbox.system.spawn(`npx eslint src/ --fix`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
   },
 };

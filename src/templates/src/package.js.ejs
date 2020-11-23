@@ -8,7 +8,8 @@
     "build": "sucrase ./src -d ./build --transforms imports",
     "start": "node build/server.js"
     <% } else { -%>
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "lint": "npx eslint src/ --fix"
     <% } -%>
   },
   "license": "MIT",

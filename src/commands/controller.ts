@@ -8,5 +8,11 @@ module.exports = {
     const createController = new CreateControllerService(toolbox);
 
     await createController.execute({ name: toolbox.parameters.first });
+
+    await toolbox.system.spawn(`npx eslint src/ --fix`, {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
   },
 };
