@@ -34,7 +34,7 @@ export default class CreateModelService {
     const schemas = this.extraValuesValidator.execute(params);
 
     if (!nameCapitalized) {
-      this.toolbox.error('Model name must be specified');
+      this.dispatchMessage.error('Model name must be specified');
       return;
     }
 
