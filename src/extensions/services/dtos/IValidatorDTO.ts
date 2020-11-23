@@ -1,5 +1,5 @@
-export default interface IValidatorDTO {
-  name: string;
-  params: string[];
+import IParamsDTO from './IParamsDTO';
+
+export default interface IValidatorDTO extends IParamsDTO {
   single: boolean;
 }
