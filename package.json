@@ -19,7 +19,8 @@
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage",
-    "nuada-demo": "nuada new demo && nuada make:scaffold demo name:string users:relational=user"
+    "nuada-demo": "nuada new demo && nuada make:scaffold demo name:string users:relational=user",
+    "commit": "git-cz"
   },
   "files": [
     "tsconfig.json",
@@ -46,6 +47,8 @@
     "@types/node": "^12.7.11",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.6.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-airbnb-typescript-prettier": "^4.0.0",
@@ -66,7 +69,22 @@
     "node",
     "cli",
     "mongo",
+    "mongoDB",
     "mongoose",
-    "express"
-  ]
+    "express",
+    "expressJS",
+    "nuada",
+    "nuadacli",
+    "nuada-cli",
+    "JS",
+    "Javascript",
+    "Ecmascript",
+    "Typescript",
+    "TS"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
