@@ -28,4 +28,4 @@ jobs:
         run: yarn lint
 
       - name: Check Commit Messages
-        uses: wegoid/commitlint-github-action@v1
+        uses: wagoid/commitlint-github-action@v2
