@@ -19,6 +19,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+          
+      - name: Install Dependencies And Build
+        run: |
+          node --version
+          npm --version
+          yarn --version
+          yarn install
+          yarn compile
 
       - name: Publish NPM 
         run: npm publish
