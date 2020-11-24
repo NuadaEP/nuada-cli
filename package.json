@@ -11,7 +11,7 @@
     "format": "prettier --write **/*.{js,ts,tsx,json}",
     "clean-build": "rm -rf ./build",
     "compile": "tsc -p .",
-    "lint": "eslint --fix ./src/commands && eslint --fix ./src/extensions",
+    "lint": "eslint src --ext ts",
     "copy-templates": "if [ -e ./src/templates ]; then cp -a ./src/templates ./build/; fi",
     "build": "yarn format && yarn lint && yarn clean-build && yarn compile && yarn copy-templates",
     "prepublishOnly": "yarn build",
