@@ -1,28 +1,15 @@
-<% if (props.sucrase) { -%>
-import Dotenv from 'dotenv';
-import Express from 'express';
-import Mongoose from 'mongoose';
-import Cors from 'cors';
-
-import 'express-async-errors';
-<% } else { -%>
 const Dotenv = require('dotenv');
 const Express = require('express');
 const Mongoose = require('mongoose');
 const Cors = require('cors');
 
 require('express-async-errors');
-<% } -%>
 
 Dotenv.config();
 
-<% if (props.sucrase) { -%>
-import DatabaseConfig from '../config/database';
-import Routes from './routes';
-<% } else { -%>
 const DatabaseConfig = require('../config/database');
 const Routes = require('./routes');
-<% } -%>
+const AppError = require('./errors/AppError');
 
 class App {
   constructor() {
@@ -39,7 +26,7 @@ class App {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     });
   }
 
@@ -67,8 +54,4 @@ class App {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new App().server;
-<% } else { -%>
 module.exports = new App().server;
-<% } -%>

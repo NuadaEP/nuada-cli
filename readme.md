@@ -1,12 +1,12 @@
-# nuada CLI
+# Nuada CLI
 
-A CLI designed to facilitate API development using express and mongoose.
+Nuada CLI was designed to improve your development experience by using ExpressJS and Mongoose tools.
 
-# nuada CLI 0.9.2
+# Nuada CLI 0.9.9 🎉🎉🎉
 
-## Instalation Guide
+## Installation Guide
 
-To install nuada package you can use:
+To install the Nuada package globally you can run:
 
 ```shell
 $ npm install nuada -g
@@ -20,66 +20,79 @@ $ yarn global add nuada
 
 ## Usage
 
-You can start a new project with nuada package just like that:
+To start a new project just run:
 
 ```shell
 $ nuada new <project-name>
 ```
 
-You can also create a project using [SUCRASE](https://www.npmjs.com/package/sucrase), just doing:
-
-```shell
-$ nuada new <project-name> --sucrase
-```
-
-Then all your project structure going to follow this lib.
-
-This command creates an entire folder structure and pattern of files that will be used in the project.
-If you do not specify the project name, it will be created in the current folder. So be careful, because it can make a mess.
+This command creates an entire folder and pattern structure that will be used to help you to develop.
+If you do not specify the project name argument, it will be created inside the current folder. So be careful, because it can make a mess 🤮.
 
 ```shell
 $ nuada make:controller <controller-name>
 ```
 
-Generates a simple controller to use in your application. Import it into your routes file to get started.
+This command generates a simple controller to use in your application.
+You don't have to import your new controller inside _router/index.js_, the auto-import script now can do it for you 🎉.
 
 ```shell
 $ nuada make:validator <validator-name> <field:type>
 ```
 
-Creates a validation file based on the passed parameters.
+The _make:validator_ creates a validation file based on the passed parameters.
 
 ```shell
 $ nuada make:model <model-name> <field:type>
 ```
 
-Create a simple model file with fields and types defined. A validation file is also created following these rules.
+The _make:model_ creates a simple model file with fields and types based on mongo type rules.
+A validation file is also created following the same rules.
+
+Now you can relate your model with some other one just running:
+
+```shell
+$ nuada make:model <model-name> <field:relational=<another-model-name>>
+```
+
+The _relational_ field type does not generate a validatable field inside the validation file.
 
 ```shell
 $ nuada make:scaffold <scaffold-name> <field:type>
 ```
 
-It generates an entire controller structure with a complete CRUD, model and validator ready to be used.
+The _make:scaffold_ command generates a **controller**, **model** and **validator** file ready to use.
+The _field:relational=<another-model-name>_ flag also works here 🎉.
+
+Above you can get a list of valid types:
+
+- String => <field:string>,
+- Number => <field:number>
+- Date => <field:date>
+- Buffer => <field:buffer>
+- Boolean => <field:boolean>
+- Mixed => <field:mixed>
+- Relational => <field:relational=<another-model-name>>
 
 ```shell
 $ nuada make:auth
 ```
 
-Create a simple authentication structure using [JWT](https://jwt.io/).
+The _make:auth_ command creates a simple authentication structure using [JWT](https://jwt.io/) ready to use.
 
 ```shell
 $ nuada make:axios
 ```
 
-Create a simple HTTP comunication service using [Axios](https://github.com/axios/axios).
+The _make:axios_ command creates an HTTP communication module using [Axios](https://github.com/axios/axios).
 
 ```shell
 $ nuada make:multer
 ```
 
-Create a upload config file using [Multer](https://github.com/expressjs/multer).
+The _make:multer_ creates an upload config file using [Multer](https://github.com/expressjs/multer).
 
-You have to import the multer config into route file:
+Don't forget to import the _multer_ config inside the _route_ file that's going to use the upload service.
 
 ```shell
 const Multer = require('multer');

@@ -1,9 +1,9 @@
-const { build } = require('gluegun')
+const { build } = require('gluegun');
 
 /**
  * Create the cli and kick it off
  */
-async function run(argv) {
+async function run(argv: NodeJS.Process) {
   // create a CLI runtime
   const cli = build()
     .brand('nuada')
@@ -11,15 +11,15 @@ async function run(argv) {
     .plugins('./node_modules', { matching: 'nuada-*', hidden: true })
     .help() // provides default for help, h, --help, -h
     .version() // provides default for version, v, --version, -v
-    .create()
+    .create();
   // enable the following method if you'd like to skip loading one of these core extensions
   // this can improve performance if they're not necessary for your project:
   // .exclude(['meta', 'strings', 'print', 'filesystem', 'semver', 'system', 'prompt', 'http', 'template', 'patching'])
   // and run it
-  const toolbox = await cli.run(argv)
+  const toolbox = await cli.run(argv);
 
   // send it back (for testing, mostly)
-  return toolbox
+  return toolbox;
 }
 
-module.exports = { run }
+module.exports = { run };

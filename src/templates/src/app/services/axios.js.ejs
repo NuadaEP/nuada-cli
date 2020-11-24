@@ -1,8 +1,4 @@
-<% if (props.sucrase) { -%>
-import Axios from 'axios';
-<% } else { -%>
 const Axios = require('axios');
-<% } -%>
 
 class AxiosService {
   async execute(method, url, headers = {}, params = {}, data = {}) {
@@ -23,8 +19,4 @@ class AxiosService {
   }
 }
 
-<% if (props.sucrase) { -%>
-export default new AxiosService()
-<% } else { -%>
-module.exports = new AxiosService()
-<% } -%>
+module.exports = new AxiosService();

@@ -1,8 +1,4 @@
-<% if (props.sucrase) { -%>
-import Mongoose from 'mongoose';
-<% } else { -%>
 const Mongoose = require('mongoose');
-<% } -%>
 
 const <%= props.name %>Model = new Mongoose.Schema(
   {
@@ -23,8 +19,4 @@ const <%= props.name %>Model = new Mongoose.Schema(
   }
 );
 
-<% if (props.sucrase) { -%>
-export default Mongoose.model('<%= props.name %>', <%= props.name %>Model)
-<% } else { -%>
 module.exports = Mongoose.model('<%= props.name %>', <%= props.name %>Model)
-<% } -%>

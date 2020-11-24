@@ -1,9 +1,5 @@
 const database = {
-    uri: process.env.DB_URL
-}
+  uri: process.env.DB_URL,
+};
 
-<% if (props.sucrase) { -%>
-export default database
-<% } else { -%>
-module.exports = database
-<% } -%>
+module.exports = database;
