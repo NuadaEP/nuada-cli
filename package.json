@@ -20,7 +20,6 @@
     "snapupdate": "jest --updateSnapshot",
     "coverage": "jest --coverage",
     "nuada-demo": "nuada new demo && nuada make:scaffold demo name:string users:relational=user",
-    "commit": "git-cz"
   },
   "files": [
     "tsconfig.json",
@@ -34,7 +33,8 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "dependencies": {
