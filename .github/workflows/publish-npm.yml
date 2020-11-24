@@ -8,28 +8,16 @@ on:
         required: true
         default: 'release deploy'
 jobs:
-  publish-npm:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        
-      - name: Install Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-          
-      - name: Install Dependencies And Build
-        run: |
-          node --version
-          npm --version
-          yarn --version
-          yarn install
-          yarn compile
-
-      - name: Publish NPM 
-        run: npm publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+    - uses: actions/checkout@v2
+    # Setup .npmrc file to publish to npm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+        registry-url: 'https://registry.npmjs.org/nuada'
+    - run: npm install
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
