@@ -12,7 +12,6 @@ module.exports = {
 
     await toolbox.system.spawn(`npx eslint src/ --fix`, {
       shell: true,
-
       stdio: 'inherit',
       stderr: 'inherit',
     });
