@@ -213,7 +213,7 @@ module.exports = {
     if (typeof parameters.first !== 'undefined')
       cd = `cd ${parameters.first} && `;
 
-    await system.spawn(`${cd}npm install && git init`, {
+    await system.spawn(`${cd}npm install && git init && npm ls`, {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit',
