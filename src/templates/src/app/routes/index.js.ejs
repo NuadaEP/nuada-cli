@@ -11,11 +11,7 @@ const files = fs.readdirSync(routesPath);
 files.map(file => {
   if (file === 'index.js') return false;
 
-  <% if (props.sucrase) { -%>
-  routes.use(require(`./${file}`).default);
-  <% } else { -%>
   routes.use(require(`./${file}`));
-  <% } -%>
 
   return true;
 });

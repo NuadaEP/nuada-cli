@@ -1,5 +1,7 @@
 const Axios = require('axios');
 
+const AppError = require('../errors/AppError');
+
 class AxiosService {
   async execute(method, url, headers = {}, params = {}, data = {}) {
     try {
