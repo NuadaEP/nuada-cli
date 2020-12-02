@@ -2,7 +2,7 @@
 
 Nuada CLI was designed to improve your development experience by using ExpressJS and Mongoose tools.
 
-# Nuada CLI 0.9.9 🎉🎉🎉
+# Nuada CLI 0.91.9 🎉🎉🎉
 
 ## Installation Guide
 
