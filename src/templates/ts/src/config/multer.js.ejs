@@ -1,6 +1,6 @@
-const Multer = require('multer');
-const Path = require('path');
-const Crypto = require('crypto');
+import Multer from 'multer';
+import Path from 'path';
+import Crypto from 'crypto';
 
 const path = Path.resolve(__dirname, '..', 'uploads');
 
@@ -20,4 +20,4 @@ const multerConfig = {
   }),
 };
 
-module.exports = multerConfig;
+export default multerConfig;
