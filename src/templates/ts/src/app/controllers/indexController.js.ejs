@@ -1,0 +1,21 @@
+const fs = require('fs');
+const path = require('path');
+
+const controllerPath = path.resolve(__dirname);
+
+const files = fs.readdirSync(controllerPath);
+
+const controllers = {};
+
+files.map(file => {
+  if (file === 'index.js') return false;
+
+  const controller = file.replace('.js', '');
+  const controllerRequire = require('./' + controller);
+
+  Object.assign(controllers, { [controller]: controllerRequire });
+
+  return true;
+});
+
+module.exports = controllers;

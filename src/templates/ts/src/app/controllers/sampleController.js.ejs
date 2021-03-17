@@ -1,0 +1,49 @@
+const Sample = require('../models/SampleModel');
+const SampleValidator = require('../validators/SampleValidator');
+const AppError = require('../errors/AppError');
+
+class SampleController {
+  async index(req, res) {
+    const response = await Sample.find();
+
+    return res.json(response);
+  }
+
+  async show(req, res) {
+    const response = await Sample.findById(req.params.id);
+
+    return res.json(response);
+  }
+
+  async store(req, res) {
+    try {
+      await SampleValidator(req.body, 'store');
+
+      const response = await Sample.create(req.body);
+
+      return res.json(response);
+    } catch (error) {
+      throw new AppError(error.message, 400);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      await SampleValidator(req.body, 'update');
+
+      const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
+
+      return res.json(response);
+    } catch (error) {
+      throw new AppError(error.message, 400);
+    }
+  }
+
+  async delete(req, res) {
+    await Sample.findByIdAndDelete(req.params.id);
+
+    return res.send(true);
+  }
+}
+
+module.exports = new SampleController();

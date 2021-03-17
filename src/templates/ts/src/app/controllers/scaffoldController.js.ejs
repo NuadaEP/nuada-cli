@@ -1,0 +1,49 @@
+const <%= props.name %>Model = require('../models/<%= props.name %>Model');
+const <%= props.name %>Validator = require('../validators/<%= props.name %>Validator');
+const AppError = require('../errors/AppError');
+
+class <%= props.name %>Controller {
+  async index(req, res) {
+    const response = await <%= props.name %>Model.find();
+
+    return res.json(response);
+  }
+
+  async show(req, res) {
+    const response = await <%= props.name %>Model.findById(req.params.id);
+
+    return res.json(response);
+  }
+
+  async store(req, res) {
+    try {
+      await <%= props.name %>Validator(req.body, 'store')
+
+      const response = await <%= props.name %>Model.create(req.body);
+
+      return res.json(response);
+    } catch (error) {
+      throw new AppError(error.message, 400);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      await <%= props.name %>Validator(req.body, 'update')
+
+      const response = await <%= props.name %>Model.findByIdAndUpdate(req.params.id, req.body);
+
+      return res.json(response);
+    } catch (error) {
+      throw new AppError(error.message, 400);
+    }
+  }
+
+  async delete(req, res) {
+    await <%= props.name %>Model.findByIdAndDelete(req.params.id);
+
+    return res.send(true);
+  }
+}
+
+module.exports = new <%= props.name %>Controller();

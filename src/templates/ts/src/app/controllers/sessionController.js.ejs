@@ -1,0 +1,23 @@
+const User = require('../models/UserModel');
+const AppError = require('../errors/AppError');
+
+class SessionController {
+  async store(req, res) {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) throw new AppError('User not found', 400);
+
+    if (!(await user.compareHash(password)))
+      throw new AppError('Invalid email password combination', 400);
+
+    const userWithOutPassword = user.toJSON();
+
+    delete userWithOutPassword.password;
+
+    return res.json({ token: User.generateToken(userWithOutPassword) });
+  }
+}
+
+module.exports = new SessionController();
