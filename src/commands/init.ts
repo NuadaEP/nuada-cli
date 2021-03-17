@@ -34,7 +34,7 @@ module.exports = {
         },
       },
       {
-        template: 'src/app/app.js.ejs',
+        template: 'js/src/app/app.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/app.js'
@@ -48,14 +48,14 @@ module.exports = {
             : `${parameters.first}/src/server.js`,
       },
       {
-        template: 'src/app/routes/index.js.ejs',
+        template: 'js/src/app/routes/index.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/routes/index.js'
             : `${parameters.first}/src/app/routes/index.js`,
       },
       {
-        template: 'src/app/routes/sample.router.js.ejs',
+        template: 'js/src/app/routes/sample.router.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/routes/sample.router.js'
@@ -76,56 +76,56 @@ module.exports = {
             : `${parameters.first}/src/config/ConfigSample.js`,
       },
       {
-        template: 'src/app/controllers/sampleController.js.ejs',
+        template: 'js/src/app/controllers/sampleController.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/controllers/SampleController.js'
             : `${parameters.first}/src/app/controllers/SampleController.js`,
       },
       {
-        template: 'src/app/controllers/indexController.js.ejs',
+        template: 'js/src/app/controllers/indexController.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/controllers/index.js'
             : `${parameters.first}/src/app/controllers/index.js`,
       },
       {
-        template: 'src/app/jobs/job.js.ejs',
+        template: 'js/src/app/jobs/job.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/jobs/SampleJob.js'
             : `${parameters.first}/src/app/jobs/SampleJob.js`,
       },
       {
-        template: 'src/app/middlewares/middleware.js.ejs',
+        template: 'js/src/app/middlewares/middleware.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/middlewares/SampleMiddleware.js'
             : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
       },
       {
-        template: 'src/app/models/sampleModel.js.ejs',
+        template: 'js/src/app/models/sampleModel.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/models/SampleModel.js'
             : `${parameters.first}/src/app/models/SampleModel.js`,
       },
       {
-        template: 'src/app/errors/AppError.js.ejs',
+        template: 'js/src/app/errors/AppError.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/errors/AppError.js'
             : `${parameters.first}/src/app/errors/AppError.js`,
       },
       {
-        template: 'src/app/services/services.js.ejs',
+        template: 'js/src/app/services/services.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/services/SampleService.js'
             : `${parameters.first}/src/app/services/SampleService.js`,
       },
       {
-        template: 'src/app/validators/sampleValidator.js.ejs',
+        template: 'js/src/app/validators/sampleValidator.js.ejs',
         target:
           typeof parameters.first === 'undefined'
             ? 'src/app/validators/SampleValidator.js'

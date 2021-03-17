@@ -20,7 +20,7 @@ export default class CreateAxiosService {
     });
 
     await this.toolbox.template.generate({
-      template: 'src/app/services/axios.js.ejs',
+      template: 'js/src/app/services/axios.js.ejs',
       target: 'src/app/services/AxiosService.js',
     });
 

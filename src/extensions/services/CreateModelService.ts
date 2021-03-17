@@ -51,7 +51,7 @@ export default class CreateModelService {
     }
 
     await this.toolbox.template.generate({
-      template: 'src/app/models/model.js.ejs',
+      template: 'js/src/app/models/model.js.ejs',
       target: `src/app/models/${nameCapitalized}Model.js`,
       props: {
         name: `${nameCapitalized}`,

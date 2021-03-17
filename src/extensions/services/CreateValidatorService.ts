@@ -53,7 +53,7 @@ export default class CreateValidatorService {
     }
 
     await this.toolbox.template.generate({
-      template: 'src/app/validators/validator.js.ejs',
+      template: 'js/src/app/validators/validator.js.ejs',
       target: `src/app/validators/${nameCapitalized}Validator.js`,
       props: {
         name: `${nameCapitalized}`,
