@@ -1,24 +1,74 @@
-const Axios = require('axios');
+import Axios from 'axios';
 
-const AppError = require('../errors/AppError');
-
-class AxiosService {
-  async execute(method, url, headers = {}, params = {}, data = {}) {
-    try {
-      const request = {
-        method,
-        url,
-      };
-
-      Object.assign(request, { headers, params, data });
-
-      return await Axios(request);
-    } catch (error) {
-      const { data, status } = error.response;
-
-      throw new AppError(data, status);
-    }
-  }
+interface IRequestDTO {
+  url: string;
+  body?: Object;
+  headers?: {
+    Authorization?: string,
+    Cookie?: string | undefined,
+  };
+  responseType?:
+    | 'json'
+    | 'arraybuffer'
+    | 'blob'
+    | 'document'
+    | 'text'
+    | 'stream'
+    | undefined;
 }
 
-module.exports = new AxiosService();
+interface IFetchMethod {
+  get<T>(data: IRequestDTO): Promise<T>;
+  patch<T>(data: IRequestDTO): Promise<T>;
+  post<T>(data: IRequestDTO): Promise<T>;
+  put<T>(data: IRequestDTO): Promise<T>;
+  delete<T>(data: IRequestDTO): Promise<T>;
+}
+
+export default class AxiosService implements IFetchMethod {
+  public async get<T>({ url, headers }: IRequestDTO): Promise<T> {
+    const { data } = await Axios.get<T>(url, { headers });
+
+    return data;
+  }
+
+  public async patch<T>({ url, body, headers }: IRequestDTO): Promise<T> {
+    const { data } = await Axios.patch<T>(url, body, { headers });
+
+    return data;
+  }
+
+  public async post<T>({
+    url,
+    body,
+    headers,
+    responseType,
+  }: IRequestDTO): Promise<T> {
+    const { data } = await Axios.post<T>(url, body, { responseType, headers });
+
+    return data;
+  }
+
+  public async toHandleHeader({
+    url,
+    body,
+    headers,
+    responseType,
+  }: IRequestDTO): Promise<any> {
+    const data = await Axios.post(url, body, { responseType, headers });
+
+    return data;
+  }
+
+  public async put<T>({ url, body, headers }: IRequestDTO): Promise<T> {
+    const { data } = await Axios.put<T>(url, body, { headers });
+
+    return data;
+  }
+
+  public async delete<T>({ url, headers }: IRequestDTO): Promise<T> {
+    const { data } = await Axios.delete<T>(url, { headers });
+
+    return data;
+  }
+}
