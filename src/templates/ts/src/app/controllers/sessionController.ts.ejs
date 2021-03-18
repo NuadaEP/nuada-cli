@@ -1,9 +1,11 @@
-const User = require('../models/UserModel');
-const AppError = require('../errors/AppError');
+import { Request, Response } from 'express';
 
-class SessionController {
-  async store(req, res) {
-    const { email, password } = req.body;
+import User from '../models/UserModel';
+import AppError from '../errors/AppError';
+
+export default class SessionController {
+  public async store(request: Request, response: Response): Promise<Response> {
+    const { email, password } = request.body;
 
     const user = await User.findOne({ email });
 
@@ -19,5 +21,3 @@ class SessionController {
     return res.json({ token: User.generateToken(userWithOutPassword) });
   }
 }
-
-module.exports = new SessionController();
