@@ -1,6 +1,6 @@
-const Mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const <%= props.name %>Model = new Mongoose.Schema(
+const <%= props.name %>Model = new Schema(
   {
 <% props.fields.forEach(field => { -%>
     <%= field.fieldName %>: {
@@ -8,7 +8,7 @@ const <%= props.name %>Model = new Mongoose.Schema(
       type: <%= field.type %>,
       require: true,
       <% } else { -%>
-      type: Mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: '<%= field.type.split('=')[1] %>',
       <% } -%>
 },
@@ -19,4 +19,4 @@ const <%= props.name %>Model = new Mongoose.Schema(
   }
 );
 
-module.exports = Mongoose.model('<%= props.name %>', <%= props.name %>Model)
+export default model('<%= props.name %>', <%= props.name %>Model)

@@ -1,12 +1,13 @@
-const Jwt = require('jsonwebtoken');
+import { Request, Response, NextFunction } from 'express';
+import Jwt from 'jsonwebtoken';
 
-const AppError = require('../errors/AppError');
-const AuthConfig = require('../../config/AuthConfig');
+import AppError from '../errors/AppError';
+import AuthConfig from '../../config/AuthConfig';
 
-class Authentication {
-  async init(req, res, next) {
+export default class Authentication {
+  public async init(request: Request, response: Response, next: NextFunction): Promise<Response> {
     try {
-      const { authorization = null } = req.headers;
+      const { authorization = null } = request.headers;
 
       if (!authorization) throw new AppError('Missing token', 400);
 
@@ -17,7 +18,7 @@ class Authentication {
 
       if (!decoded_token.user) throw new AppError('Invalid User', 401);
 
-      req.user = decoded_token.user;
+      request.user = decoded_token.user;
 
       next();
     } catch (e) {
@@ -25,5 +26,3 @@ class Authentication {
     }
   }
 }
-
-module.exports = new Authentication().init;
