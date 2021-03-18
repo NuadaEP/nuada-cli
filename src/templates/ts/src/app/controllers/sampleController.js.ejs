@@ -1,49 +1,49 @@
-const Sample = require('../models/SampleModel');
-const SampleValidator = require('../validators/SampleValidator');
-const AppError = require('../errors/AppError');
+import { Request, Response } from 'express';
 
-class SampleController {
-  async index(req, res) {
-    const response = await Sample.find();
+import Sample from '../models/SampleModel';
+import SampleValidator from '../validators/SampleValidator';
+import AppError from '../errors/AppError';
 
-    return res.json(response);
+export default class SampleController {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const sample = await Sample.find();
+
+    return response.json(sample);
   }
 
-  async show(req, res) {
-    const response = await Sample.findById(req.params.id);
+  public async show(request: Request, response: Response): Promise<Response> {
+    const sample = await Sample.findById(request.params.id);
 
-    return res.json(response);
+    return response.json(sample);
   }
 
-  async store(req, res) {
+  public async store(request: Request, response: Response): Promise<Response> {
     try {
-      await SampleValidator(req.body, 'store');
+      await SampleValidator(request.body, 'store');
 
-      const response = await Sample.create(req.body);
+      const sample = await Sample.create(request.body);
 
-      return res.json(response);
+      return response.json(sample);
     } catch (error) {
       throw new AppError(error.message, 400);
     }
   }
 
-  async update(req, res) {
+  public async update(request: Request, response: Response): Promise<Response> {
     try {
-      await SampleValidator(req.body, 'update');
+      await SampleValidator(request.body, 'update');
 
-      const response = await Sample.findByIdAndUpdate(req.params.id, req.body);
+      const sample = await Sample.findByIdAndUpdate(req.params.id, request.body);
 
-      return res.json(response);
+      return response.json(sample);
     } catch (error) {
       throw new AppError(error.message, 400);
     }
   }
 
-  async delete(req, res) {
+  public async delete(request: Request, response: Response): Promise<Response> {
     await Sample.findByIdAndDelete(req.params.id);
 
     return res.send(true);
   }
 }
-
-module.exports = new SampleController();

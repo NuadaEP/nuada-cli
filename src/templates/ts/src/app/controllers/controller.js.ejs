@@ -1,6 +1,9 @@
-class <%= props.name %>Controller {
-  async index(req, res) {
-    return res.send('indexMethod');
+import { Request, Response } from 'express';
+
+export default class <%= props.name %>Controller {
+  public async index(request: Request, response: Response): Promise<Response<{ success: true }>> {
+    return response.json({
+      success: true
+    });
   }
 }
-module.exports = new <%= props.name %>Controller();
