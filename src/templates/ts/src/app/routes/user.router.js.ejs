@@ -1,9 +1,0 @@
-const { Router } = require('express');
-const controller = require('../controllers');
-
-const routes = Router();
-
-routes.get('/user', controller.UserController.show);
-routes.post('/user', controller.UserController.store);
-
-module.exports = routes;
