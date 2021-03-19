@@ -1,0 +1,39 @@
+/**
+ * Thats validation must only works for controller with the same name
+ * To more validation schema, take a look https://github.com/jquense/yup
+ */
+import { Request } from 'express'
+import * as Yup from 'yup';
+
+export type IRole = 'store' | 'update';
+
+class UserValidator {
+  private validationConfig: Yup.ObjectSchema;
+
+  public async execute(body: Request, role: IRole): Promise<void> {
+    switch (role) {
+      case 'store':
+        this.validationConfig = Yup.object().shape({
+          email: Yup.string().email().required(),
+          password: Yup.string().min(6).required(),
+          confirmPassword: Yup.string().min(6).required(),
+        });
+        break;
+
+      case 'update':
+        this.validationConfig = Yup.object().shape({
+          email: Yup.string().email(),
+          password: Yup.string().min(6),
+          confirmPassword: Yup.string().min(6),
+        });
+        break;
+
+      default:
+        break;
+    }
+
+    await this.validationConfig.validate(body);
+  }
+}
+
+export default new UserValidator().execute;
