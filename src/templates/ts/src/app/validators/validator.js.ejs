@@ -1,12 +1,15 @@
-const Yup = require('yup')
+import { Request } from 'express'
+import * as Yup from 'yup';
+
+export type IRole = 'store' | 'update';
 
 class <%= props.name %>Validator {
-  validation(body, role) {
-    let validationConfig;
+  private validationConfig: Yup.ObjectSchema;
 
+  public async execute(body: Request, role: IRole): Promise<void> {
     switch (role) {
       case 'store':
-        validationConfig = Yup.object().shape({
+        this.validationConfig = Yup.object().shape({
 <% props.fields.forEach(field => { -%>
           <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(),
 <% }) -%>
@@ -14,18 +17,19 @@ class <%= props.name %>Validator {
         break;
 
       case 'update':
-        validationConfig = Yup.object().shape({
+        this.validationConfig = Yup.object().shape({
 <% props.fields.forEach(field => { -%>
           <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(),
 <% }) -%>
         });
         break;
+
         default:
           break;
     }
 
-    return validationConfig.validate(body);
+    await this.validationConfig.validate(body);
   }
 }
 
-module.exports = new <%= props.name %>Validator().validation
+export default new <%= props.name %>Validator().execute;
