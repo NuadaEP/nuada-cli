@@ -1,27 +1,24 @@
-const Dotenv = require('dotenv');
-const Express = require('express');
-const Mongoose = require('mongoose');
-const Cors = require('cors');
+import dotenv from 'dotenv';
+import express, { Request, Response, NextFunction, Express } from 'express';
+import Mongoose from 'mongoose';
+import Cors from 'cors';
 
-require('express-async-errors');
+import 'express-async-errors';
 
-Dotenv.config();
+dotenv.config();
 
-const DatabaseConfig = require('../config/database');
-const Routes = require('./routes');
-const AppError = require('./errors/AppError');
+import DatabaseConfig from '../config/database';
+import Routes from './routes';
+import AppError from './errors/AppError';
 
 class App {
-  constructor() {
-    this.server = Express();
+  private server: Express;
 
-    this.database();
-    this.middwares();
-    this.routes();
-    this.exception();
+  constructor() {
+    this.server = express();
   }
 
-  database() {
+  private database() {
     Mongoose.connect(DatabaseConfig.uri, {
       useCreateIndex: true,
       useNewUrlParser: true,
@@ -30,18 +27,18 @@ class App {
     });
   }
 
-  middwares() {
+  private middwares() {
     this.server.use(Cors());
     this.server.use(Express.json());
     this.server.use(Express.urlencoded({ extended: true }));
   }
 
-  routes() {
+  private routes() {
     this.server.use(Routes);
   }
 
-  exception() {
-    this.server.use(async (err, req, res, next) => {
+  private exception() {
+    this.server.use(async (err: Error, request: Request, response: Response, _: NextFunction) => {
       if (err instanceof AppError) {
         return res.status(err.statusCode).json(err.error);
       }
@@ -54,4 +51,4 @@ class App {
   }
 }
 
-module.exports = new App().server;
+export default new App()
