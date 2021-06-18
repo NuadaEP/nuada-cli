@@ -200,6 +200,8 @@ module.exports = {
 
     Promise.all(pendingActions);
 
+    warning(`=> ${parameters.first}`);
+
     warning(
       '<!==================== Git was initialized ====================!>',
     );
@@ -208,22 +210,22 @@ module.exports = {
       '<!==================== We are preparing everything for you ====================!>',
     );
 
-    let cd = '';
+    // let cd = '';
 
-    if (typeof parameters.first !== 'undefined')
-      cd = `cd ${parameters.first} && `;
+    // if (typeof parameters.first !== 'undefined')
+    //   cd = `cd ${parameters.first} && `;
 
-    await system.spawn(`${cd}npm install && git init && npm ls`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit',
-    });
+    // await system.spawn(`${cd}npm install && git init && npm ls`, {
+    //   shell: true,
+    //   stdio: 'inherit',
+    //   stderr: 'inherit',
+    // });
 
-    await system.spawn(`${cd}npx eslint src/ --fix`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit',
-    });
+    // await system.spawn(`${cd}npx eslint src/ --fix`, {
+    //   shell: true,
+    //   stdio: 'inherit',
+    //   stderr: 'inherit',
+    // });
 
     success('Project created successfuly!');
   },

@@ -11,7 +11,7 @@ import DatabaseConfig from '../config/database';
 import Routes from './routes';
 import AppError from './errors/AppError';
 
-class App {
+export default class App {
   private server: Express;
 
   constructor() {
@@ -50,5 +50,3 @@ class App {
     });
   }
 }
-
-export default new App()
