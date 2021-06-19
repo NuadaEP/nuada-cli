@@ -158,7 +158,7 @@ module.exports = {
             : `${parameters.first}/.prettierrc`,
       },
       {
-        template: `${stack}/src/readme.${stack}.ejs`,
+        template: `${stack}/src/readme.md.ejs`,
         target:
           typeof parameters.first === 'undefined'
             ? 'readme.md'
@@ -168,11 +168,11 @@ module.exports = {
 
     if (stack === 'js') {
       actions.push({
-        template: `${stack}/src/app/controllers/indexController.${stack}.ejs`,
+        template: 'js/src/app/controllers/indexController.js.ejs',
         target:
           typeof parameters.first === 'undefined'
-            ? `src/app/controllers/index.${stack}`
-            : `${parameters.first}/src/app/controllers/index.${stack}`,
+            ? 'src/app/controllers/index.js'
+            : `${parameters.first}/src/app/controllers/index.js`,
       });
     }
 
