@@ -15,15 +15,13 @@ export default class CreateModelService extends BaseService {
 
   protected readonly createValidatadorService: CreateValidatorService;
 
-  constructor(toolbox: GluegunToolbox) {
-    super(toolbox);
+  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+    super(toolbox, dispatchMessage);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);
 
     this.createValidatadorService = new CreateValidatorService(toolbox);
-
-    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute({ name, params }: IParamsDTO): Promise<void> {

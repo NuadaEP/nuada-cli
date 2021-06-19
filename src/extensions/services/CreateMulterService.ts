@@ -1,9 +1,10 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 import BaseService from './BaseService';
 
 export default class CreateMulterService extends BaseService {
-  constructor(toolbox: GluegunToolbox) {
-    super(toolbox);
+  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+    super(toolbox, dispatchMessage);
   }
 
   public async execute(): Promise<void> {

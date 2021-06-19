@@ -7,13 +7,12 @@ interface IBaseService {
 }
 
 export default class BaseService implements IBaseService {
-  public toolbox: GluegunToolbox;
-
-  public dispatchMessage: DispatchMessages;
-
-  constructor(toolbox: GluegunToolbox) {
+  constructor(
+    public toolbox: GluegunToolbox,
+    public dispatchMessage: DispatchMessages,
+  ) {
     this.toolbox = toolbox;
 
-    this.dispatchMessage = new DispatchMessages(toolbox);
+    this.dispatchMessage = dispatchMessage;
   }
 }

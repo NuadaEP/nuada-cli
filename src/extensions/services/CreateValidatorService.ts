@@ -6,6 +6,7 @@ import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
 import BaseService from './BaseService';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateValidatorService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
@@ -14,8 +15,8 @@ export default class CreateValidatorService extends BaseService {
 
   protected readonly hasDependenciesValidator: HasDependenciesValidator;
 
-  constructor(toolbox: GluegunToolbox) {
-    super(toolbox);
+  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+    super(toolbox, dispatchMessage);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);

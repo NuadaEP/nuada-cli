@@ -1,4 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import BaseService from './BaseService';
@@ -8,8 +9,8 @@ import IFullDTO from './dtos/IFullDTO';
 export default class CreateRouterService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
 
-  constructor(toolbox: GluegunToolbox) {
-    super(toolbox);
+  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+    super(toolbox, dispatchMessage);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
   }

@@ -1,4 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 import BaseService from './BaseService';
 
 export default class CreateAuthService extends BaseService {
@@ -37,8 +38,8 @@ export default class CreateAuthService extends BaseService {
     },
   ];
 
-  constructor(toolbox: GluegunToolbox) {
-    super(toolbox);
+  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+    super(toolbox, dispatchMessage);
   }
 
   public async execute(): Promise<void> {
@@ -48,11 +49,9 @@ export default class CreateAuthService extends BaseService {
       stderr: 'inherit',
     });
 
-    const promises = this.actions.map(action =>
-      this.toolbox.template.generate(action),
+    await Promise.all(
+      this.actions.map(action => this.toolbox.template.generate(action)),
     );
-
-    await Promise.all(promises);
 
     this.dispatchMessage.success('Authentication module generated successfuly');
   }
