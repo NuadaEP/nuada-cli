@@ -5,27 +5,21 @@ import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import BaseService from './BaseService';
 
-export default class CreateValidatorService {
-  private readonly toolbox: GluegunToolbox;
-
+export default class CreateValidatorService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
 
   protected readonly extraValuesValidator: ExtraValuesValidator;
 
   protected readonly hasDependenciesValidator: HasDependenciesValidator;
 
-  protected readonly dispatchMessage: DispatchMessages;
-
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
+    super(toolbox);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);
     this.hasDependenciesValidator = new HasDependenciesValidator(toolbox);
-
-    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   async execute({ name, params, single = true }: IValidatorDTO): Promise<void> {

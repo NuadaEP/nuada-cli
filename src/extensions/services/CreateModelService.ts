@@ -6,20 +6,17 @@ import CreateValidatorService from './CreateValidatorService';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import IParamsDTO from './dtos/IParamsDTO';
+import BaseService from './BaseService';
 
-export default class CreateModelService {
-  private readonly toolbox: GluegunToolbox;
-
+export default class CreateModelService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
 
   protected readonly extraValuesValidator: ExtraValuesValidator;
 
   protected readonly createValidatadorService: CreateValidatorService;
 
-  protected readonly dispatchMessage: DispatchMessages;
-
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
+    super(toolbox);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
     this.extraValuesValidator = new ExtraValuesValidator(toolbox);

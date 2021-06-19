@@ -1,15 +1,9 @@
 import { GluegunToolbox } from 'gluegun';
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import BaseService from './BaseService';
 
-export default class CreateMulterService {
-  protected readonly toolbox: GluegunToolbox;
-
-  protected readonly dispatchMessage: DispatchMessages;
-
+export default class CreateMulterService extends BaseService {
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
-
-    this.dispatchMessage = new DispatchMessages(toolbox);
+    super(toolbox);
   }
 
   public async execute(): Promise<void> {

@@ -1,23 +1,17 @@
 import { GluegunToolbox } from 'gluegun';
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import HasNameValidator from '../validators/HasNameValidator';
+import BaseService from './BaseService';
 
 import IFullDTO from './dtos/IFullDTO';
 
-export default class CreateRouterService {
-  private readonly toolbox: GluegunToolbox;
-
+export default class CreateRouterService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
 
-  protected readonly dispatchMessage: DispatchMessages;
-
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
+    super(toolbox);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
-
-    this.dispatchMessage = new DispatchMessages(toolbox);
   }
 
   public async execute({ name, full = false }: IFullDTO): Promise<void> {

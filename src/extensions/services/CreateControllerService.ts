@@ -2,18 +2,15 @@ import { GluegunToolbox } from 'gluegun';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import HasNameValidator from '../validators/HasNameValidator';
+import BaseService from './BaseService';
 
 import IFullDTO from './dtos/IFullDTO';
 
-export default class CreateControllerService {
-  private readonly toolbox: GluegunToolbox;
-
+export default class CreateControllerService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
 
-  protected readonly dispatchMessage: DispatchMessages;
-
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox;
+    super(toolbox);
 
     this.hasNameValidator = new HasNameValidator(toolbox);
 
