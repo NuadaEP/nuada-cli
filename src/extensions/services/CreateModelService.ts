@@ -6,7 +6,7 @@ import CreateValidatorService from './CreateValidatorService';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import IParamsDTO from './dtos/IParamsDTO';
-import BaseService from './BaseService';
+import BaseService from './base/BaseService';
 
 export default class CreateModelService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;

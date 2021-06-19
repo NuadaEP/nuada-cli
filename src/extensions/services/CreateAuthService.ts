@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
-import BaseService from './BaseService';
+import BaseService from './base/BaseService';
 
 export default class CreateAuthService extends BaseService {
   protected readonly actions = [

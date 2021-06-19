@@ -5,7 +5,7 @@ import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
-import BaseService from './BaseService';
+import BaseService from './base/BaseService';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 export default class CreateValidatorService extends BaseService {

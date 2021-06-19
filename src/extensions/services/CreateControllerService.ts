@@ -2,7 +2,7 @@ import { GluegunToolbox } from 'gluegun';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
 
 import HasNameValidator from '../validators/HasNameValidator';
-import BaseService from './BaseService';
+import BaseService from './base/BaseService';
 
 import IFullDTO from './dtos/IFullDTO';
 

@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun';
 import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
-import BaseService from './BaseService';
+import BaseService from './base/BaseService';
 
 export default class CreateAxiosService extends BaseService {
   constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
