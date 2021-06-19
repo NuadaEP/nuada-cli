@@ -88,13 +88,6 @@ module.exports = {
             : `${parameters.first}/src/app/controllers/SampleController.${stack}`,
       },
       {
-        template: `${stack}/src/app/controllers/indexController.${stack}.ejs`,
-        target:
-          typeof parameters.first === 'undefined'
-            ? `src/app/controllers/index.${stack}`
-            : `${parameters.first}/src/app/controllers/index.${stack}`,
-      },
-      {
         template: `${stack}/src/app/jobs/job.${stack}.ejs`,
         target:
           typeof parameters.first === 'undefined'
@@ -172,6 +165,16 @@ module.exports = {
             : `${parameters.first}/readme.md`,
       },
     ];
+
+    if (stack === 'js') {
+      actions.push({
+        template: `${stack}/src/app/controllers/indexController.${stack}.ejs`,
+        target:
+          typeof parameters.first === 'undefined'
+            ? `src/app/controllers/index.${stack}`
+            : `${parameters.first}/src/app/controllers/index.${stack}`,
+      });
+    }
 
     if (typeof parameters.first === 'undefined') {
       const confirm = {
