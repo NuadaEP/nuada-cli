@@ -1,5 +1,5 @@
-export default interface IDispatchMessages {
-  success(message: string): void;
-  warning(message: string): void;
-  error(message: string): void;
+export namespace DispatchMessages {
+  export interface Execute {
+    execute(message: string): void;
+  }
 }

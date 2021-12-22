@@ -1,3 +1,6 @@
 bin
 demo
 commitlint.config.js
+node_modules
+docs
+bin

@@ -1,58 +1,25 @@
 {
   "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
+    "es2021": true,
+    "node": true
   },
-  "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "eslint-config-airbnb-typescript-prettier"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
+  "extends": ["standard", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "extraFileExtensions": [".txt"]
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "prettier/prettier": "error",
     "camelcase": "off",
     "no-useless-constructor": "off",
-    "prettier/prettier": "error",
-    "class-methods-use-this": "off",
-    "no-param-reassign": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/naming-convention": [
+    "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^I[A-Z]",
-          "match": true
-        }
+        "argsIgnorePattern": "_"
       }
     ],
-    "import/no-cycle": ["error", { "maxDepth": "∞" }],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ]
-  },
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
-    }
+    "@typescript-eslint/no-namespace": "off"
   }
 }
