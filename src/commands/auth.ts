@@ -13,7 +13,7 @@ module.exports = {
         target: 'src/app/validators/UserValidator.js'
       },
       {
-        template: 'src/config/auth.js.ejs',
+        template: 'js/src/config/auth.js.ejs',
         target: 'src/config/auth.js'
       },
       {
@@ -42,11 +42,11 @@ module.exports = {
       }
     ]
 
-    const authentication = await makeGetCreateAuthentication().execute({
+    const authentication = await makeGetCreateAuthentication(toolbox).execute({
       actions
     })
 
-    const communicate = makeGetPromptCommunication()
+    const communicate = makeGetPromptCommunication(toolbox)
 
     if (!authentication.success) {
       return communicate.execute({
