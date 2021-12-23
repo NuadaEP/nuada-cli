@@ -1,12 +1,12 @@
-export namespace Comunicate {
+export namespace Communicate {
   export type Request = {
-    type: 'error' | 'sucess' | 'warning'
+    type: 'error' | 'success' | 'warning'
     message: string
   }
 
   export type Response = void
 
   export interface Execute {
-    execute(data: Comunicate.Request): Promise<Comunicate.Response>
+    execute(data: Communicate.Request): Communicate.Response
   }
 }
