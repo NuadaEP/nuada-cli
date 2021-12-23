@@ -1,5 +1,7 @@
-export namespace DispatchMessages {
-  export interface Execute {
-    execute(message: string): void
-  }
+export default interface DispatchMessages {
+  success(message: string): void
+
+  warning(message: string): void
+
+  error(message: string): void
 }

@@ -1,11 +1,14 @@
 import { GluegunToolbox } from 'gluegun'
 import CreateModelService from '../extensions/services/CreateModelService'
+import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages'
 
 module.exports = {
   name: 'make:model',
   description: 'Create a simple model inside src/app/models',
   run: async (toolbox: GluegunToolbox) => {
-    const createModel = new CreateModelService(toolbox)
+    const message = new DispatchMessages(toolbox)
+
+    const createModel = new CreateModelService(toolbox, message)
 
     await createModel.execute({
       name: toolbox.parameters.first,

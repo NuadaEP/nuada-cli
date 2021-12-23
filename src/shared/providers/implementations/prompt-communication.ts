@@ -1,4 +1,4 @@
-import { Communicate } from '@shared/domain'
+import { Communicate } from '../../domain'
 import { GluegunToolbox } from 'gluegun'
 
 export class PromptCommunication implements Communicate.Execute {

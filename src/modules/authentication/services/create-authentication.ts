@@ -1,4 +1,4 @@
-import { CreateModule } from '@shared/domain'
+import { CreateModule } from '../../../shared'
 import { GluegunToolbox } from 'gluegun'
 
 export class CreateAuthentication implements CreateModule.Execute {

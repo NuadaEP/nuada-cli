@@ -1,11 +1,14 @@
 import { GluegunToolbox } from 'gluegun'
 import CreateValidatorService from '../extensions/services/CreateValidatorService'
+import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages'
 
 module.exports = {
   name: 'make:validator',
   description: 'Create a simple validator inside src/app/validators',
   run: async (toolbox: GluegunToolbox) => {
-    const createValidator = new CreateValidatorService(toolbox)
+    const message = new DispatchMessages(toolbox)
+
+    const createValidator = new CreateValidatorService(toolbox, message)
 
     await createValidator.execute({
       name: toolbox.parameters.first,

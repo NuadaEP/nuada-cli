@@ -21,7 +21,10 @@ export default class CreateModelService extends BaseService {
     this.hasNameValidator = new HasNameValidator(toolbox)
     this.extraValuesValidator = new ExtraValuesValidator(toolbox)
 
-    this.createValidatadorService = new CreateValidatorService(toolbox)
+    this.createValidatadorService = new CreateValidatorService(
+      toolbox,
+      dispatchMessage
+    )
   }
 
   public async execute({ name, params }: IParamsDTO): Promise<void> {

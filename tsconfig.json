@@ -23,12 +23,7 @@
     "declaration": true,
     "declarationDir": "build/types",
     "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {
-      "@modules/*": ["modules/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@root/*": ["*"]
-    }
+    "rootDir": "."
   },
   "include": ["./src"],
   "exclude": ["node_modules"]

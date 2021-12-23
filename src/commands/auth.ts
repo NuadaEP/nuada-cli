@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun'
 
-import { makeGetPromptCommunication } from '@shared/providers'
+import { makeGetPromptCommunication } from '../shared'
 import { makeGetCreateAuthentication } from '../modules/authentication'
 
 module.exports = {

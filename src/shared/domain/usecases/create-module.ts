@@ -1,4 +1,4 @@
-import { Actions, Processor } from "../models";
+import { Actions, Processor } from '../models'
 
 export namespace CreateModule {
   export type Request = {

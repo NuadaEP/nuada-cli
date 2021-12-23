@@ -1,7 +1,7 @@
 import * as gluegun from 'gluegun'
 import { GluegunToolbox } from 'gluegun'
 
-import { CreateModule } from '@shared/domain'
+import { CreateModule } from '../../../shared'
 import { CreateAuthentication } from '../services'
 
 export function makeGetCreateAuthentication(): CreateModule.Execute {

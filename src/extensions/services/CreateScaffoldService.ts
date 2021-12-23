@@ -5,6 +5,7 @@ import IParamsDTO from './dtos/IParamsDTO'
 import CreateControllerService from './CreateControllerService'
 import CreateModelService from './CreateModelService'
 import CreateRouterService from './CreateRouterService'
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages'
 
 export default class CreateScaffoldService {
   protected readonly createModel: CreateModelService
@@ -14,9 +15,11 @@ export default class CreateScaffoldService {
   protected readonly createRouter: CreateRouterService
 
   constructor(toolbox: GluegunToolbox) {
-    this.createModel = new CreateModelService(toolbox)
-    this.createController = new CreateControllerService(toolbox)
-    this.createRouter = new CreateRouterService(toolbox)
+    const message = new DispatchMessages(toolbox)
+
+    this.createModel = new CreateModelService(toolbox, message)
+    this.createController = new CreateControllerService(toolbox, message)
+    this.createRouter = new CreateRouterService(toolbox, message)
   }
 
   public async execute({ name, params }: IParamsDTO): Promise<void> {

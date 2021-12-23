@@ -1,7 +1,7 @@
 import * as gluegun from 'gluegun'
 import { GluegunToolbox } from 'gluegun'
 
-import { Communicate } from '@shared/domain'
+import { Communicate } from '../../domain'
 import { PromptCommunication } from '../implementations'
 
 export function makeGetPromptCommunication(): Communicate.Execute {
