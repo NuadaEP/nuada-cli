@@ -21,7 +21,7 @@ export class CreateAuthentication implements CreateModule.Execute {
       return {
         success: true
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         data: {
