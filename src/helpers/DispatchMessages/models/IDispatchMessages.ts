@@ -1,5 +1,5 @@
 export namespace DispatchMessages {
   export interface Execute {
-    execute(message: string): void;
+    execute(message: string): void
   }
 }

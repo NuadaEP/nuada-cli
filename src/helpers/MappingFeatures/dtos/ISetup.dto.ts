@@ -1,5 +1,5 @@
-import { IStacks } from './IStacks.dto';
+import { IStacks } from './IStacks.dto'
 
 export interface ISetup {
-  primaryFlag: IStacks;
+  primaryFlag: IStacks
 }

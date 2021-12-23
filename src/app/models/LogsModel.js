@@ -1,35 +1,35 @@
-const Mongoose = require('mongoose');
+const Mongoose = require('mongoose')
 
 const LogsModel = new Mongoose.Schema(
   {
     integrationKey: {
       type: String,
-      require: true,
-      },
+      require: true
+    },
     originUrl: {
       type: String,
-      require: true,
-      },
+      require: true
+    },
     data: {
       type: String,
-      require: true,
-      },
+      require: true
+    },
     weight: {
       type: Number,
-      require: true,
-      },
+      require: true
+    },
     eventType: {
       type: String,
-      require: true,
-      },
+      require: true
+    },
     externalResponsableId: {
       type: String,
-      require: true,
-      },
+      require: true
+    }
   },
   {
     timestamps: true
   }
-);
+)
 
 module.exports = Mongoose.model('Logs', LogsModel)

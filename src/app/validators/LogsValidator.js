@@ -2,7 +2,7 @@ const Yup = require('yup')
 
 class LogsValidator {
   validation(body, role) {
-    let validationConfig;
+    let validationConfig
 
     switch (role) {
       case 'store':
@@ -12,9 +12,9 @@ class LogsValidator {
           data: Yup.string().required(),
           weight: Yup.number().required(),
           eventType: Yup.string().required(),
-          externalResponsableId: Yup.string().required(),
-        });
-        break;
+          externalResponsableId: Yup.string().required()
+        })
+        break
 
       case 'update':
         validationConfig = Yup.object().shape({
@@ -23,14 +23,14 @@ class LogsValidator {
           data: Yup.string(),
           weight: Yup.number(),
           eventType: Yup.string(),
-          externalResponsableId: Yup.string(),
-        });
-        break;
-        default:
-          break;
+          externalResponsableId: Yup.string()
+        })
+        break
+      default:
+        break
     }
 
-    return validationConfig.validate(body);
+    return validationConfig.validate(body)
   }
 }
 

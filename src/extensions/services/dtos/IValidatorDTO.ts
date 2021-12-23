@@ -1,5 +1,5 @@
-import IParamsDTO from './IParamsDTO';
+import IParamsDTO from './IParamsDTO'
 
 export default interface IValidatorDTO extends IParamsDTO {
-  single?: boolean;
+  single?: boolean
 }

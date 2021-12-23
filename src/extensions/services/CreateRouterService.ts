@@ -1,33 +1,33 @@
-import { GluegunToolbox } from 'gluegun';
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import { GluegunToolbox } from 'gluegun'
+import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages'
 
-import HasNameValidator from '../validators/HasNameValidator';
-import BaseService from './base/BaseService';
+import HasNameValidator from '../validators/HasNameValidator'
+import BaseService from './base/BaseService'
 
-import IFullDTO from './dtos/IFullDTO';
+import IFullDTO from './dtos/IFullDTO'
 
 export default class CreateRouterService extends BaseService {
-  protected readonly hasNameValidator: HasNameValidator;
+  protected readonly hasNameValidator: HasNameValidator
 
   constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
-    super(toolbox, dispatchMessage);
+    super(toolbox, dispatchMessage)
 
-    this.hasNameValidator = new HasNameValidator(toolbox);
+    this.hasNameValidator = new HasNameValidator(toolbox)
   }
 
   public async execute({ name, full = false }: IFullDTO): Promise<void> {
-    const nameCapitalized = await this.hasNameValidator.execute(name);
+    const nameCapitalized = await this.hasNameValidator.execute(name)
 
-    if (!nameCapitalized) return;
+    if (!nameCapitalized) return
 
     await this.toolbox.template.generate({
       template: full
         ? 'src/app/routes/scaffold.router.js.ejs'
         : 'src/app/routes/scaffold.router.js.ejs',
       target: `src/app/routes/${name}.router.js`,
-      props: { name: `${name}`, nameCapitalized },
-    });
+      props: { name: `${name}`, nameCapitalized }
+    })
 
-    this.dispatchMessage.success(`Route ${name}.router generated successfuly`);
+    this.dispatchMessage.success(`Route ${name}.router generated successfuly`)
   }
 }
