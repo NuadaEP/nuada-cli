@@ -21,8 +21,15 @@
     "strict": false,
     "target": "es5",
     "declaration": true,
-    "declarationDir": "build/types"
+    "declarationDir": "build/types",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@root/*": ["*"]
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["./src"],
   "exclude": ["node_modules"]
 }

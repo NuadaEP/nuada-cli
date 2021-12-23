@@ -1,6 +1,6 @@
 import { Actions, Processor } from "../models";
 
-export namespace CreateModel {
+export namespace CreateModule {
   export type Request = {
     actions: Actions
   }
@@ -8,6 +8,6 @@ export namespace CreateModel {
   export type Response = Processor
 
   export interface Execute {
-    execute(data: CreateModel.Request): Promise<CreateModel.Response>
+    execute(data: CreateModule.Request): Promise<CreateModule.Response>
   }
 }

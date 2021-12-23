@@ -1,1 +1,2 @@
-export * from './create-model'
+export * from './create-module'
+export * from './communicate'
