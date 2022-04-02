@@ -17,11 +17,17 @@ export class CreateHttpClient implements CreateModule.Execute {
       await Promise.all(data.map(this.toolbox.template.generate))
 
       return {
-        success: true
+        success: true,
+        data: {
+          message: 'Yeeah! Now you can make HTTP requests 🎉'
+        }
       }
     } catch {
       return {
-        success: false
+        success: false,
+        data: {
+          message: 'There are an error to generate your HTTP client 😔'
+        }
       }
     }
   }

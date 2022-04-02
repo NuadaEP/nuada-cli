@@ -1,20 +1,32 @@
 import { GluegunToolbox } from 'gluegun'
-import CreateAxiosService from '../extensions/services/CreateAxiosService'
-import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages'
+import { makeHttpClient } from 'src/modules/http-client'
+import { lintProject, makeGetPromptCommunication } from 'src/shared'
 
 module.exports = {
   name: 'make:axios',
   description: 'Create a axios service configuration',
   run: async (toolbox: GluegunToolbox) => {
-    const message = new DispatchMessages(toolbox)
-    const createAxiosService = new CreateAxiosService(toolbox, message)
+    const actions = [
+      {
+        template: 'js/src/app/services/axios.js.ejs',
+        target: 'src/app/services/AxiosService.js'
+      }
+    ]
 
-    await createAxiosService.execute()
+    const httpClient = await makeHttpClient(toolbox).execute(actions)
 
-    await toolbox.system.spawn(`npx eslint src/ --fix`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit'
+    const communicate = makeGetPromptCommunication(toolbox)
+
+    if (!httpClient.success) {
+      return communicate.execute({
+        type: 'error',
+        message: httpClient.data.message
+      })
+    }
+
+    return lintProject({
+      communicate,
+      message: httpClient.data.message
     })
   }
 }

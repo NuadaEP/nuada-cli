@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun'
 
-import { makeGetPromptCommunication } from '../shared'
+import { lintProject, makeGetPromptCommunication } from '../shared'
 import { makeAuthentication } from '../modules/authentication'
 
 module.exports = {
@@ -53,22 +53,9 @@ module.exports = {
       })
     }
 
-    communicate.execute({
-      type: 'warning',
-      message: 'Start project linting...'
+    lintProject({
+      communicate,
+      message: authentication.data.message
     })
-
-    toolbox.system
-      .spawn(`npx eslint src/ --fix`, {
-        shell: true,
-        stdio: 'inherit',
-        stderr: 'inherit'
-      })
-      .finally(() =>
-        communicate.execute({
-          type: 'success',
-          message: 'Your authentication package is created'
-        })
-      )
   }
 }

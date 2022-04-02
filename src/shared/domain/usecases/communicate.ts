@@ -1,3 +1,5 @@
+import { GluegunToolbox } from 'gluegun'
+
 export namespace Communicate {
   export type Request = {
     type: 'error' | 'success' | 'warning'
@@ -7,6 +9,7 @@ export namespace Communicate {
   export type Response = void
 
   export interface Execute {
+    toolbox: GluegunToolbox
     execute(data: Communicate.Request): Communicate.Response
   }
 }
