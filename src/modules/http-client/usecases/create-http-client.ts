@@ -2,19 +2,19 @@ import { GluegunToolbox } from 'gluegun'
 import { CreateModule } from '../../../shared'
 
 export class CreateHttpClient implements CreateModule.Execute {
-  constructor(private readonly toolbox: GluegunToolbox) {}
+  constructor (private readonly toolbox: GluegunToolbox) {}
 
-  public async execute(
+  public async execute (
     data: CreateModule.Request
   ): Promise<CreateModule.Response> {
     try {
+      await Promise.all(data.map(this.toolbox.template.generate))
+
       await this.toolbox.system.spawn('npm install axios', {
         shell: true,
         stdio: 'inherit',
         stderr: 'inherit'
       })
-
-      await Promise.all(data.map(this.toolbox.template.generate))
 
       return {
         success: true,
@@ -26,7 +26,8 @@ export class CreateHttpClient implements CreateModule.Execute {
       return {
         success: false,
         data: {
-          message: 'There are an error to generate your HTTP client 😔'
+          message:
+            'There is an error to generate your HTTP client module, sorry 😔'
         }
       }
     }

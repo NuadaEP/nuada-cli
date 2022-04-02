@@ -3,23 +3,14 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["standard", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": ["standard"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 12,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error",
-    "camelcase": "off",
-    "no-useless-constructor": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "_"
-      }
-    ],
-    "@typescript-eslint/no-namespace": "off"
+    "no-useless-constructor": "off"
   }
 }

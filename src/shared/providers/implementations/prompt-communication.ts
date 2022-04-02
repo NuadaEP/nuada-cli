@@ -8,6 +8,6 @@ export class PromptCommunication implements Communicate.Execute {
     if (data.type === 'success') return this.toolbox.print.success(data.message)
     if (data.type === 'error') return this.toolbox.print.error(data.message)
 
-    return this.toolbox.print.error(data.message)
+    return this.toolbox.print.warning(data.message)
   }
 }

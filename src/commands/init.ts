@@ -137,11 +137,11 @@ module.exports = {
             : `${parameters.first}/.editorconfig`
       },
       {
-        template: `${stack}/src/eslintrc.${stack}.ejs`,
+        template: `${stack}/src/eslintrc.json.ejs`,
         target:
           typeof parameters.first === 'undefined'
             ? '.eslintrc'
-            : `${parameters.first}/.eslintrc.${stack}`
+            : `${parameters.first}/.eslintrc.json`
       },
       {
         template: `${stack}/src/gitignore.${stack}.ejs`,

@@ -1,6 +1,6 @@
 export type Processor<T = Record<string, unknown>> = {
   success: boolean
-  data?: {
+  data: {
     message: string
     data?: T
   }

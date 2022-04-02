@@ -8,24 +8,27 @@ export class CreateAuthentication implements CreateModule.Execute {
     data: CreateModule.Request
   ): Promise<CreateModule.Response> {
     try {
+      await Promise.all(
+        data.map(action => this.toolbox.template.generate(action))
+      )
+
       await this.toolbox.system.spawn('npm install bcryptjs jsonwebtoken', {
         shell: true,
         stdio: 'inherit',
         stderr: 'inherit'
       })
 
-      await Promise.all(
-        data.map(action => this.toolbox.template.generate(action))
-      )
-
       return {
-        success: true
+        success: true,
+        data: {
+          message: 'Yeah! Now you can sign in your users 🎉'
+        }
       }
     } catch {
       return {
         success: false,
         data: {
-          message: 'Houve um erro ao gerar o módulo de autenticação'
+          message: 'There is an error to generate your auth module, sorry 😔'
         }
       }
     }

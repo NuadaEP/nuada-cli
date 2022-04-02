@@ -1,10 +1,10 @@
 import { GluegunToolbox } from 'gluegun'
-import { makeHttpClient } from 'src/modules/http-client'
-import { lintProject, makeGetPromptCommunication } from 'src/shared'
+import { makeHttpClient } from '../modules/http-client'
+import { lintProject, makeGetPromptCommunication } from '../shared'
 
 module.exports = {
-  name: 'make:axios',
-  description: 'Create a axios service configuration',
+  name: 'make:http',
+  description: 'Create a http client service configuration with Axios',
   run: async (toolbox: GluegunToolbox) => {
     const actions = [
       {
