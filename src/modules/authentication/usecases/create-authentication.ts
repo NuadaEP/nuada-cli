@@ -15,7 +15,7 @@ export class CreateAuthentication implements CreateModule.Execute {
       })
 
       await Promise.all(
-        data.actions.map(action => this.toolbox.template.generate(action))
+        data.map(action => this.toolbox.template.generate(action))
       )
 
       return {

@@ -1,9 +1,9 @@
 import { GluegunToolbox } from 'gluegun'
 
 import { CreateModule } from '../../../shared'
-import { CreateAuthentication } from '../services'
+import { CreateAuthentication } from '../usecases'
 
-export function makeGetCreateAuthentication(
+export function makeAuthentication(
   toolbox: GluegunToolbox
 ): CreateModule.Execute {
   const createModule = new CreateAuthentication(toolbox)

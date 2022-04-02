@@ -1,1 +1,1 @@
-export * from './get-create-authentication'
+export * from './make-authentication'

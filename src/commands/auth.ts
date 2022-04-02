@@ -1,7 +1,7 @@
 import { GluegunToolbox } from 'gluegun'
 
 import { makeGetPromptCommunication } from '../shared'
-import { makeGetCreateAuthentication } from '../modules/authentication'
+import { makeAuthentication } from '../modules/authentication'
 
 module.exports = {
   name: 'make:auth',
@@ -42,9 +42,7 @@ module.exports = {
       }
     ]
 
-    const authentication = await makeGetCreateAuthentication(toolbox).execute({
-      actions
-    })
+    const authentication = await makeAuthentication(toolbox).execute(actions)
 
     const communicate = makeGetPromptCommunication(toolbox)
 
