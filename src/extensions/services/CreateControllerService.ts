@@ -9,13 +9,13 @@ import IFullDTO from './dtos/IFullDTO'
 export default class CreateControllerService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator
 
-  constructor(toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
+  constructor (toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
     super(toolbox, dispatchMessage)
 
     this.hasNameValidator = new HasNameValidator(toolbox)
   }
 
-  public async execute({ name, full = false }: IFullDTO): Promise<void> {
+  public async execute ({ name, full = false }: IFullDTO): Promise<void> {
     const nameCapitalized = await this.hasNameValidator.execute(name)
 
     if (!nameCapitalized) return

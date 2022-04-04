@@ -5,10 +5,10 @@ export class CreateHttpClient implements CreateModule.Execute {
   constructor (private readonly toolbox: GluegunToolbox) {}
 
   public async execute (
-    data: CreateModule.Request
+    { actions }: CreateModule.Request
   ): Promise<CreateModule.Response> {
     try {
-      await Promise.all(data.map(this.toolbox.template.generate))
+      await Promise.all(actions.map(this.toolbox.template.generate))
 
       await this.toolbox.system.spawn('npm install axios', {
         shell: true,

@@ -1,21 +1,51 @@
 import { GluegunToolbox } from 'gluegun'
-import CreateControllerService from '../extensions/services/CreateControllerService'
-import DispatchMessages from '../helpers/DispatchMessages/implementations/DispatchMessages'
+import { makeController } from 'src/modules/controllers'
+import {
+  formatModuleName,
+  lintProject,
+  makeGetPromptCommunication
+} from 'src/shared'
 
 module.exports = {
   name: 'make:controller',
   description: 'Create a simple controller inside src/app/controllers',
   run: async (toolbox: GluegunToolbox) => {
-    const message = new DispatchMessages(toolbox)
+    const controllerName = formatModuleName(toolbox.parameters.first)
 
-    const createController = new CreateControllerService(toolbox, message)
+    if (!controllerName.success) {
+      return {
+        success: false,
+        data: {
+          message: controllerName.data.message
+        }
+      }
+    }
 
-    await createController.execute({ name: toolbox.parameters.first })
+    const actions = [
+      {
+        template: 'src/app/controllers/controller.js.ejs',
+        target: `src/app/controllers/${controllerName}Controller.js`,
+        props: { name: `${controllerName}` }
+      }
+    ]
 
-    await toolbox.system.spawn(`npx eslint src/ --fix`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit'
+    const controller = await makeController(toolbox).execute({
+      actions,
+      name: controllerName.data.data
+    })
+
+    const communicate = makeGetPromptCommunication(toolbox)
+
+    if (!controller.success) {
+      communicate.execute({
+        message: controller.data.message,
+        type: 'error'
+      })
+    }
+
+    lintProject({
+      communicate,
+      message: controller.data.message
     })
   }
 }
