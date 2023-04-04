@@ -1,52 +1,52 @@
-import dotenv from 'dotenv';
-import express, { Request, Response, NextFunction, Express } from 'express';
-import Mongoose from 'mongoose';
-import Cors from 'cors';
+import * as dotenv from 'dotenv'
+import express, { Request, Response, NextFunction, Express } from 'express'
+import Mongoose from 'mongoose'
+import Cors from 'cors'
 
-import 'express-async-errors';
+import 'express-async-errors'
 
-dotenv.config();
+import DatabaseConfig from '../config/database'
+import Routes from './routes'
+import AppError from './errors/AppError'
 
-import DatabaseConfig from '../config/database';
-import Routes from './routes';
-import AppError from './errors/AppError';
+dotenv.config()
 
 export default class App {
   private server: Express;
 
-  constructor() {
-    this.server = express();
+  constructor () {
+    this.server = express()
   }
 
-  private database() {
+  private database () {
     Mongoose.connect(DatabaseConfig.uri, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
-      useUnifiedTopology: true,
-    });
+      useUnifiedTopology: true
+    })
   }
 
-  private middwares() {
-    this.server.use(Cors());
-    this.server.use(Express.json());
-    this.server.use(Express.urlencoded({ extended: true }));
+  private middwares () {
+    this.server.use(Cors())
+    this.server.use(express.json())
+    this.server.use(express.urlencoded({ extended: true }))
   }
 
-  private routes() {
-    this.server.use(Routes);
+  private routes () {
+    this.server.use(Routes)
   }
 
-  private exception() {
+  private exception () {
     this.server.use(async (err: Error, request: Request, response: Response, _: NextFunction) => {
       if (err instanceof AppError) {
-        return res.status(err.statusCode).json(err.error);
+        return response.status(err.statusCode).json(err.error)
       }
 
-      return res.status(500).json({
+      return response.status(500).json({
         status: 'error',
-        message: 'Internal Server Error',
-      });
-    });
+        message: 'Internal Server Error'
+      })
+    })
   }
 }

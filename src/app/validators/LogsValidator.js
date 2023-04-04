@@ -1,7 +1,7 @@
 const Yup = require('yup')
 
 class LogsValidator {
-  validation(body, role) {
+  validation (body, role) {
     let validationConfig
 
     switch (role) {
