@@ -13,7 +13,10 @@ module.exports = {
       }
     ]
 
-    const httpClient = await makeHttpClient(toolbox).execute(actions)
+    const httpClient = await makeHttpClient(toolbox).execute({
+      actions,
+      name: 'AxiosService.js'
+    })
 
     const communicate = makeGetPromptCommunication(toolbox)
 

@@ -42,7 +42,10 @@ module.exports = {
       }
     ]
 
-    const authentication = await makeAuthentication(toolbox).execute(actions)
+    const authentication = await makeAuthentication(toolbox).execute({
+      actions,
+      name: 'Auth'
+    })
 
     const communicate = makeGetPromptCommunication(toolbox)
 

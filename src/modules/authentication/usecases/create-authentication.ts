@@ -1,15 +1,27 @@
 import { CreateModule } from '../../../shared'
 import { GluegunToolbox } from 'gluegun'
 
-export class CreateAuthentication implements CreateModule.Execute {
+export namespace CreateAuthenticatior {
+  export type Request = CreateModule.Request
+
+  export type Response = CreateModule.Response<string>
+
+  export interface Execute {
+    execute(data: Request): Promise<Response>
+  }
+}
+
+export class CreateAuthentication implements CreateAuthenticatior.Execute {
   constructor(private readonly toolbox: GluegunToolbox) {}
 
   public async execute(
-    data: CreateModule.Request
-  ): Promise<CreateModule.Response> {
+    data: CreateAuthenticatior.Request
+  ): Promise<CreateAuthenticatior.Response> {
     try {
       await Promise.all(
-        data.map(action => this.toolbox.template.generate(action))
+        data.actions.map(action =>
+          this.toolbox.template.generate({ template: action.template })
+        )
       )
 
       await this.toolbox.system.spawn('npm install bcryptjs jsonwebtoken', {
