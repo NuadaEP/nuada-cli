@@ -1,10 +1,10 @@
 import { GluegunToolbox } from 'gluegun'
-import { makeController } from 'src/modules/controllers'
+import { makeController } from '../modules'
 import {
   formatModuleName,
   lintProject,
   makeGetPromptCommunication
-} from 'src/shared'
+} from '../shared'
 
 module.exports = {
   name: 'make:controller',
@@ -23,8 +23,8 @@ module.exports = {
 
     const actions = [
       {
-        template: 'src/app/controllers/controller.js.ejs',
-        target: `src/app/controllers/${controllerName}Controller.js`,
+        template: 'src/app/controllers/controller.ts.ejs',
+        target: `src/app/controllers/${controllerName}Controller.ts`,
         props: { name: `${controllerName}` }
       }
     ]

@@ -17,89 +17,89 @@ module.exports = {
 
     const actions = [
       {
-        template: 'ts/src/package.ts.ejs',
+        template: 'src/package.ts.ejs',
         target: `${parameters.first}/package.json`,
         props: {
           name: parameters.first
         }
       },
       {
-        template: 'ts/src/env.ts.ejs',
+        template: 'src/env.ts.ejs',
         target: `${parameters.first}/.env`,
         props: {
           name: parameters.first
         }
       },
       {
-        template: 'ts/src/app/app.ts.ejs',
+        template: 'src/app/app.ts.ejs',
         target: `${parameters.first}/src/app/app.ts`
       },
       {
-        template: 'ts/src/server.ts.ejs',
+        template: 'src/server.ts.ejs',
         target: `${parameters.first}/src/server.ts`
       },
       {
-        template: 'ts/src/app/routes/index.ts.ejs',
+        template: 'src/app/routes/index.ts.ejs',
         target: `${parameters.first}/src/app/routes/index.ts`
       },
       {
-        template: 'ts/src/app/routes/sample.router.ts.ejs',
+        template: 'src/app/routes/sample.router.ts.ejs',
         target: `${parameters.first}/src/app/routes/sample.router.ts`
       },
       {
-        template: 'ts/src/config/database.ts.ejs',
+        template: 'src/config/database.ts.ejs',
         target: `${parameters.first}/src/config/database.ts`
       },
       {
-        template: 'ts/src/config/config.ts.ejs',
+        template: 'src/config/config.ts.ejs',
         target: `${parameters.first}/src/config/ConfigSample.ts`
       },
       {
-        template: 'ts/src/app/controllers/sampleController.ts.ejs',
+        template: 'src/app/controllers/sampleController.ts.ejs',
         target: `${parameters.first}/src/app/controllers/SampleController.ts`
       },
       {
-        template: 'ts/src/app/jobs/job.ts.ejs',
+        template: 'src/app/jobs/job.ts.ejs',
         target: `${parameters.first}/src/app/jobs/SampleJob.ts`
       },
       {
-        template: 'ts/src/app/middlewares/middleware.ts.ejs',
+        template: 'src/app/middlewares/middleware.ts.ejs',
         target: `${parameters.first}/src/app/middlewares/SampleMiddleware.ts`
       },
       {
-        template: 'ts/src/app/models/sampleModel.ts.ejs',
+        template: 'src/app/models/sampleModel.ts.ejs',
         target: `${parameters.first}/src/app/models/SampleModel.ts`
       },
       {
-        template: 'ts/src/app/errors/AppError.ts.ejs',
+        template: 'src/app/errors/AppError.ts.ejs',
         target: `${parameters.first}/src/app/errors/AppError.ts`
       },
       {
-        template: 'ts/src/app/services/services.ts.ejs',
+        template: 'src/app/services/services.ts.ejs',
         target: `${parameters.first}/src/app/services/SampleService.ts`
       },
       {
-        template: 'ts/src/app/validators/sampleValidator.ts.ejs',
+        template: 'src/app/validators/sampleValidator.ts.ejs',
         target: `${parameters.first}/src/app/validators/SampleValidator.ts`
       },
       {
-        template: 'ts/src/editorConfig.ts.ejs',
+        template: 'src/editorConfig.ts.ejs',
         target: `${parameters.first}/.editorconfig`
       },
       {
-        template: 'ts/src/eslintrc.json.ejs',
+        template: 'src/eslintrc.json.ejs',
         target: `${parameters.first}/.eslintrc`
       },
       {
-        template: 'ts/src/gitignore.ts.ejs',
+        template: 'src/gitignore.ts.ejs',
         target: `${parameters.first}/.gitignore`
       },
       {
-        template: 'ts/src/prettierrc.ts.ejs',
+        template: 'src/prettierrc.ts.ejs',
         target: `${parameters.first}/.prettierrc`
       },
       {
-        template: 'ts/src/readme.md.ejs',
+        template: 'src/readme.md.ejs',
         target: `${parameters.first}/readme.ms`
       }
     ]

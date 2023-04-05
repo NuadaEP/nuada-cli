@@ -1,10 +1,10 @@
 import { GluegunToolbox } from 'gluegun'
-import { CreateModule } from 'src/shared'
+import { CreateModule } from '../../../shared'
 
 export class CreateController implements CreateModule.Execute {
-  constructor(private readonly toolbox: GluegunToolbox) {}
+  constructor (private readonly toolbox: GluegunToolbox) {}
 
-  public async execute({
+  public async execute ({
     actions,
     name
   }: CreateModule.Request): Promise<CreateModule.Response> {
