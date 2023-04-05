@@ -1,4 +1,4 @@
-export default interface DispatchMessages {
+export interface IDispatchMessages {
   success(message: string): void;
 
   warning(message: string): void;

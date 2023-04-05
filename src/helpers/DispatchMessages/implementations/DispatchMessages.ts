@@ -1,8 +1,8 @@
 import { GluegunToolbox } from 'gluegun';
 
-import IIDispatchMessages from '../models/IIDispatchMessages';
+import { IDispatchMessages } from '../models/IDispatchMessages';
 
-export default class IDispatchMessages implements IIDispatchMessages {
+export class DispatchMessages implements IDispatchMessages {
   private readonly toolbox: GluegunToolbox;
 
   constructor(toolbox: GluegunToolbox) {

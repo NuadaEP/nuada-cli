@@ -1,6 +1,6 @@
 import { GluegunToolbox } from 'gluegun';
 
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages, DispatchMessages } from '../../helpers';
 
 export default class HasNameValidator {
   protected readonly dispatch: IDispatchMessages;
@@ -10,7 +10,7 @@ export default class HasNameValidator {
   };
 
   constructor(toolbox: GluegunToolbox) {
-    this.dispatch = new IDispatchMessages(toolbox);
+    this.dispatch = new DispatchMessages(toolbox);
   }
 
   public async execute(name: string): Promise<string | boolean> {

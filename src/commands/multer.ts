@@ -1,12 +1,12 @@
 import { GluegunToolbox } from 'gluegun';
 import CreateMulterService from '../extensions/services/CreateMulterService';
-import IDispatchMessages from '../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { DispatchMessages } from '../helpers';
 
 module.exports = {
   name: 'make:multer',
   description: 'Create a multer configuration service to upload files',
   run: async (toolbox: GluegunToolbox) => {
-    const message = new IDispatchMessages(toolbox);
+    const message = new DispatchMessages(toolbox);
 
     const createMulter = new CreateMulterService(toolbox, message);
 

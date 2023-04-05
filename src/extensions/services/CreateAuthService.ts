@@ -1,5 +1,6 @@
 import { GluegunToolbox } from 'gluegun';
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages } from '../../helpers';
+
 import BaseService from './base/BaseService';
 
 export default class CreateAuthService extends BaseService {

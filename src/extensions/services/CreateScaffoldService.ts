@@ -5,7 +5,7 @@ import IParamsDTO from './dtos/IParamsDTO';
 import CreateControllerService from './CreateControllerService';
 import CreateModelService from './CreateModelService';
 import CreateRouterService from './CreateRouterService';
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { DispatchMessages } from '../../helpers';
 
 export default class CreateScaffoldService {
   protected readonly createModel: CreateModelService;
@@ -15,7 +15,7 @@ export default class CreateScaffoldService {
   protected readonly createRouter: CreateRouterService;
 
   constructor(toolbox: GluegunToolbox) {
-    const message = new IDispatchMessages(toolbox);
+    const message = new DispatchMessages(toolbox);
 
     this.createModel = new CreateModelService(toolbox, message);
     this.createController = new CreateControllerService(toolbox, message);

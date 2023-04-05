@@ -3,7 +3,7 @@ import { GluegunToolbox } from 'gluegun';
 import HasNameValidator from '../validators/HasNameValidator';
 import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import CreateValidatorService from './CreateValidatorService';
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages } from '../../helpers';
 
 import IParamsDTO from './dtos/IParamsDTO';
 import BaseService from './base/BaseService';

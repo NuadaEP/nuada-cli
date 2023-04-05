@@ -6,7 +6,7 @@ import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
 import IValidatorDTO from './dtos/IValidatorDTO';
 import BaseService from './base/BaseService';
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages } from '../../helpers';
 
 export default class CreateValidatorService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;

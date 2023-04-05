@@ -1,5 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
-import IDispatchMessages from '../../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages } from '../../../helpers';
 
 interface IBaseService {
   toolbox: GluegunToolbox;

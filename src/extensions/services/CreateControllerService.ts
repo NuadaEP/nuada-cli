@@ -1,5 +1,5 @@
 import { GluegunToolbox } from 'gluegun';
-import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
+import { IDispatchMessages } from '../../helpers';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import BaseService from './base/BaseService';
