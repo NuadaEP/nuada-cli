@@ -1,2 +1,2 @@
-export * from './create-module'
-export * from './communicate'
+export * from './create-module';
+export * from './communicate';

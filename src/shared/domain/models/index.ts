@@ -1,2 +1,2 @@
-export * from './actions'
-export * from './processor'
+export * from './actions';
+export * from './processor';

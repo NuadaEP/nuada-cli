@@ -1,26 +1,26 @@
-import { Communicate } from '../domain'
+import { Communicate } from '../domain';
 
 type LintProject = {
-  communicate: Communicate.Execute
-  message: string
-}
+  communicate: Communicate.Execute;
+  message: string;
+};
 
-export const lintProject = ({ communicate, message }: LintProject) => {
+export const lintProject = ({ communicate, message }: LintProject): void => {
   communicate.execute({
     type: 'warning',
-    message: 'Start project linting...'
-  })
+    message: 'Start project linting...',
+  });
 
   communicate.toolbox.system
     .spawn(`npx eslint src/ --fix`, {
       shell: true,
       stdio: 'inherit',
-      stderr: 'inherit'
+      stderr: 'inherit',
     })
     .finally(() =>
       communicate.execute({
         type: 'success',
-        message
+        message,
       })
-    )
-}
+    );
+};

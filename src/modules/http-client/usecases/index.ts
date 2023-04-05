@@ -1,1 +1,1 @@
-export * from './create-http-client'
+export * from './create-http-client';

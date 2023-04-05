@@ -1,1 +1,1 @@
-export * from './prompt-communication'
+export * from './prompt-communication';

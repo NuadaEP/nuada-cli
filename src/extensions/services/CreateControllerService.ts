@@ -1,35 +1,35 @@
-import { GluegunToolbox } from 'gluegun'
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages'
+import { GluegunToolbox } from 'gluegun';
+import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
 
-import HasNameValidator from '../validators/HasNameValidator'
-import BaseService from './base/BaseService'
+import HasNameValidator from '../validators/HasNameValidator';
+import BaseService from './base/BaseService';
 
-import IFullDTO from './dtos/IFullDTO'
+import IFullDTO from './dtos/IFullDTO';
 
 export default class CreateControllerService extends BaseService {
-  protected readonly hasNameValidator: HasNameValidator
+  protected readonly hasNameValidator: HasNameValidator;
 
-  constructor (toolbox: GluegunToolbox, dispatchMessage: DispatchMessages) {
-    super(toolbox, dispatchMessage)
+  constructor(toolbox: GluegunToolbox, dispatchMessage: IDispatchMessages) {
+    super(toolbox, dispatchMessage);
 
-    this.hasNameValidator = new HasNameValidator(toolbox)
+    this.hasNameValidator = new HasNameValidator(toolbox);
   }
 
-  public async execute ({ name, full = false }: IFullDTO): Promise<void> {
-    const nameCapitalized = await this.hasNameValidator.execute(name)
+  public async execute({ name, full = false }: IFullDTO): Promise<void> {
+    const nameCapitalized = await this.hasNameValidator.execute(name);
 
-    if (!nameCapitalized) return
+    if (!nameCapitalized) return;
 
     await this.toolbox.template.generate({
       template: full
         ? 'src/app/controllers/scaffoldController.js.ejs'
         : 'src/app/controllers/controller.js.ejs',
       target: `src/app/controllers/${nameCapitalized}Controller.js`,
-      props: { name: `${nameCapitalized}` }
-    })
+      props: { name: `${nameCapitalized}` },
+    });
 
     this.dispatchMessage.success(
       `Controller ${nameCapitalized}Controller generated successfuly`
-    )
+    );
   }
 }

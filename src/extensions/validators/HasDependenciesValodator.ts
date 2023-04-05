@@ -1,39 +1,40 @@
-import { GluegunToolbox } from 'gluegun'
+import { GluegunToolbox } from 'gluegun';
 
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages'
+import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
 
 interface IPackageJSON {
-  express: boolean
-  mongoose: boolean
+  express: boolean;
+  mongoose: boolean;
 }
 
 export default class HasDependenciesValidator {
-  private readonly toolbox: GluegunToolbox
+  private readonly toolbox: GluegunToolbox;
 
-  protected readonly dispatch: DispatchMessages
+  protected readonly dispatch: IDispatchMessages;
 
   protected readonly messages = {
     error:
       'This project do not have "mongoose" or "express" packages, so it can not be created',
-    warning: 'Run "npm install mongoose express" or "yarn add mongoose express"'
-  }
+    warning:
+      'Run "npm install mongoose express" or "yarn add mongoose express"',
+  };
 
   constructor(toolbox: GluegunToolbox) {
-    this.toolbox = toolbox
+    this.toolbox = toolbox;
 
-    this.dispatch = new DispatchMessages(toolbox)
+    this.dispatch = new IDispatchMessages(toolbox);
   }
 
   public async execute(): Promise<boolean> {
     const { express, mongoose }: IPackageJSON =
-      await this.toolbox.filesystem.read('package.json', 'json')
+      await this.toolbox.filesystem.read('package.json', 'json');
 
-    if (express && mongoose) return true
+    if (express && mongoose) return true;
 
-    this.dispatch.error(this.messages.error)
+    this.dispatch.error(this.messages.error);
 
-    this.dispatch.warning(this.messages.warning)
+    this.dispatch.warning(this.messages.warning);
 
-    return false
+    return false;
   }
 }

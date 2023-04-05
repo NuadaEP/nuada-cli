@@ -1,1 +1,1 @@
-export * from './create-controller'
+export * from './create-controller';

@@ -1,25 +1,25 @@
-import { GluegunToolbox } from 'gluegun'
+import { GluegunToolbox } from 'gluegun';
 
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages'
+import IDispatchMessages from '../../helpers/IDispatchMessages/implementations/IDispatchMessages';
 
 export default class HasNameValidator {
-  protected readonly dispatch: DispatchMessages
+  protected readonly dispatch: IDispatchMessages;
 
   protected readonly messages = {
-    error: 'The name parameter should be passed'
-  }
+    error: 'The name parameter should be passed',
+  };
 
   constructor(toolbox: GluegunToolbox) {
-    this.dispatch = new DispatchMessages(toolbox)
+    this.dispatch = new IDispatchMessages(toolbox);
   }
 
   public async execute(name: string): Promise<string | boolean> {
     if (!name) {
-      this.dispatch.error(this.messages.error)
+      this.dispatch.error(this.messages.error);
 
-      return false
+      return false;
     }
 
-    return name.charAt(0).toUpperCase() + name.slice(1)
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 }

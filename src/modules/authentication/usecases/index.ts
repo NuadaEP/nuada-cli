@@ -1,1 +1,1 @@
-export * from './create-authentication'
+export * from './create-authentication';

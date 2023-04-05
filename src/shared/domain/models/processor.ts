@@ -1,7 +1,7 @@
 export type Processor<T = Record<string, unknown>> = {
-  success: boolean
+  success: boolean;
   data: {
-    message: string
-    data?: T
-  }
-}
+    message: string;
+    data?: T;
+  };
+};

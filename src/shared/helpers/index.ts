@@ -1,2 +1,2 @@
-export * from './lint-project'
-export * from './format-module-name'
+export * from './lint-project';
+export * from './format-module-name';

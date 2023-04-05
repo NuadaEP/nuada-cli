@@ -1,5 +1,5 @@
-import IBaseDTO from './IBaseDTO'
+import IBaseDTO from './IBaseDTO';
 
 export default interface IParamsDTO extends IBaseDTO {
-  params: string[]
+  params: string[];
 }

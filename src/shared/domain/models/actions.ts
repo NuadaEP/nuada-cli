@@ -1,3 +1,3 @@
-export type Action = { template: string; target: string }
+export type Action = { template: string; target: string };
 
-export type Actions = Array<Action>
+export type Actions = Array<Action>;

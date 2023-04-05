@@ -1,1 +1,1 @@
-export type IStacks = 'ts' | 'js'
+export type IStacks = 'ts' | 'js';

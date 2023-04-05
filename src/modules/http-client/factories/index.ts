@@ -1,1 +1,1 @@
-export * from './make-http-client'
+export * from './make-http-client';

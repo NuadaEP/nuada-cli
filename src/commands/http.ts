@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun'
-import { makeHttpClient } from '../modules/http-client'
-import { lintProject, makeGetPromptCommunication } from '../shared'
+import { GluegunToolbox } from 'gluegun';
+import { makeHttpClient } from '../modules/http-client';
+import { lintProject, makeGetPromptCommunication } from '../shared';
 
 module.exports = {
   name: 'make:http',
@@ -9,27 +9,27 @@ module.exports = {
     const actions = [
       {
         template: 'js/src/app/services/axios.js.ejs',
-        target: 'src/app/services/AxiosService.js'
-      }
-    ]
+        target: 'src/app/services/AxiosService.js',
+      },
+    ];
 
     const httpClient = await makeHttpClient(toolbox).execute({
       actions,
-      name: 'AxiosService.js'
-    })
+      name: 'AxiosService.js',
+    });
 
-    const communicate = makeGetPromptCommunication(toolbox)
+    const communicate = makeGetPromptCommunication(toolbox);
 
     if (!httpClient.success) {
       return communicate.execute({
         type: 'error',
-        message: httpClient.data.message
-      })
+        message: httpClient.data.message,
+      });
     }
 
     return lintProject({
       communicate,
-      message: httpClient.data.message
-    })
-  }
-}
+      message: httpClient.data.message,
+    });
+  },
+};

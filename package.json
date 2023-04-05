@@ -1,51 +1,87 @@
 {
-  "name": "demo",
-  "version": "1.0.0",
-  "main": "src/server.js",
-  "scripts": {
-    "start": "node dist/server.js",
-    "dev:server": "ts-node-dev --inspect --transpile-only --no-notify --ignore-watch node_modules src/server.ts",
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "lint": "npx eslint src/ --fix"
+  "name": "nuada",
+  "version": "0.91.9",
+  "description": "nuada CLI",
+  "types": "build/types/types.d.ts",
+  "bin": {
+    "nuada": "bin/nuada"
   },
+  "scripts": {
+    "format": "prettier --write **/*.{js,ts,tsx,json}",
+    "clean-build": "rm -rf ./build",
+    "compile": "tsc -p .",
+    "lint": "eslint src --ext ts",
+    "copy-templates": "if [ -e ./src/templates ]; then cp -a ./src/templates ./build/; fi",
+    "build": "yarn format && yarn lint && yarn clean-build && yarn compile && yarn copy-templates",
+    "prepublishOnly": "yarn build",
+    "test": "jest",
+    "watch": "jest --watch",
+    "snapupdate": "jest --updateSnapshot",
+    "coverage": "jest --coverage"
+  },
+  "files": [
+    "tsconfig.json",
+    ".eslint.json",
+    "build",
+    "LICENSE",
+    "readme.md",
+    "docs",
+    "bin"
+  ],
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
   "dependencies": {
-    "cors": "~2.8.5",
-    "date-fns": "^2.17.0",
-    "dotenv": "~8.2.0",
-    "express": "~4.17.1",
-    "express-async-errors": "~3.1.1",
-    "mongoose": "~5.11.9",
-    "mongoose-paginate-v2": "^1.3.16",
-    "yup": "~0.27.0"
+    "gluegun": "^4.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-typescript": "^7.12.7",
-    "@types/cors": "^2.8.9",
-    "@types/express": "^4.17.9",
-    "@types/mongoose": "^5.10.3",
-    "@types/mongoose-paginate-v2": "^1.3.9",
-    "@types/node": "^14.14.16",
-    "@types/yup": "^0.29.11",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-plugin-transform-decorators": "^6.24.1",
-    "babel-plugin-transform-typescript-metadata": "^0.3.1",
-    "eslint": "~6.5.1",
-    "eslint-config-airbnb-base": "~14.0.0",
-    "eslint-config-prettier": "~6.4.0",
-    "eslint-plugin-import": "~2.18.2",
-    "eslint-plugin-prettier": "~3.1.1",
-    "prettier": "~1.18.2",
-    "ts-node-dev": "^1.1.1",
-    "typescript": "^4.1.3"
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.11",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.6.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-airbnb-typescript-prettier": "^4.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "cli",
+    "mongo",
+    "mongoDB",
+    "mongoose",
+    "express",
+    "expressJS",
+    "nuada",
+    "nuadacli",
+    "nuada-cli",
+    "JS",
+    "Javascript",
+    "Ecmascript",
+    "Typescript",
+    "TS"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
-

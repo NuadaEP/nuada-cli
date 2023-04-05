@@ -1,1 +1,1 @@
-export * from './make-prompt-communication'
+export * from './make-prompt-communication';

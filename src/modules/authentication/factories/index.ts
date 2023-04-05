@@ -1,1 +1,1 @@
-export * from './make-authentication'
+export * from './make-authentication';
