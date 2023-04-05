@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 import { makeHttpClient } from '../modules/http-client';
 import { lintProject, makeGetPromptCommunication } from '../shared';
 
@@ -21,13 +21,14 @@ module.exports = {
     const communicate = makeGetPromptCommunication(toolbox);
 
     if (!httpClient.success) {
-      return communicate.execute({
+      communicate.execute({
         type: 'error',
         message: httpClient.data.message,
       });
+      return;
     }
 
-    return lintProject({
+    lintProject({
       communicate,
       message: httpClient.data.message,
     });

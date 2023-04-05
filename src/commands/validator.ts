@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 import CreateValidatorService from '../extensions/services/CreateValidatorService';
 import { DispatchMessages } from '../helpers';
 

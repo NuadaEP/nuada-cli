@@ -1,5 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
-import { CreateModule } from '../../../shared';
+import { type GluegunToolbox } from 'gluegun';
+import { type CreateModule } from '../../../shared';
 
 export namespace CreateAuthenticatior {
   export type Request = CreateModule.Request;
@@ -7,7 +7,7 @@ export namespace CreateAuthenticatior {
   export type Response = CreateModule.Response<string>;
 
   export interface Execute {
-    execute(data: Request): Promise<Response>;
+    execute: (data: Request) => Promise<Response>;
   }
 }
 
@@ -19,8 +19,9 @@ export class CreateAuthentication implements CreateAuthenticatior.Execute {
   ): Promise<CreateAuthenticatior.Response> {
     try {
       await Promise.all(
-        data.actions.map((action) =>
-          this.toolbox.template.generate({ template: action.template })
+        data.actions.map(
+          async (action) =>
+            await this.toolbox.template.generate({ template: action.template })
         )
       );
 

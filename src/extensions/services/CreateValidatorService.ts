@@ -1,12 +1,12 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import HasDependenciesValidator from '../validators/HasDependenciesValodator';
 
-import IValidatorDTO from './dtos/IValidatorDTO';
+import type IValidatorDTO from './dtos/IValidatorDTO';
 import BaseService from './base/BaseService';
-import { IDispatchMessages } from '../../helpers';
+import { type IDispatchMessages } from '../../helpers';
 
 export default class CreateValidatorService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;
@@ -23,8 +23,10 @@ export default class CreateValidatorService extends BaseService {
     this.hasDependenciesValidator = new HasDependenciesValidator(toolbox);
   }
 
-  async execute({ name, params, single = true }: IValidatorDTO): Promise<void> {
-    const nameCapitalized = await this.hasNameValidator.execute(name);
+  async execute({ name, params }: IValidatorDTO): Promise<void> {
+    const nameCapitalized = (await this.hasNameValidator.execute(
+      name
+    )) as string;
     const schemas = this.extraValuesValidator.execute(params);
 
     const schemaWithoutRelational = schemas.filter((item) => {

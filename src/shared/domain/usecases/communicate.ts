@@ -1,15 +1,15 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 export namespace Communicate {
-  export type Request = {
+  export interface Request {
     type: 'error' | 'success' | 'warning';
     message: string;
-  };
+  }
 
-  export type Response = void;
+  export type Response = any;
 
   export interface Execute {
     toolbox: GluegunToolbox;
-    execute(data: Communicate.Request): Communicate.Response;
+    execute: (data: Communicate.Request) => Communicate.Response;
   }
 }

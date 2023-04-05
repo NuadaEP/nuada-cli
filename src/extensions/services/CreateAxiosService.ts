@@ -1,5 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
-import { IDispatchMessages } from '../../helpers';
+import { type GluegunToolbox } from 'gluegun';
+import { type IDispatchMessages } from '../../helpers';
 import BaseService from './base/BaseService';
 
 export default class CreateAxiosService extends BaseService {

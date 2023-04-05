@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import { Communicate } from '../../domain';
+import { type Communicate } from '../../domain';
 import { PromptCommunication } from '../implementations';
 
 export function makeGetPromptCommunication(

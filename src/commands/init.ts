@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 module.exports = {
   name: 'new',
@@ -9,11 +9,13 @@ module.exports = {
       template,
       print: { success, warning, error },
       prompt,
-      // filesystem,
       system,
     } = toolbox;
 
-    if (typeof parameters.first === 'undefined') return error('NAME?');
+    if (typeof parameters.first === 'undefined') {
+      error('NAME?');
+      return;
+    }
 
     const actions = [
       {
@@ -132,7 +134,9 @@ module.exports = {
       }
     }
 
-    await Promise.all(actions.map((action) => template.generate(action)));
+    await Promise.all(
+      actions.map(async (action) => await template.generate(action))
+    );
 
     warning(`=> ${parameters.first}`);
 

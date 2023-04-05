@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 import { lintProject, makeGetPromptCommunication } from '../shared';
 import { makeAuthentication } from '../modules/authentication';
@@ -50,10 +50,11 @@ module.exports = {
     const communicate = makeGetPromptCommunication(toolbox);
 
     if (!authentication.success) {
-      return communicate.execute({
+      communicate.execute({
         type: 'error',
         message: authentication.data.message,
       });
+      return;
     }
 
     lintProject({

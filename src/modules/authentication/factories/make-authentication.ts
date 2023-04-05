@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import { CreateAuthentication, CreateAuthenticatior } from '../usecases';
+import { CreateAuthentication, type CreateAuthenticatior } from '../usecases';
 
 export function makeAuthentication(
   toolbox: GluegunToolbox

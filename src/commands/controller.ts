@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 import { makeController } from '../modules';
 import {
   formatModuleName,
@@ -24,8 +24,8 @@ module.exports = {
     const actions = [
       {
         template: 'src/app/controllers/controller.ts.ejs',
-        target: `src/app/controllers/${controllerName}Controller.ts`,
-        props: { name: `${controllerName}` },
+        target: `src/app/controllers/${controllerName.data.data}Controller.ts`,
+        props: { name: `${controllerName.data.data}` },
       },
     ];
 

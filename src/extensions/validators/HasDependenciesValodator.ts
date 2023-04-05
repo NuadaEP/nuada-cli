@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import { IDispatchMessages, DispatchMessages } from '../../helpers';
+import { type IDispatchMessages, DispatchMessages } from '../../helpers';
 
 interface IPackageJSON {
   express: boolean;

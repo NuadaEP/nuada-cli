@@ -1,4 +1,4 @@
-import { CreateModule } from '../domain';
+import { type CreateModule } from '../domain';
 
 export const formatModuleName = (
   name: string

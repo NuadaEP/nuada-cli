@@ -1,5 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
-import { IDispatchMessages } from '../../helpers';
+import { type GluegunToolbox } from 'gluegun';
+import { type IDispatchMessages } from '../../helpers';
 
 import BaseService from './base/BaseService';
 
@@ -51,7 +51,9 @@ export default class CreateAuthService extends BaseService {
     });
 
     await Promise.all(
-      this.actions.map((action) => this.toolbox.template.generate(action))
+      this.actions.map(
+        async (action) => await this.toolbox.template.generate(action)
+      )
     );
 
     this.dispatchMessage.success('Authentication module generated successfuly');

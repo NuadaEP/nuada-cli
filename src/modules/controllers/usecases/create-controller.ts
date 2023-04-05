@@ -1,5 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
-import { CreateModule } from '../../../shared';
+import { type GluegunToolbox } from 'gluegun';
+import { type CreateModule } from '../../../shared';
 
 export class CreateController implements CreateModule.Execute {
   constructor(private readonly toolbox: GluegunToolbox) {}

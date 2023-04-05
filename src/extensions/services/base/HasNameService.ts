@@ -1,5 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
-import { IDispatchMessages } from '../../../helpers';
+import { type GluegunToolbox } from 'gluegun';
+import { type IDispatchMessages } from '../../../helpers';
 import BaseService from './BaseService';
 
 export default class HasNameService extends BaseService {

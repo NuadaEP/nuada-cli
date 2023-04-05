@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import { IDispatchMessages, DispatchMessages } from '../../helpers';
+import { type IDispatchMessages, DispatchMessages } from '../../helpers';
 
 interface ISchemas {
   fieldName: string;
@@ -31,7 +31,7 @@ export default class ExtraValuesValidator {
     this.dispatch = new DispatchMessages(toolbox);
   }
 
-  public execute(params: string[]): Array<ISchemas | void> {
+  public execute(params: string[]): ISchemas[] {
     const parameters = params.slice(1, params.length);
 
     const schemas = parameters.map((parameter) => {
@@ -40,18 +40,20 @@ export default class ExtraValuesValidator {
 
       type = `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
 
-      if (this.types.indexOf(type) === -1) {
+      if (!this.types.includes(type)) {
         const [relational] = type.split('=');
 
-        if (this.types.indexOf(relational) === -1) {
-          return this.dispatch.error(
+        if (!this.types.includes(relational)) {
+          this.dispatch.error(
             `The field type is not one of the <${this.types.join('|')}>`
           );
+          return undefined;
         }
       } else if (type === 'Relational') {
-        return this.dispatch.error(
+        this.dispatch.error(
           'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>'
         );
+        return undefined;
       }
 
       return {

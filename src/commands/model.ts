@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 import CreateModelService from '../extensions/services/CreateModelService';
 import { DispatchMessages } from '../helpers';
 

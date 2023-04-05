@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import { IDispatchMessages } from '../models/IDispatchMessages';
+import { type IDispatchMessages } from '../models/IDispatchMessages';
 
 export class DispatchMessages implements IDispatchMessages {
   private readonly toolbox: GluegunToolbox;
@@ -10,14 +10,14 @@ export class DispatchMessages implements IDispatchMessages {
   }
 
   public success(message: string): void {
-    return this.toolbox.print.success(message);
+    this.toolbox.print.success(message);
   }
 
   public warning(message: string): void {
-    return this.toolbox.print.warning(message);
+    this.toolbox.print.warning(message);
   }
 
   public error(message: string): void {
-    return this.toolbox.print.error(message);
+    this.toolbox.print.error(message);
   }
 }

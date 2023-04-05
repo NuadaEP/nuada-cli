@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 import CreateScaffoldService from '../extensions/services/CreateScaffoldService';
 
 module.exports = {

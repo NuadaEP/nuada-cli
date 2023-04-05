@@ -1,3 +1,6 @@
-export type Action = { template: string; target: string };
+export interface Action {
+  template: string;
+  target: string;
+}
 
-export type Actions = Array<Action>;
+export type Actions = Action[];

@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import IParamsDTO from './dtos/IParamsDTO';
+import type IParamsDTO from './dtos/IParamsDTO';
 
 import CreateControllerService from './CreateControllerService';
 import CreateModelService from './CreateModelService';

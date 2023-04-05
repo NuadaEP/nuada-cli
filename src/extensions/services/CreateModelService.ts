@@ -1,11 +1,11 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import ExtraValuesValidator from '../validators/ExtraValuesValidator';
 import CreateValidatorService from './CreateValidatorService';
-import { IDispatchMessages } from '../../helpers';
+import { type IDispatchMessages } from '../../helpers';
 
-import IParamsDTO from './dtos/IParamsDTO';
+import type IParamsDTO from './dtos/IParamsDTO';
 import BaseService from './base/BaseService';
 
 export default class CreateModelService extends BaseService {
@@ -31,8 +31,9 @@ export default class CreateModelService extends BaseService {
     const nameCapitalized = await this.hasNameValidator.execute(name);
     const schemas = this.extraValuesValidator.execute(params);
 
-    if (!nameCapitalized) {
+    if (typeof nameCapitalized === 'boolean') {
       this.dispatchMessage.error('Model name must be specified');
+
       return;
     }
 

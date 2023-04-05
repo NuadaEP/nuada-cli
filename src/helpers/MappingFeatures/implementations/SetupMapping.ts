@@ -1,5 +1,5 @@
-import { ISetup, IStacks } from '../dtos';
-import { ISetupMapping } from '../models/ISetupMapping';
+import { type ISetup, type IStacks } from '../dtos';
+import { type ISetupMapping } from '../models/ISetupMapping';
 
 export default class SetupMapping implements ISetupMapping {
   execute(stack: IStacks): ISetup {

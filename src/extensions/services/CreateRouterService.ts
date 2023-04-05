@@ -1,10 +1,10 @@
-import { GluegunToolbox } from 'gluegun';
-import { IDispatchMessages } from '../../helpers';
+import { type GluegunToolbox } from 'gluegun';
+import { type IDispatchMessages } from '../../helpers';
 
 import HasNameValidator from '../validators/HasNameValidator';
 import BaseService from './base/BaseService';
 
-import IFullDTO from './dtos/IFullDTO';
+import type IFullDTO from './dtos/IFullDTO';
 
 export default class CreateRouterService extends BaseService {
   protected readonly hasNameValidator: HasNameValidator;

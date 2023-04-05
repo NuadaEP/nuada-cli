@@ -1,9 +1,9 @@
-import { Communicate } from '../domain';
+import { type Communicate } from '../domain';
 
-type LintProject = {
+interface LintProject {
   communicate: Communicate.Execute;
   message: string;
-};
+}
 
 export const lintProject = ({ communicate, message }: LintProject): void => {
   communicate.execute({
@@ -17,10 +17,10 @@ export const lintProject = ({ communicate, message }: LintProject): void => {
       stdio: 'inherit',
       stderr: 'inherit',
     })
-    .finally(() =>
+    .finally(() => {
       communicate.execute({
         type: 'success',
         message,
-      })
-    );
+      });
+    });
 };
