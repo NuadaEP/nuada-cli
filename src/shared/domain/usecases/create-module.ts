@@ -6,9 +6,9 @@ export namespace CreateModule {
     name?: string;
   };
 
-  export type Response<T> = Processor<T>;
+  export type Response<T = any> = Processor<T>;
 
   export interface Execute {
-    execute<T>(data: Request): Promise<Response<T>>;
+    execute<T = any>(data: Request): Promise<Response<T>>;
   }
 }
