@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import express, { Request, Response, NextFunction, Express } from 'express'
+import * as express from 'express'
 import Mongoose from 'mongoose'
 import Cors from 'cors'
 
@@ -12,7 +12,7 @@ import AppError from './errors/AppError'
 dotenv.config()
 
 export default class App {
-  private server: Express;
+  public server: express.Express;
 
   constructor () {
     this.server = express()
@@ -38,7 +38,7 @@ export default class App {
   }
 
   private exception () {
-    this.server.use(async (err: Error, request: Request, response: Response, _: NextFunction) => {
+    this.server.use(async (err: Error, request: express.Request, response: express.Response, _: express.NextFunction) => {
       if (err instanceof AppError) {
         return response.status(err.statusCode).json(err.error)
       }
