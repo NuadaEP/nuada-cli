@@ -50,8 +50,8 @@ export default class CreateValidatorService extends BaseService {
     }
 
     await this.toolbox.template.generate({
-      template: 'js/src/app/validators/validator.js.ejs',
-      target: `src/app/validators/${nameCapitalized}Validator.js`,
+      template: 'src/app/validators/validator.ts.ejs',
+      target: `src/app/validators/${nameCapitalized}Validator.ts`,
       props: {
         name: `${nameCapitalized}`,
         fields: schemaWithoutRelational,

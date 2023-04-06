@@ -1,6 +1,5 @@
 {
   "env": {
-    "es2021": true,
     "node": true
   },
   "extends": ["standard-with-typescript", "plugin:prettier/recommended"],
@@ -21,6 +20,7 @@
     "@typescript-eslint/no-namespace": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
+    "import/no-duplicates": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/naming-convention": [
@@ -34,13 +34,7 @@
         }
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ]
+    "import/extensions": "off"
   },
   "settings": {
     "import/resolver": {

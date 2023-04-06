@@ -8,8 +8,8 @@ module.exports = {
   run: async (toolbox: GluegunToolbox) => {
     const actions = [
       {
-        template: 'js/src/app/services/axios.js.ejs',
-        target: 'src/app/services/AxiosService.js',
+        template: 'src/app/services/axios.ts.ejs',
+        target: 'src/app/services/AxiosService.ts',
       },
     ];
 

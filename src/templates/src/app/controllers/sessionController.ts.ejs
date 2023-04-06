@@ -18,6 +18,6 @@ export default class SessionController {
 
     delete userWithOutPassword.password;
 
-    return res.json({ token: User.generateToken(userWithOutPassword) });
+    return response.json({ token: User.generateToken(userWithOutPassword) });
   }
 }

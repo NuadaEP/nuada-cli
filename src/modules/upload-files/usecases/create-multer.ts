@@ -1,26 +1,15 @@
 import { type GluegunToolbox } from 'gluegun';
 import { type CreateModule } from '../../../shared';
 
-export namespace CreateAuthenticatior {
-  export type Request = Pick<CreateModule.Request, 'actions'>;
-
-  export type Response = CreateModule.Response<string>;
-
-  export interface Execute {
-    execute: (data: Request) => Promise<Response>;
-  }
-}
-
-export class CreateAuthentication implements CreateAuthenticatior.Execute {
+export class CreateMulterService implements CreateModule.Execute {
   constructor(private readonly toolbox: GluegunToolbox) {}
 
   public async execute(
-    data: CreateAuthenticatior.Request
-  ): Promise<CreateAuthenticatior.Response> {
+    data: CreateModule.Request
+  ): Promise<CreateModule.Response> {
     try {
       await Promise.all(data.actions.map(this.toolbox.template.generate));
-
-      await this.toolbox.system.spawn('npm install bcryptjs jsonwebtoken', {
+      await this.toolbox.system.spawn('npm install multer', {
         shell: true,
         stdio: 'inherit',
         stderr: 'inherit',
@@ -29,7 +18,7 @@ export class CreateAuthentication implements CreateAuthenticatior.Execute {
       return {
         success: true,
         data: {
-          message: 'Yeah! Now you can sign in your users 🎉',
+          message: 'Yeah! Now you can upload files 🎉',
         },
       };
     } catch {

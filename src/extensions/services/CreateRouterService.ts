@@ -22,9 +22,9 @@ export default class CreateRouterService extends BaseService {
 
     await this.toolbox.template.generate({
       template: full
-        ? 'src/app/routes/scaffold.router.js.ejs'
-        : 'src/app/routes/scaffold.router.js.ejs',
-      target: `src/app/routes/${name}.router.js`,
+        ? 'src/app/routes/scaffold.router.ts.ejs'
+        : 'src/app/routes/scaffold.router.ts.ejs',
+      target: `src/app/routes/${name}.router.ts`,
       props: { name: `${name}`, nameCapitalized },
     });
 

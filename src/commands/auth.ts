@@ -9,42 +9,41 @@ module.exports = {
   run: async (toolbox: GluegunToolbox): Promise<void> => {
     const actions = [
       {
-        template: 'js/src/app/validators/userValidator.js.ejs',
-        target: 'src/app/validators/UserValidator.js',
+        template: 'src/app/validators/userValidator.ts.ejs',
+        target: 'src/app/validators/UserValidator.ts',
       },
       {
-        template: 'js/src/config/auth.js.ejs',
-        target: 'src/config/auth.js',
+        template: 'src/config/auth.ts.ejs',
+        target: 'src/config/auth.ts',
       },
       {
-        template: 'js/src/app/models/userModel.js.ejs',
-        target: 'src/app/models/UserModel.js',
+        template: 'src/app/models/userModel.ts.ejs',
+        target: 'src/app/models/UserModel.ts',
       },
       {
-        template: 'js/src/app/controllers/userController.js.ejs',
-        target: 'src/app/controllers/UserController.js',
+        template: 'src/app/controllers/userController.ts.ejs',
+        target: 'src/app/controllers/UserController.ts',
       },
       {
-        template: 'js/src/app/middlewares/authentication.js.ejs',
-        target: 'src/app/middlewares/AuthenticationMiddleware.js',
+        template: 'src/app/middlewares/authentication.ts.ejs',
+        target: 'src/app/middlewares/AuthenticationMiddleware.ts',
       },
       {
-        template: 'js/src/app/controllers/sessionController.js.ejs',
-        target: 'src/app/controllers/SessionController.js',
+        template: 'src/app/controllers/sessionController.ts.ejs',
+        target: 'src/app/controllers/SessionController.ts',
       },
       {
-        template: 'js/src/app/routes/session.router.js.ejs',
-        target: 'src/app/routes/session.router.js',
+        template: 'src/app/routes/session.router.ts.ejs',
+        target: 'src/app/routes/session.router.ts',
       },
       {
-        template: 'js/src/app/routes/user.router.js.ejs',
-        target: 'src/app/routes/user.router.js',
+        template: 'src/app/routes/user.router.ts.ejs',
+        target: 'src/app/routes/user.router.ts',
       },
     ];
 
     const authentication = await makeAuthentication(toolbox).execute({
       actions,
-      name: 'Auth',
     });
 
     const communicate = makeGetPromptCommunication(toolbox);
