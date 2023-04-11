@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 export type IRole = 'store' | 'update';
 
 class SampleValidator {
-  private validationConfig: Yup.ObjectSchema;
+  private validationConfig: Yup.AnyObject;
 
   public async execute(body: Request, role: IRole): Promise<void> {
     switch (role) {

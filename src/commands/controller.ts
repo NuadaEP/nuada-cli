@@ -5,6 +5,7 @@ import {
   lintProject,
   makeGetPromptCommunication,
 } from '../shared';
+import { nuadaConfig } from '../shared/helpers/nuada-config';
 
 module.exports = {
   name: 'make:controller',
@@ -21,6 +22,12 @@ module.exports = {
       };
     }
 
+    const communicate = makeGetPromptCommunication(toolbox);
+
+    const config = nuadaConfig(controllerName.data.data, communicate, 'single');
+
+    if (!config) return;
+
     const actions = [
       {
         template: 'src/app/controllers/controller.ts.ejs',
@@ -33,8 +40,6 @@ module.exports = {
       actions,
       name: controllerName.data.data,
     });
-
-    const communicate = makeGetPromptCommunication(toolbox);
 
     if (!controller.success) {
       communicate.execute({
