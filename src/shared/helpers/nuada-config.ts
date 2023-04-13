@@ -1,16 +1,19 @@
 import * as fs from 'fs';
 import { type Communicate } from '../domain';
 
+type Routes = Array<{
+  verb: 'post' | 'get' | 'patch' | 'put' | 'delete';
+  endpoint: string;
+  methodName: string;
+}>;
+
 interface Modules {
   name: string;
   controller: string;
-  routes: Array<{
-    method: 'POST' | 'GET' | 'PATCH' | 'PUT' | 'DELETE';
-    endpoint: string;
-  }>;
+  routes: Routes;
 }
 
-interface NuadaConfig {
+export interface NuadaConfig {
   name: string;
   modules: Modules[];
 }
@@ -19,7 +22,7 @@ export function nuadaConfig(
   moduleName: string,
   communicate: Communicate.Execute,
   controllerType: 'scaffold' | 'single'
-): boolean {
+): boolean | NuadaConfig {
   try {
     const filepath = 'nuada-config.json';
     const configFile = fs.readFileSync(filepath, 'utf8');
@@ -37,25 +40,29 @@ export function nuadaConfig(
 
     const name = moduleName.toLocaleLowerCase();
 
-    let routes = [];
+    let routes: Routes = [];
 
     if (controllerType === 'scaffold') {
       routes = [
         {
           endpoint: `/${name}/:id`,
-          method: 'GET',
+          verb: 'get',
+          methodName: 'show',
         },
         {
           endpoint: `/${name}`,
-          method: 'POST',
+          verb: 'post',
+          methodName: 'store',
         },
         {
           endpoint: `/${name}/:id`,
-          method: 'PUT',
+          verb: 'put',
+          methodName: 'update',
         },
         {
           endpoint: `/${name}/:id`,
-          method: 'DELETE',
+          verb: 'delete',
+          methodName: 'delete',
         },
       ];
     }
@@ -66,7 +73,8 @@ export function nuadaConfig(
       routes: [
         {
           endpoint: `/${name}`,
-          method: 'GET',
+          verb: 'get',
+          methodName: 'index',
         },
         ...routes,
       ],
@@ -79,7 +87,7 @@ export function nuadaConfig(
 
     fs.writeFileSync(filepath, JSON.stringify(newRegister));
 
-    return true;
+    return newRegister;
   } catch {
     communicate.execute({
       message:

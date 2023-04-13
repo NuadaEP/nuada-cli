@@ -1,0 +1,10 @@
+import { Router } from 'express';
+
+import <%= props.name %>Controller from '../controllers/<%= props.name %>Controller';
+
+const <%= props.name %>Routes = Router();
+const <%= props.name %> = new <%= props.name %>Controller();
+
+<% props.routes.forEach(function(route){ %><%= props.name %>Routes.<%= route.verb %>('<%= route.endpoint %>', <%= props.name %>.<%= route.methodName%>);
+<% }) %>
+export default <%= props.name %>Routes;

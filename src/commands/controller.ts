@@ -5,7 +5,7 @@ import {
   lintProject,
   makeGetPromptCommunication,
 } from '../shared';
-import { nuadaConfig } from '../shared/helpers/nuada-config';
+import { nuadaConfig, generateRoutes } from '../shared/helpers';
 
 module.exports = {
   name: 'make:controller',
@@ -26,7 +26,9 @@ module.exports = {
 
     const config = nuadaConfig(controllerName.data.data, communicate, 'single');
 
-    if (!config) return;
+    if (typeof config === 'boolean') return;
+
+    await generateRoutes(toolbox, config);
 
     const actions = [
       {
