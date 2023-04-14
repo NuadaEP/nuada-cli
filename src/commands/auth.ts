@@ -1,6 +1,11 @@
 import { type GluegunToolbox } from 'gluegun';
 
-import { lintProject, makeGetPromptCommunication } from '../shared';
+import {
+  generateRoutes,
+  lintProject,
+  makeGetPromptCommunication,
+  nuadaConfig,
+} from '../shared';
 import { makeAuthentication } from '../modules/authentication';
 
 module.exports = {
@@ -33,20 +38,49 @@ module.exports = {
         target: 'src/app/controllers/SessionController.ts',
       },
       {
-        template: 'src/app/routes/session.router.ts.ejs',
-        target: 'src/app/routes/session.router.ts',
-      },
-      {
         template: 'src/app/routes/user.router.ts.ejs',
         target: 'src/app/routes/user.router.ts',
       },
     ];
+    const communicate = makeGetPromptCommunication(toolbox);
+
+    const config = nuadaConfig([
+      {
+        controller: 'SessionController',
+        name: 'Session',
+        routes: [
+          {
+            endpoint: '/auth',
+            methodName: 'store',
+            verb: 'post',
+          },
+        ],
+      },
+      {
+        controller: 'UserController',
+        name: 'User',
+        routes: [
+          {
+            endpoint: '/user',
+            methodName: 'show',
+            verb: 'get',
+          },
+          {
+            endpoint: '/user',
+            methodName: 'store',
+            verb: 'post',
+          },
+        ],
+      },
+    ]);
+
+    if (typeof config === 'boolean') return;
+
+    await generateRoutes(toolbox, config);
 
     const authentication = await makeAuthentication(toolbox).execute({
       actions,
     });
-
-    const communicate = makeGetPromptCommunication(toolbox);
 
     if (!authentication.success) {
       communicate.execute({

@@ -24,7 +24,19 @@ module.exports = {
 
     const communicate = makeGetPromptCommunication(toolbox);
 
-    const config = nuadaConfig(controllerName.data.data, communicate, 'single');
+    const config = nuadaConfig([
+      {
+        controller: `${controllerName.data.data}Controller`,
+        name: controllerName.data.data,
+        routes: [
+          {
+            endpoint: `/${controllerName.data.data.toLocaleLowerCase()}`,
+            methodName: 'index',
+            verb: 'get',
+          },
+        ],
+      },
+    ]);
 
     if (typeof config === 'boolean') return;
 

@@ -4,7 +4,7 @@ import UserValidator from '../validators/UserValidator';
 import User from '../models/UserModel';
 import AppError from '../errors/AppError';
 
-class UserController {
+export default class UserController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { _id: user_id } = response.locals.user;
 
@@ -29,5 +29,3 @@ class UserController {
     }
   }
 }
-
-module.exports = new UserController();

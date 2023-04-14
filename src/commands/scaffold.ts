@@ -2,6 +2,7 @@ import { type GluegunToolbox } from 'gluegun';
 import {
   formatModuleName,
   generateRoutes,
+  generateScaffoldModule,
   lintProject,
   makeGetPromptCommunication,
   nuadaConfig,
@@ -30,11 +31,9 @@ module.exports = {
 
     const communicate = makeGetPromptCommunication(toolbox);
 
-    const config = nuadaConfig(
-      controllerName.data.data,
-      communicate,
-      'scaffold'
-    );
+    const config = nuadaConfig([
+      generateScaffoldModule(controllerName.data.data),
+    ]);
 
     if (typeof config === 'boolean') return;
 

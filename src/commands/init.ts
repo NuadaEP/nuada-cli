@@ -8,7 +8,7 @@ module.exports = {
       parameters,
       template,
       print: { success, warning, error },
-      // system,
+      system,
     } = toolbox;
 
     if (typeof parameters.first === 'undefined') {
@@ -116,15 +116,6 @@ module.exports = {
       actions.map(async (action) => await template.generate(action))
     );
 
-    // const configFile = fs.readFileSync(
-    //   `${parameters.first}/nuada-config.json`,
-    //   'utf8'
-    // );
-
-    // const jsonConfigFile = JSON.parse(configFile) as NuadaConfig;
-
-    // await generateRoutes(toolbox, jsonConfigFile);
-
     warning(
       '<!==================== Git was initialized ====================!>'
     );
@@ -133,20 +124,20 @@ module.exports = {
       '<!==================== We are preparing everything for you ====================!>'
     );
 
-    // await system.spawn(
-    //   `cd ${parameters.first} && npm install && npm audit fix --force && git init && npm ls`,
-    //   {
-    //     shell: true,
-    //     stdio: 'inherit',
-    //     stderr: 'inherit',
-    //   }
-    // );
+    await system.spawn(
+      `cd ${parameters.first} && npm install && npm audit fix --force && git init && npm ls`,
+      {
+        shell: true,
+        stdio: 'inherit',
+        stderr: 'inherit',
+      }
+    );
 
-    // await system.spawn('npx eslint src/ --fix', {
-    //   shell: true,
-    //   stdio: 'inherit',
-    //   stderr: 'inherit',
-    // });
+    await system.spawn('npx eslint src/ --fix', {
+      shell: true,
+      stdio: 'inherit',
+      stderr: 'inherit',
+    });
 
     success('Project created successfuly!');
   },
