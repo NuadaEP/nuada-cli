@@ -8,12 +8,11 @@ module.exports = {
       parameters,
       template,
       print: { success, warning, error },
-      prompt,
-      system,
+      // system,
     } = toolbox;
 
     if (typeof parameters.first === 'undefined') {
-      error('NAME?');
+      error(`Maybe you forgot the name of the project, didn't you? 🙃`);
       return;
     }
 
@@ -41,7 +40,7 @@ module.exports = {
         target: `${parameters.first}/src/server.ts`,
       },
       {
-        template: 'src/app/routes/index.ts.ejs',
+        template: 'src/app/routes/index-static.ejs',
         target: `${parameters.first}/src/app/routes/index.ts`,
       },
       {
@@ -104,41 +103,27 @@ module.exports = {
         template: 'src/readme.md.ejs',
         target: `${parameters.first}/readme.ms`,
       },
+      {
+        template: 'src/nuada-config.json.ejs',
+        target: `${parameters.first}/nuada-config.json`,
+        props: {
+          name: parameters.first,
+        },
+      },
     ];
-
-    if (typeof parameters.first === 'undefined') {
-      const confirm = {
-        type: 'select',
-        name: 'confirm',
-        message:
-          'Do you realy want to create your project in that current folder?',
-        choices: ['Yes, I do', 'No, lets create a folder'],
-      };
-
-      const consoleConfirm = await prompt.ask(confirm);
-
-      if (consoleConfirm.confirm === 'No, lets create a folder') {
-        const inputName = {
-          type: 'input',
-          name: 'inputName',
-          message: "What's project name?",
-        };
-
-        const projectName = await prompt.ask(inputName);
-
-        parameters.first = projectName.inputName;
-      } else {
-        warning(
-          'You give no name for your application, so it will be created in current folder'
-        );
-      }
-    }
 
     await Promise.all(
       actions.map(async (action) => await template.generate(action))
     );
 
-    warning(`=> ${parameters.first}`);
+    // const configFile = fs.readFileSync(
+    //   `${parameters.first}/nuada-config.json`,
+    //   'utf8'
+    // );
+
+    // const jsonConfigFile = JSON.parse(configFile) as NuadaConfig;
+
+    // await generateRoutes(toolbox, jsonConfigFile);
 
     warning(
       '<!==================== Git was initialized ====================!>'
@@ -148,20 +133,20 @@ module.exports = {
       '<!==================== We are preparing everything for you ====================!>'
     );
 
-    await system.spawn(
-      `cd ${parameters.first} && npm install && npm audit fix --force && git init && npm ls`,
-      {
-        shell: true,
-        stdio: 'inherit',
-        stderr: 'inherit',
-      }
-    );
+    // await system.spawn(
+    //   `cd ${parameters.first} && npm install && npm audit fix --force && git init && npm ls`,
+    //   {
+    //     shell: true,
+    //     stdio: 'inherit',
+    //     stderr: 'inherit',
+    //   }
+    // );
 
-    await system.spawn('npx eslint src/ --fix', {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit',
-    });
+    // await system.spawn('npx eslint src/ --fix', {
+    //   shell: true,
+    //   stdio: 'inherit',
+    //   stderr: 'inherit',
+    // });
 
     success('Project created successfuly!');
   },

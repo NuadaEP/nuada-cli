@@ -8,13 +8,22 @@ export class CreateRoute implements CreateModule.Execute {
     actions,
     name,
   }: CreateModule.Request): Promise<CreateModule.Response> {
-    await Promise.all(actions.map(this.toolbox.template.generate));
+    try {
+      await Promise.all(actions.map(this.toolbox.template.generate));
 
-    return {
-      success: true,
-      data: {
-        message: `Yeah! We create the route ${name} 🎉`,
-      },
-    };
+      return {
+        success: true,
+        data: {
+          message: `Yeah! We create the route ${name} 🎉`,
+        },
+      };
+    } catch {
+      return {
+        success: false,
+        data: {
+          message: `Ops! Something went wrong to create your route file for ${name} module`,
+        },
+      };
+    }
   }
 }
