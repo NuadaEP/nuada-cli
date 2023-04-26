@@ -1,6 +1,6 @@
 {
   "name": "nuada",
-  "version": "0.91.9",
+  "version": "1.0.0",
   "description": "nuada CLI",
   "types": "build/types/types.d.ts",
   "bin": {
