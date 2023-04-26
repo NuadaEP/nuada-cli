@@ -1,7 +1,8 @@
 import { type GluegunToolbox } from 'gluegun';
 import {
   formatModuleName,
-  generateRoutes,
+  generateRouteFile,
+  generateRouteIndex,
   generateScaffoldModule,
   lintProject,
   makeGetPromptCommunication,
@@ -31,13 +32,16 @@ module.exports = {
 
     const communicate = makeGetPromptCommunication(toolbox);
 
-    const config = nuadaConfig([
-      generateScaffoldModule(controllerName.data.data),
-    ]);
+    const modules = [generateScaffoldModule(controllerName.data.data)];
+
+    const config = nuadaConfig(modules);
 
     if (typeof config === 'boolean') return;
 
-    await generateRoutes(toolbox, config);
+    await Promise.all([
+      generateRouteFile(toolbox, modules),
+      generateRouteIndex(toolbox, config),
+    ]);
 
     const controllerActions = [
       {

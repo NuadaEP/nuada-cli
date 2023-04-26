@@ -5,7 +5,12 @@ import {
   lintProject,
   makeGetPromptCommunication,
 } from '../shared';
-import { nuadaConfig, generateRoutes } from '../shared/helpers';
+import {
+  nuadaConfig,
+  generateRouteFile,
+  generateRouteIndex,
+  type NuadaModule,
+} from '../shared/helpers';
 
 module.exports = {
   name: 'make:controller',
@@ -24,7 +29,7 @@ module.exports = {
 
     const communicate = makeGetPromptCommunication(toolbox);
 
-    const config = nuadaConfig([
+    const modules: NuadaModule[] = [
       {
         controller: `${controllerName.data.data}Controller`,
         name: controllerName.data.data,
@@ -36,11 +41,16 @@ module.exports = {
           },
         ],
       },
-    ]);
+    ];
+
+    const config = nuadaConfig(modules);
 
     if (typeof config === 'boolean') return;
 
-    await generateRoutes(toolbox, config);
+    await Promise.all([
+      generateRouteFile(toolbox, modules),
+      generateRouteIndex(toolbox, config),
+    ]);
 
     const actions = [
       {

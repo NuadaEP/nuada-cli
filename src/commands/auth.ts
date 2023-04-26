@@ -1,7 +1,9 @@
 import { type GluegunToolbox } from 'gluegun';
 
 import {
-  generateRoutes,
+  type NuadaModule,
+  generateRouteFile,
+  generateRouteIndex,
   lintProject,
   makeGetPromptCommunication,
   nuadaConfig,
@@ -44,7 +46,7 @@ module.exports = {
     ];
     const communicate = makeGetPromptCommunication(toolbox);
 
-    const config = nuadaConfig([
+    const modules: NuadaModule[] = [
       {
         controller: 'SessionController',
         name: 'Session',
@@ -72,11 +74,16 @@ module.exports = {
           },
         ],
       },
-    ]);
+    ];
+
+    const config = nuadaConfig(modules);
 
     if (typeof config === 'boolean') return;
 
-    await generateRoutes(toolbox, config);
+    await Promise.all([
+      generateRouteFile(toolbox, modules),
+      generateRouteIndex(toolbox, config),
+    ]);
 
     const authentication = await makeAuthentication(toolbox).execute({
       actions,
