@@ -164,9 +164,9 @@ module.exports = {
     await system.spawn(
       `cd ${parameters.first} && npm install ${productionDependencies.join(
         ' '
-      )}& npm install ${developmentDependencies.join(
+      )} && npm install ${developmentDependencies.join(
         ' '
-      )}-D && npm audit fix --force && git init && npm ls`,
+      )} -D && npm audit fix --force && git init && npm ls`,
       {
         shell: true,
         stdio: 'inherit',

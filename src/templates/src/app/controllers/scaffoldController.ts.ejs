@@ -25,7 +25,7 @@ export default class <%= props.name %>Controller {
 
       return response.json(<%= props.name %>);
     } catch (error) {
-      throw new AppError(error.message, 400);
+      throw new AppError({ message: error.message, statusCode: 400 });
     }
   }
 
@@ -37,13 +37,13 @@ export default class <%= props.name %>Controller {
 
       return response.json(<%= props.name %>);
     } catch (error) {
-      throw new AppError(error.message, 400);
+      throw new AppError({ message: error.message, statusCode: 400 });
     }
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
     await <%= props.name %>Model.findByIdAndDelete(request.params.id);
 
-    return res.send(true);
+    return response.send(true);
   }
 }

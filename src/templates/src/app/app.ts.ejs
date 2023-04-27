@@ -4,7 +4,7 @@ dotenv.config({ path: '../.env' });
 
 import * as express from 'express';
 import mongoose from 'mongoose';
-import Cors from 'cors';
+import * as Cors from 'cors';
 
 import 'express-async-errors';
 
@@ -52,7 +52,7 @@ export default class App {
         _: express.NextFunction
       ) => {
         if (err instanceof AppError) {
-          return response.status(err.statusCode).json(err.error);
+          return response.status(err.statusCode).json(err.message);
         }
 
         return response.status(500).json({

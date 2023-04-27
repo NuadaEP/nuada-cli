@@ -8,31 +8,24 @@ import * as Yup from 'yup';
 export type IRole = 'store' | 'update';
 
 class UserValidator {
-  private validationConfig: Yup.AnyObject;
-
   public async execute(body: Request, role: IRole): Promise<void> {
     switch (role) {
       case 'store':
-        this.validationConfig = Yup.object().shape({
+        await Yup.object().shape({
           email: Yup.string().email().required(),
           password: Yup.string().min(6).required(),
           confirmPassword: Yup.string().min(6).required(),
-        });
+        }).validate(body, { abortEarly: false });
         break;
 
       case 'update':
-        this.validationConfig = Yup.object().shape({
+        await Yup.object().shape({
           email: Yup.string().email(),
           password: Yup.string().min(6),
           confirmPassword: Yup.string().min(6),
-        });
-        break;
-
-      default:
+        }).validate(body, { abortEarly: false });
         break;
     }
-
-    await this.validationConfig.validate(body);
   }
 }
 

@@ -8,29 +8,22 @@ import * as Yup from 'yup';
 export type IRole = 'store' | 'update';
 
 class SampleValidator {
-  private validationConfig: Yup.AnyObject;
-
   public async execute(body: Request, role: IRole): Promise<void> {
     switch (role) {
       case 'store':
-        this.validationConfig = Yup.object().shape({
+        await Yup.object().shape({
           title: Yup.string().required(),
           description: Yup.string().required(),
-        });
+        }).validate(body, { abortEarly: false });
         break;
 
       case 'update':
-        this.validationConfig = Yup.object().shape({
+        await Yup.object().shape({
           title: Yup.string(),
           description: Yup.string(),
-        });
-        break;
-
-      default:
+        }).validate(body, { abortEarly: false });
         break;
     }
-
-    await this.validationConfig.validate(body);
   }
 }
 
