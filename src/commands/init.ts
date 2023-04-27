@@ -124,8 +124,49 @@ module.exports = {
       '<!==================== We are preparing everything for you ====================!>'
     );
 
+    const productionDependencies = [
+      'cors',
+      'dotenv',
+      'express',
+      'express-async-errors',
+      'mongoose',
+      'mongoose-paginate-v2',
+      'yup',
+    ];
+
+    const developmentDependencies = [
+      '@babel/cli',
+      '@babel/core',
+      '@babel/node',
+      '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-decorators',
+      '@babel/preset-env',
+      '@babel/preset-typescript',
+      '@types/cors',
+      '@types/express',
+      '@types/node',
+      '@types/yup',
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'babel-plugin-module-resolver',
+      'babel-plugin-transform-decorators',
+      'babel-plugin-transform-typescript-metadata',
+      'eslint',
+      'eslint-config-airbnb-base',
+      'eslint-config-prettier',
+      'eslint-plugin-import',
+      'eslint-plugin-prettier',
+      'prettier',
+      'ts-node-dev',
+      'typescript',
+    ];
+
     await system.spawn(
-      `cd ${parameters.first} && npm install && npm audit fix --force && git init && npm ls`,
+      `cd ${parameters.first} && npm install ${productionDependencies.join(
+        ' '
+      )}& npm install ${developmentDependencies.join(
+        ' '
+      )}-D && npm audit fix --force && git init && npm ls`,
       {
         shell: true,
         stdio: 'inherit',
