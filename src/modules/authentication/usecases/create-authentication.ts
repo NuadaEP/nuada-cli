@@ -20,11 +20,14 @@ export class CreateAuthentication implements CreateAuthenticatior.Execute {
     try {
       await Promise.all(data.actions.map(this.toolbox.template.generate));
 
-      await this.toolbox.system.spawn('npm install bcryptjs jsonwebtoken', {
-        shell: true,
-        stdio: 'inherit',
-        stderr: 'inherit',
-      });
+      await this.toolbox.system.spawn(
+        'npm install bcryptjs jsonwebtoken && npm install @types/bcryptjs @types/jsonwebtoken -D',
+        {
+          shell: true,
+          stdio: 'inherit',
+          stderr: 'inherit',
+        }
+      );
 
       return {
         success: true,

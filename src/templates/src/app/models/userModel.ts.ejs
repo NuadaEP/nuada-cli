@@ -1,12 +1,12 @@
 import { Schema, model } from 'mongoose';
-import Bcrypt from 'bcryptjs';
-import Jwt from 'jsonwebtoken';
+import * as Bcrypt from 'bcryptjs';
+import * as Jwt from 'jsonwebtoken';
 
 import AuthConfig from '../../config/auth';
 
 const UserModel = new Schema(
   {
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -18,7 +18,7 @@ const UserModel = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 UserModel.pre('save', async function (next) {

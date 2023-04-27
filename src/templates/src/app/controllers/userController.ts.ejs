@@ -18,14 +18,20 @@ export default class UserController {
       const { email, password, confirmPassword } = request.body;
 
       if (await User.findOne({ email }))
-        throw new AppError('Email is already in use', 400);
+        throw new AppError({
+          message: 'Email is already in use',
+          statusCode: 400,
+        });
 
       if (password != confirmPassword)
-        throw new AppError('The provided password is not identical', 400);
+        throw new AppError({
+          message: 'The provided password is not identical',
+          statusCode: 400,
+        });
 
       return response.json(await User.create({ email, password }));
     } catch (error) {
-      throw new AppError(error.message, 400);
+      throw new AppError({ message: error.message, statusCode: 400 });
     }
   }
 }
