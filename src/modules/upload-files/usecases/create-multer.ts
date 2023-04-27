@@ -9,11 +9,14 @@ export class CreateMulterService implements CreateModule.Execute {
   ): Promise<CreateModule.Response> {
     try {
       await Promise.all(data.actions.map(this.toolbox.template.generate));
-      await this.toolbox.system.spawn('npm install multer', {
-        shell: true,
-        stdio: 'inherit',
-        stderr: 'inherit',
-      });
+      await this.toolbox.system.spawn(
+        'npm install multer && npm install @types/multer -D',
+        {
+          shell: true,
+          stdio: 'inherit',
+          stderr: 'inherit',
+        }
+      );
 
       return {
         success: true,

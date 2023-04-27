@@ -1,28 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
-import Jwt from 'jsonwebtoken';
+import * as Jwt from 'jsonwebtoken';
 
 import AppError from '../errors/AppError';
-import AuthConfig from '../../config/AuthConfig';
+import AuthConfig from '../../config/auth';
 
 export default class Authentication {
-  public async init(request: Request, response: Response, next: NextFunction): Promise<Response> {
+  public init(request: Request, response: Response, next: NextFunction): void {
     try {
       const { authorization = null } = request.headers;
 
-      if (!authorization) throw new AppError('Missing token', 400);
+      if (!authorization)
+        throw new AppError({ message: 'Missing token', statusCode: 400 });
 
       const [, token] = authorization.split(' ');
-      const decoded_token = await Jwt.verify(token, AuthConfig.secret);
+      const decoded_token = Jwt.verify(token, AuthConfig.secret) as {
+        user: { email: string };
+      };
 
-      if (decoded_token.error) throw new AppError('Invalid Token', 401);
-
-      if (!decoded_token.user) throw new AppError('Invalid User', 401);
+      if (!decoded_token.user)
+        throw new AppError({ message: 'Invalid User', statusCode: 401 });
 
       request.user = decoded_token.user;
 
       next();
     } catch (e) {
-      throw new AppError('Invalid Token', 401);
+      throw new AppError({ message: 'Invalid Token', statusCode: 401 });
     }
   }
 }
