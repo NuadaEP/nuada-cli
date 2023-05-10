@@ -20,7 +20,7 @@ $ yarn global add nuada
 
 ## Usage
 
-Now the project will bootstrap with _nuada-config.json_ witch going to mapping the routes of the project.
+Now the project will bootstrap with _nuada-config.json_ witch going to map the routes of the project.
 So do not edit, move or delete this file 😉
 
 ### Create a new project
@@ -95,7 +95,7 @@ $ nuada make:auth
 
 The _make:auth_ command creates a simple authentication structure using [JWT](https://jwt.io/) ready to use.
 
-### Create a HTTP client
+### Create an HTTP client
 
 ```shell
 $ nuada make:axios
