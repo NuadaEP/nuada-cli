@@ -1,0 +1,11 @@
+import { Router } from 'express';
+
+<% props.modules.forEach(function(module){ %>import <%= module.name %>Routes from './<%= module.name.toLowerCase() %>.router';
+<% }) %>
+
+const routes = Router();
+
+<% props.modules.forEach(function(module){ %>routes.use(<%= module.name %>Routes);
+<% }) %>
+
+export default routes;

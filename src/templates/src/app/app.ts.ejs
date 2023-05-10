@@ -1,0 +1,65 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: '../.env' });
+
+import * as express from 'express';
+import mongoose from 'mongoose';
+import * as Cors from 'cors';
+
+import 'express-async-errors';
+
+import DatabaseConfig from '../config/database';
+import Routes from './routes';
+import AppError from './errors/AppError';
+
+export default class App {
+  public server: express.Express;
+
+  constructor() {
+    this.server = express();
+  }
+
+  public init() {
+    this.database();
+    this.middwares();
+    this.routes();
+    this.exception();
+  }
+
+  private database() {
+    mongoose
+      .connect(DatabaseConfig.uri)
+      .then(_ => console.log('[orm]: MongoDB connection established'))
+      .catch(console.log);
+  }
+
+  private middwares() {
+    this.server.use(Cors());
+    this.server.use(express.json());
+    this.server.use(express.urlencoded({ extended: true }));
+  }
+
+  private routes() {
+    this.server.use(Routes);
+  }
+
+  private exception() {
+    this.server.use(
+      async (
+        err: Error,
+        request: express.Request,
+        response: express.Response,
+        _: express.NextFunction
+      ) => {
+        if (err instanceof AppError) {
+          return response.status(err.statusCode).json(err.message);
+        }
+
+        return response.status(500).json({
+          status: 'error',
+          message: 'Internal Server Error',
+        });
+      }
+    );
+  }
+}

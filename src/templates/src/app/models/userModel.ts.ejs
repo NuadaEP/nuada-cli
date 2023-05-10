@@ -1,0 +1,44 @@
+import { Schema, model } from 'mongoose';
+import * as Bcrypt from 'bcryptjs';
+import * as Jwt from 'jsonwebtoken';
+
+import AuthConfig from '../../config/auth';
+
+const UserModel = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+UserModel.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  this.password = await Bcrypt.hash(this.password, 8);
+});
+
+UserModel.methods = {
+  compareHash(password) {
+    return Bcrypt.compare(password, this.password);
+  },
+};
+
+UserModel.statics = {
+  generateToken(user) {
+    return Jwt.sign({ user }, AuthConfig.secret, {
+      expiresIn: AuthConfig.ttl,
+    });
+  },
+};
+
+export default model('User', UserModel);

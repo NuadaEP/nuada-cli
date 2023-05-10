@@ -1,9 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { build } = require('gluegun');
 
 /**
  * Create the cli and kick it off
  */
-async function run(argv: NodeJS.Process) {
+async function run(argv: NodeJS.Process): Promise<any> {
   // create a CLI runtime
   const cli = build()
     .brand('nuada')

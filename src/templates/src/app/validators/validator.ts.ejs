@@ -1,0 +1,28 @@
+import { Request } from 'express'
+import * as Yup from 'yup';
+
+export type IRole = 'store' | 'update';
+
+class <%= props.name %>Validator {
+  public async execute(body: Request, role: IRole): Promise<void> {
+    switch (role) {
+      case 'store':
+        await Yup.object().shape({
+<% props.fields.forEach(field => { -%>
+          <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>().required(),
+<% }) -%>
+        }).validate(body, { abortEarly: false });
+        break;
+
+      case 'update':
+        await Yup.object().shape({
+<% props.fields.forEach(field => { -%>
+          <%- field.fieldName %>: Yup.<%= field.type.toLowerCase() %>(),
+<% }) -%>
+        }).validate(body, { abortEarly: false });
+        break;
+    }s
+  }
+}
+
+export default new <%= props.name %>Validator().execute;

@@ -1,9 +1,9 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import { type IDispatchMessages, DispatchMessages } from '../../helpers';
 
 export default class HasNameValidator {
-  protected readonly dispatch: DispatchMessages;
+  protected readonly dispatch: IDispatchMessages;
 
   protected readonly messages = {
     error: 'The name parameter should be passed',

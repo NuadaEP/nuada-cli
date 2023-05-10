@@ -1,225 +1,180 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 module.exports = {
   name: 'new',
   description: 'Create a complete project structure to use',
-  run: async (toolbox: GluegunToolbox) => {
+  run: async (toolbox: GluegunToolbox): Promise<void> => {
     const {
       parameters,
       template,
-      print: { success, warning },
-      prompt,
+      print: { success, warning, error },
       system,
     } = toolbox;
 
+    if (typeof parameters.first === 'undefined') {
+      error(`Maybe you forgot the name of the project, didn't you? 🙃`);
+      return;
+    }
+
     const actions = [
       {
-        template: 'src/package.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'package.json'
-            : `${parameters.first}/package.json`,
+        template: 'src/package.ts.ejs',
+        target: `${parameters.first}/package.json`,
         props: {
-          name: parameters.first || 'unnamedApp',
+          name: parameters.first,
         },
       },
       {
-        template: 'src/env.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? '.env'
-            : `${parameters.first}/.env`,
+        template: 'src/env.ts.ejs',
+        target: `${parameters.first}/.env`,
         props: {
-          name: parameters.first || 'unnamedApp',
+          name: parameters.first,
         },
       },
       {
-        template: 'src/app/app.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/app.js'
-            : `${parameters.first}/src/app/app.js`,
+        template: 'src/app/app.ts.ejs',
+        target: `${parameters.first}/src/app/app.ts`,
       },
       {
-        template: 'src/server.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/server.js'
-            : `${parameters.first}/src/server.js`,
+        template: 'src/server.ts.ejs',
+        target: `${parameters.first}/src/server.ts`,
       },
       {
-        template: 'src/app/routes/index.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/routes/index.js'
-            : `${parameters.first}/src/app/routes/index.js`,
+        template: 'src/app/routes/index-static.ejs',
+        target: `${parameters.first}/src/app/routes/index.ts`,
       },
       {
-        template: 'src/app/routes/sample.router.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/routes/sample.router.js'
-            : `${parameters.first}/src/app/routes/sample.router.js`,
+        template: 'src/app/routes/sample.router.ts.ejs',
+        target: `${parameters.first}/src/app/routes/sample.router.ts`,
       },
       {
-        template: 'src/config/database.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/config/database.js'
-            : `${parameters.first}/src/config/database.js`,
+        template: 'src/config/database.ts.ejs',
+        target: `${parameters.first}/src/config/database.ts`,
       },
       {
-        template: 'src/config/config.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/config/ConfigSample.js'
-            : `${parameters.first}/src/config/ConfigSample.js`,
+        template: 'src/config/config.ts.ejs',
+        target: `${parameters.first}/src/config/ConfigSample.ts`,
       },
       {
-        template: 'src/app/controllers/sampleController.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/controllers/SampleController.js'
-            : `${parameters.first}/src/app/controllers/SampleController.js`,
+        template: 'src/app/controllers/sampleController.ts.ejs',
+        target: `${parameters.first}/src/app/controllers/SampleController.ts`,
       },
       {
-        template: 'src/app/controllers/indexController.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/controllers/index.js'
-            : `${parameters.first}/src/app/controllers/index.js`,
+        template: 'src/app/jobs/job.ts.ejs',
+        target: `${parameters.first}/src/app/jobs/SampleJob.ts`,
       },
       {
-        template: 'src/app/jobs/job.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/jobs/SampleJob.js'
-            : `${parameters.first}/src/app/jobs/SampleJob.js`,
+        template: 'src/app/middlewares/middleware.ts.ejs',
+        target: `${parameters.first}/src/app/middlewares/SampleMiddleware.ts`,
       },
       {
-        template: 'src/app/middlewares/middleware.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/middlewares/SampleMiddleware.js'
-            : `${parameters.first}/src/app/middlewares/SampleMiddleware.js`,
+        template: 'src/app/models/sampleModel.ts.ejs',
+        target: `${parameters.first}/src/app/models/SampleModel.ts`,
       },
       {
-        template: 'src/app/models/sampleModel.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/models/SampleModel.js'
-            : `${parameters.first}/src/app/models/SampleModel.js`,
+        template: 'src/app/errors/AppError.ts.ejs',
+        target: `${parameters.first}/src/app/errors/AppError.ts`,
       },
       {
-        template: 'src/app/errors/AppError.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/errors/AppError.js'
-            : `${parameters.first}/src/app/errors/AppError.js`,
+        template: 'src/app/services/services.ts.ejs',
+        target: `${parameters.first}/src/app/services/SampleService.ts`,
       },
       {
-        template: 'src/app/services/services.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/services/SampleService.js'
-            : `${parameters.first}/src/app/services/SampleService.js`,
+        template: 'src/app/validators/sampleValidator.ts.ejs',
+        target: `${parameters.first}/src/app/validators/SampleValidator.ts`,
       },
       {
-        template: 'src/app/validators/sampleValidator.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'src/app/validators/SampleValidator.js'
-            : `${parameters.first}/src/app/validators/SampleValidator.js`,
+        template: 'src/editorConfig.ts.ejs',
+        target: `${parameters.first}/.editorconfig`,
       },
       {
-        template: 'src/editorConfig.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? '.editorconfig'
-            : `${parameters.first}/.editorconfig`,
+        template: 'src/eslintrc.json.ejs',
+        target: `${parameters.first}/.eslintrc`,
       },
       {
-        template: 'src/eslintrc.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? '.eslintrc'
-            : `${parameters.first}/.eslintrc.js`,
+        template: 'src/gitignore.ts.ejs',
+        target: `${parameters.first}/.gitignore`,
       },
       {
-        template: 'src/gitignore.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? '.gitignore'
-            : `${parameters.first}/.gitignore`,
-      },
-      {
-        template: 'src/prettierrc.js.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? '.prettierrc'
-            : `${parameters.first}/.prettierrc`,
+        template: 'src/prettierrc.ts.ejs',
+        target: `${parameters.first}/.prettierrc`,
       },
       {
         template: 'src/readme.md.ejs',
-        target:
-          typeof parameters.first === 'undefined'
-            ? 'readme.md'
-            : `${parameters.first}/readme.md`,
+        target: `${parameters.first}/readme.ms`,
+      },
+      {
+        template: 'src/nuada-config.json.ejs',
+        target: `${parameters.first}/nuada-config.json`,
+        props: {
+          name: parameters.first,
+        },
       },
     ];
 
-    if (typeof parameters.first === 'undefined') {
-      const confirm = {
-        type: 'select',
-        name: 'confirm',
-        message:
-          'Do you realy want to create your project in that current folder?',
-        choices: ['Yes, I do', 'No, lets create a folder'],
-      };
+    await Promise.all(
+      actions.map(async (action) => await template.generate(action))
+    );
 
-      const consoleConfirm = await prompt.ask(confirm);
+    warning(
+      '<!==================== Git was initialized ====================!>'
+    );
 
-      if (consoleConfirm.confirm === 'No, lets create a folder') {
-        const inputName = {
-          type: 'input',
-          name: 'inputName',
-          message: "What's project name?",
-        };
+    warning(
+      '<!==================== We are preparing everything for you ====================!>'
+    );
 
-        const projectName = await prompt.ask(inputName);
+    const productionDependencies = [
+      'cors',
+      'dotenv',
+      'express',
+      'express-async-errors',
+      'mongoose',
+      'mongoose-paginate-v2',
+      'yup',
+    ];
 
-        parameters.first = projectName.inputName;
-      } else {
-        warning(
-          'You give no name for your application, so it will be created in current folder',
-        );
+    const developmentDependencies = [
+      '@babel/cli',
+      '@babel/core',
+      '@babel/node',
+      '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-decorators',
+      '@babel/preset-env',
+      '@babel/preset-typescript',
+      '@types/cors',
+      '@types/express',
+      '@types/node',
+      '@types/yup',
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'babel-plugin-module-resolver',
+      'babel-plugin-transform-decorators',
+      'babel-plugin-transform-typescript-metadata',
+      'eslint',
+      'eslint-config-airbnb-base',
+      'eslint-config-prettier',
+      'eslint-plugin-import',
+      'eslint-plugin-prettier',
+      'prettier',
+      'ts-node-dev',
+      'typescript',
+    ];
+
+    await system.spawn(
+      `cd ${parameters.first} && npm install ${productionDependencies.join(
+        ' '
+      )} && npm install ${developmentDependencies.join(
+        ' '
+      )} -D && npm audit fix --force && git init && npm ls`,
+      {
+        shell: true,
+        stdio: 'inherit',
+        stderr: 'inherit',
       }
-    }
-
-    const pendingActions = actions.map(action => template.generate(action));
-
-    Promise.all(pendingActions);
-
-    warning(
-      '<!==================== Git was initialized ====================!>',
     );
 
-    warning(
-      '<!==================== We are preparing everything for you ====================!>',
-    );
-
-    let cd = '';
-
-    if (typeof parameters.first !== 'undefined')
-      cd = `cd ${parameters.first} && `;
-
-    await system.spawn(`${cd}npm install && git init && npm ls`, {
-      shell: true,
-      stdio: 'inherit',
-      stderr: 'inherit',
-    });
-
-    await system.spawn(`${cd}npx eslint src/ --fix`, {
+    await system.spawn('npx eslint src/ --fix', {
       shell: true,
       stdio: 'inherit',
       stderr: 'inherit',

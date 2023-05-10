@@ -1,34 +1,27 @@
 {
   "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
-  "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "eslint-config-airbnb-typescript-prettier"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parser": "@typescript-eslint/parser",
+  "extends": ["standard-with-typescript", "plugin:prettier/recommended"],
+  "overrides": [],
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": "latest",
     "sourceType": "module",
-    "extraFileExtensions": [".txt"]
+    "project": ["tsconfig.json"]
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "consistent-return": "off",
     "camelcase": "off",
-    "no-useless-constructor": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-useless-constructor": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-namespace": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
-    "no-param-reassign": "off",
-    "@typescript-eslint/no-var-requires": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/naming-convention": [
       "error",
@@ -36,23 +29,17 @@
         "selector": "interface",
         "format": ["PascalCase"],
         "custom": {
-          "regex": "^I[A-Z]",
+          "regex": "^[A-Z]",
           "match": true
         }
       }
     ],
-    "import/no-cycle": ["error", { "maxDepth": "∞" }],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ]
+    "import/extensions": "off"
   },
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "node": { "extensions": [".js", ".jsx", ".ts", ".tsx"] },
+      "typescript": { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     }
   }
 }

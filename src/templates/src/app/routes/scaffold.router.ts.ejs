@@ -1,0 +1,14 @@
+import { Router } from 'express';
+
+import <%= props.nameCapitalized %>Controller from '../controllers/<%= props.nameCapitalized %>Controller';
+
+const Routes = Router();
+const <%= props.name %>Controller = new <%= props.nameCapitalized %>Controller();
+
+<%= props.name %>Routes.get('/<%= props.name %>', <%= props.name %>Controller.index);
+<%= props.name %>Routes.get('/<%= props.name %>/:id', <%= props.name %>Controller.show);
+<%= props.name %>Routes.post('/<%= props.name %>', <%= props.name %>Controller.store);
+<%= props.name %>Routes.put('/<%= props.name %>/:id', <%= props.name %>Controller.update);
+<%= props.name %>Routes.delete('/<%= props.name %>/:id', <%= props.name %>Controller.delete);
+
+export default <%= props.name %>Routes;

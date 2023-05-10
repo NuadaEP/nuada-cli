@@ -1,0 +1,49 @@
+import { Request, Response } from 'express';
+
+import <%= props.name %>Model from '../models/<%= props.name %>Model';
+import <%= props.name %>Validator from '../validators/<%= props.name %>Validator';
+import AppError from '../errors/AppError';
+
+export default class <%= props.name %>Controller {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const <%= props.name %> = await <%= props.name %>Model.find();
+
+    return response.json(<%= props.name %>);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const <%= props.name %> = await <%= props.name %>Model.findById(request.params.id);
+
+    return response.json(<%= props.name %>);
+  }
+
+  public async store(request: Request, response: Response): Promise<Response> {
+    try {
+      await <%= props.name %>Validator(request.body, 'store')
+
+      const <%= props.name %> = await <%= props.name %>Model.create(request.body);
+
+      return response.json(<%= props.name %>);
+    } catch (error) {
+      throw new AppError({ message: error.message, statusCode: 400 });
+    }
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    try {
+      await <%= props.name %>Validator(request.body, 'update')
+
+      const <%= props.name %> = await <%= props.name %>Model.findByIdAndUpdate(request.params.id, request.body);
+
+      return response.json(<%= props.name %>);
+    } catch (error) {
+      throw new AppError({ message: error.message, statusCode: 400 });
+    }
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    await <%= props.name %>Model.findByIdAndDelete(request.params.id);
+
+    return response.send(true);
+  }
+}

@@ -1,0 +1,27 @@
+import { Request, Response } from 'express';
+
+import User from '../models/UserModel';
+import AppError from '../errors/AppError';
+
+export default class SessionController {
+  public async store(request: Request, response: Response): Promise<Response> {
+    const { email, password } = request.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user)
+      throw new AppError({ message: 'User not found', statusCode: 400 });
+
+    if (!(await user.compareHash(password)))
+      throw new AppError({
+        message: 'Invalid email password combination',
+        statusCode: 400,
+      });
+
+    const userWithOutPassword = user.toJSON();
+
+    delete userWithOutPassword.password;
+
+    return response.json({ token: User.generateToken(userWithOutPassword) });
+  }
+}

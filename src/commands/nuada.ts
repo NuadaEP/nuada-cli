@@ -1,4 +1,4 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
 module.exports = {
   name: 'nuada',
@@ -12,13 +12,13 @@ module.exports = {
     warning('$ nuada new <project-name>');
     warning('$ nuada make:controller <controller-name>');
     warning(
-      '$ nuada make:validator <validator-name> <field:type>|<field:relational=model_ref>',
+      '$ nuada make:validator <validator-name> <field:type>|<field:relational=model_ref>'
     );
     warning(
-      '$ nuada make:model <model-name> <field:type>|<field:relational=model_ref>',
+      '$ nuada make:model <model-name> <field:type>|<field:relational=model_ref>'
     );
     warning(
-      '$ nuada make:scaffold <scaffold-name> <field:type>|<field:relational=model_ref>',
+      '$ nuada make:scaffold <scaffold-name> <field:type>|<field:relational=model_ref>'
     );
     warning('$ nuada make:auth');
     warning('$ nuada make:axios');

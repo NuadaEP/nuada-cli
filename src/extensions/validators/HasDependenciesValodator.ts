@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import { type IDispatchMessages, DispatchMessages } from '../../helpers';
 
 interface IPackageJSON {
   express: boolean;
@@ -10,7 +10,7 @@ interface IPackageJSON {
 export default class HasDependenciesValidator {
   private readonly toolbox: GluegunToolbox;
 
-  protected readonly dispatch: DispatchMessages;
+  protected readonly dispatch: IDispatchMessages;
 
   protected readonly messages = {
     error:
@@ -26,13 +26,8 @@ export default class HasDependenciesValidator {
   }
 
   public async execute(): Promise<boolean> {
-    const {
-      express,
-      mongoose,
-    }: IPackageJSON = await this.toolbox.filesystem.read(
-      'package.json',
-      'json',
-    );
+    const { express, mongoose }: IPackageJSON =
+      await this.toolbox.filesystem.read('package.json', 'json');
 
     if (express && mongoose) return true;
 

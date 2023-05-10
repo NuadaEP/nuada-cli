@@ -1,0 +1,12 @@
+{
+  "name": "<%= props.name %>",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev:server": "ts-node-dev --inspect --transpile-only --no-notify --ignore-watch node_modules src/server.ts",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "lint": "npx eslint src/ --fix"
+  },
+  "license": "MIT"
+}

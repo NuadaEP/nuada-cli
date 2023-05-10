@@ -1,0 +1,37 @@
+import { Request, Response } from 'express';
+
+import UserValidator from '../validators/UserValidator';
+import User from '../models/UserModel';
+import AppError from '../errors/AppError';
+
+export default class UserController {
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { _id: user_id } = response.locals.user;
+
+    return response.send({ user_id });
+  }
+
+  public async store(request: Request, response: Response): Promise<Response> {
+    try {
+      await UserValidator(request.body, 'store');
+
+      const { email, password, confirmPassword } = request.body;
+
+      if (await User.findOne({ email }))
+        throw new AppError({
+          message: 'Email is already in use',
+          statusCode: 400,
+        });
+
+      if (password != confirmPassword)
+        throw new AppError({
+          message: 'The provided password is not identical',
+          statusCode: 400,
+        });
+
+      return response.json(await User.create({ email, password }));
+    } catch (error) {
+      throw new AppError({ message: error.message, statusCode: 400 });
+    }
+  }
+}

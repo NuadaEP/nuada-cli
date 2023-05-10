@@ -1,0 +1,16 @@
+{
+  "name": "<%= props.name %>",
+  "modules": [
+    {
+      "name": "Sample",
+      "controller": "SampleController",
+      "routes": [
+        { "endpoint": "/sample", "verb": "get", "methodName": "index" },
+        { "endpoint": "/sample/:id", "verb": "get", "methodName": "show" },
+        { "endpoint": "/sample", "verb": "post", "methodName": "store" },
+        { "endpoint": "/sample/:id", "verb": "put", "methodName": "update" },
+        { "endpoint": "/sample/:id", "verb": "delete", "methodName": "delete" }
+      ]
+    }
+  ]
+}

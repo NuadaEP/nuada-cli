@@ -1,6 +1,6 @@
-import { GluegunToolbox } from 'gluegun';
+import { type GluegunToolbox } from 'gluegun';
 
-import DispatchMessages from '../../helpers/DispatchMessages/implementations/DispatchMessages';
+import { type IDispatchMessages, DispatchMessages } from '../../helpers';
 
 interface ISchemas {
   fieldName: string;
@@ -8,7 +8,7 @@ interface ISchemas {
 }
 
 export default class ExtraValuesValidator {
-  protected readonly dispatch: DispatchMessages;
+  protected readonly dispatch: IDispatchMessages;
 
   public readonly types = [
     'String',
@@ -23,7 +23,7 @@ export default class ExtraValuesValidator {
   protected readonly messages = {
     error: 'Fields and types must be specified to create a model',
     warning: `Try something like this: fieldName:type [${this.types.join(
-      ', ',
+      ', '
     )}]`,
   };
 
@@ -31,27 +31,29 @@ export default class ExtraValuesValidator {
     this.dispatch = new DispatchMessages(toolbox);
   }
 
-  public execute(params: string[]): Array<ISchemas | void> {
+  public execute(params: string[]): ISchemas[] {
     const parameters = params.slice(1, params.length);
 
-    const schemas = parameters.map(parameter => {
+    const schemas = parameters.map((parameter) => {
       let [, type] = parameter.split(':');
       const [fieldName] = parameter.split(':');
 
       type = `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
 
-      if (this.types.indexOf(type) === -1) {
+      if (!this.types.includes(type)) {
         const [relational] = type.split('=');
 
-        if (this.types.indexOf(relational) === -1) {
-          return this.dispatch.error(
-            `The field type is not one of the <${this.types.join('|')}>`,
+        if (!this.types.includes(relational)) {
+          this.dispatch.error(
+            `The field type is not one of the <${this.types.join('|')}>`
           );
+          return undefined;
         }
       } else if (type === 'Relational') {
-        return this.dispatch.error(
-          'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>',
+        this.dispatch.error(
+          'You forgot to relate the field to an existing model. It must be like: <field_name:relational=<model_ref>'
         );
+        return undefined;
       }
 
       return {

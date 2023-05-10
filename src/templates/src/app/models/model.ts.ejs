@@ -1,0 +1,22 @@
+import { Schema, model } from 'mongoose';
+
+const <%= props.name %>Model = new Schema(
+  {
+<% props.fields.forEach(field => { -%>
+    <%= field.fieldName %>: {
+<% if (field.type.search('=') == -1) { -%>
+      type: <%= field.type %>,
+      require: true,
+      <% } else { -%>
+      type: Schema.Types.ObjectId,
+      ref: '<%= field.type.split('=')[1] %>',
+      <% } -%>
+},
+<% }) -%>
+  },
+  {
+    timestamps: true
+  }
+);
+
+export default model('<%= props.name %>', <%= props.name %>Model)
