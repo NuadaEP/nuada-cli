@@ -4,3 +4,5 @@
 demo
 src/uploads/*
 server.test.js
+*.lock
+build
