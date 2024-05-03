@@ -1,17 +1,17 @@
 {
   "name": "nuada",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "nuada CLI",
   "types": "build/types/types.d.ts",
   "bin": {
     "nuada": "bin/nuada"
   },
   "scripts": {
-    "format": "prettier --write **/*.{js,ts,tsx,json}",
+    "format": "prettier --write **/*.{js,ts}",
     "clean-build": "rm -rf ./build",
     "compile": "tsc -p .",
     "lint": "eslint src --ext ts",
-    "copy-templates": "if [ -e ./src/templates ]; then cp -a ./src/templates ./build/; fi",
+    "copy-templates": "mkdir build/templates && cp -a ./src/templates/ ./build/templates",
     "build": "yarn format && yarn lint && yarn clean-build && yarn compile && yarn copy-templates",
     "prepublishOnly": "yarn build",
     "test": "jest",
